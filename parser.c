@@ -88,7 +88,7 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 		while(i==0){ // gerar lama com 60% de possibilidade
 			x=rand()%SIZE;
 			y=rand()%SIZE;
-			if((casaLivre(e,x,y)==1) && (abs(e.treasure.x-x)+abs(e.treasure.y-y)<10)){
+			if(casaLivre(e,x,y)==1){
 				e.lama.x = x;
 				e.lama.y = y;
 				i++;
@@ -160,8 +160,7 @@ void print_move(ESTADO e, int difx, int dify){
 		printf("</a>\n");
 	}
 	else if (px==e.lama.x && py==e.lama.y){
-		newE=enemyMove(newE);
-		newE=enemyMove(newE);
+		newE=enemyMove(enemyMove(newE));
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
 			print_lama(e);
 		printf("</a>\n");
@@ -359,7 +358,7 @@ void print_player(ESTADO e){
 
 
 void print_lama(ESTADO e){
-	print_image(e.lama.x, e.lama.y, TAM, DOOR);
+	print_image(e.lama.x, e.lama.y, TAM, LAMA);
 }
 
 
@@ -406,9 +405,9 @@ void print_door(ESTADO e){
 
 void print_specific_item(int i, ESTADO e){ 
 	if (e.inimigo[i].visivel==1){
-		if (e.inimigo[i].item==0) print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, DOOR);
-		if (e.inimigo[i].item==1) print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, DOOR);
-		if (e.inimigo[i].item==2) print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, DOOR);
+		if (e.inimigo[i].item==0) print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, SCORE_5);
+		if (e.inimigo[i].item==1) print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, SCORE_10);
+		if (e.inimigo[i].item==2) print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, SCORE_25);
 		if (e.inimigo[i].item==3) print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, VIDADROP);
 		if (e.inimigo[i].item==4) print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, MANADROP);
 		if (e.inimigo[i].item==5) print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, SWORD);
@@ -429,9 +428,9 @@ void print_treasure(ESTADO e){
 
 void print_treasure_item(ESTADO e){
 	if(e.item.visivel==1){
-		if (e.item.tipo==0) print_image(e.item.x, e.item.y, TAM, DOOR);
-		if (e.item.tipo==1) print_image(e.item.x, e.item.y, TAM, DOOR);
-		if (e.item.tipo==2) print_image(e.item.x, e.item.y, TAM, DOOR);
+		if (e.item.tipo==0) print_image(e.item.x, e.item.y, TAM, SCORE_5);
+		if (e.item.tipo==1) print_image(e.item.x, e.item.y, TAM, SCORE_10);
+		if (e.item.tipo==2) print_image(e.item.x, e.item.y, TAM, SCORE_25);
 		if (e.item.tipo==3) print_image(e.item.x, e.item.y, TAM, VIDADROP);
 		if (e.item.tipo==4) print_image(e.item.x, e.item.y, TAM, MANADROP);
 		if (e.item.tipo==5) print_image(e.item.x, e.item.y, TAM, SWORD);

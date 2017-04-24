@@ -20,6 +20,11 @@ $(EXEC):	$(OBJS)
 			sudo cp mana_Drop.png /var/www/html
 			sudo cp sword.png /var/www/html
 			sudo cp crit.png /var/www/html
+			sudo cp score5.png /var/www/html
+			sudo cp score10.png /var/www/html
+			sudo cp score25.png /var/www/html
+			sudo cp lama.png /var/www/html
+
 
 clean:
 	rm	$(EXEC)	*.o
