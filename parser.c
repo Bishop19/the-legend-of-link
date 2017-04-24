@@ -82,12 +82,13 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
     		}	 
     }
 
+    i=0;
     l=rand()%SIZE;
 	if (l<6){
 		while(i==0){ // gerar lama com 60% de possibilidade
 			x=rand()%SIZE;
 			y=rand()%SIZE;
-			if(casaLivre(e,x,y)==1){
+			if((casaLivre(e,x,y)==1) && (abs(e.treasure.x-x)+abs(e.treasure.y-y)<10)){
 				e.lama.x = x;
 				e.lama.y = y;
 				i++;
@@ -150,8 +151,9 @@ void print_move(ESTADO e, int difx, int dify){
 			print_treasure(e);
 		printf("</a>\n");
 	}
-	else if (px==e.item.x && py== e.item.y && e.item.visivel==1){
+	else if (px==e.item.x && py==e.item.y && e.item.visivel==1){
 		newE.item.visivel=0;
+		newE=catchItem(e.item.tipo, newE);
 		newE=enemyMove(newE);
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
 			print_treasure_item(e);
