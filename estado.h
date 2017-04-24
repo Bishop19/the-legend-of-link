@@ -80,6 +80,8 @@ typedef struct estado {
 	TREASURE treasure;
 	/** Item dropado */
 	ITEM item;
+	/** Lama que faz com que o player não jogo um turno*/
+	POSICAO lama;
 	/** O nº de inimigos */
 	char num_inimigos;
 	/** O nº de obstáculos */

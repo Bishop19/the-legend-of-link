@@ -21,12 +21,5 @@ $(EXEC):	$(OBJS)
 			sudo cp sword.png /var/www/html
 			sudo cp crit.png /var/www/html
 
-
-
-
-
-
-
-
 clean:
 	rm	$(EXEC)	*.o

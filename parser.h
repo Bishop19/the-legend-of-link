@@ -52,6 +52,8 @@ ESTADO catchItem(int item, ESTADO e);
 int isItem (ESTADO e, int px, int py);
 void print_specific_item(int i, ESTADO e);
 void print_rangeEnemy(ESTADO e);
+int atk_Player(int vida, int crit, int atk);
+void print_lama(ESTADO e);
 
 
 #endif

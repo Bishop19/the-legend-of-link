@@ -8,7 +8,7 @@
 
 
 ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int atk, int crit){
-	int i, x, y, z; 
+	int i, x, y, z, l; 
 	ESTADO e = {0};
 	srand(time(NULL));
 
@@ -34,8 +34,8 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 
 	i=0;
 	z=rand()%SIZE;
-	if (z<5){
-		while(i==0){ // gerar tesouro
+	if (z<8){
+		while(i==0){ // gerar tesouro com 80% de possibilidade
 			x=rand()%SIZE;
 			y=rand()%SIZE;
 			if((casaLivre(e,x,y)==1) && (abs(e.door.x-x)+abs(e.door.y-y)>7) && (abs(e.jog.x-x)+abs(e.jog.y-y)>7)){
@@ -60,7 +60,7 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
     		if(casaLivre(e,x,y)==1){
     			e.inimigo[i].x=x;
     			e.inimigo[i].y=y;
-    			e.inimigo[i].vida=1;
+    			e.inimigo[i].vida=2;
     			e.inimigo[i].tipo=tipoInimigo(e.nivel,rand());
     			e.inimigo[i].item=itemInimigo(z);
     			e.inimigo[i].visivel=0;
@@ -81,6 +81,20 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
     			e.num_obstaculos++;
     		}	 
     }
+
+    l=rand()%SIZE;
+	if (l<6){
+		while(i==0){ // gerar lama com 60% de possibilidade
+			x=rand()%SIZE;
+			y=rand()%SIZE;
+			if(casaLivre(e,x,y)==1){
+				e.lama.x = x;
+				e.lama.y = y;
+				i++;
+			}
+		}
+	}
+
 	return e;
 }
 
@@ -116,9 +130,11 @@ void print_move(ESTADO e, int difx, int dify){
 	}
 	else if (isEnemy(e, px, py)!=(-1)){
 		int i = isEnemy(e, px, py);
-		newE.inimigo[i].vida=0;
-		newE.inimigo[i].visivel=1;
-		newE.score+=5;
+		newE.inimigo[i].vida=atk_Player(newE.inimigo[i].vida, newE.jog.crit, newE.jog.atk);
+		if (newE.inimigo[i].vida==0) {
+			newE.inimigo[i].visivel=1;
+			newE.score+=5;
+		}
 		newE=enemyMove(newE); // jogada dos inimigos
 		print_rangeAttack(px, py, TAM); //indica ao jogador que pode atacar o inimigo
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
@@ -139,6 +155,13 @@ void print_move(ESTADO e, int difx, int dify){
 		newE=enemyMove(newE);
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
 			print_treasure_item(e);
+		printf("</a>\n");
+	}
+	else if (px==e.lama.x && py==e.lama.y){
+		newE=enemyMove(newE);
+		newE=enemyMove(newE);
+		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
+			print_lama(e);
 		printf("</a>\n");
 	}
 }
@@ -240,8 +263,10 @@ ESTADO catchItem(int item, ESTADO e){
 	if (item==0) e.score+=5;
 	else if (item==1) e.score+=10;
 	else if (item==2) e.score+=25;
-	else if (item==3 && e.jog.vida<10) e.jog.vida+=2;
-	else if (item==4 && e.jog.mana<10) e.jog.mana+=2;
+	else if (item==3 && e.jog.vida<=8) e.jog.vida+=2;
+	else if (item==3 && e.jog.vida>8) e.jog.vida=10;
+	else if (item==4 && e.jog.mana<=8) e.jog.mana+=2;
+	else if (item==4 && e.jog.mana>8) e.jog.mana=10;
 	else if (item==5) e.jog.atk+=1;
 	else if (item==6) e.jog.crit+=1;
 
@@ -278,15 +303,16 @@ void opcaoRange(ESTADO e){ // funcao que define se o range de ataque dos inimigo
 	newE.range = abs(e.range -1);
 	if(newE.range == 1)
 		for(i=0;i<e.num_inimigos;i++)
-			newE.inimigo[i].range=1;
+			if(newE.inimigo[i].vida!=0) newE.inimigo[i].range=1;
 	if(newE.range == 0)
 		for(i=0;i<e.num_inimigos;i++)
-			newE.inimigo[i].range=0;	
+			if(newE.inimigo[i].vida!=0) newE.inimigo[i].range=0;	
 
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			printf("<image x=700 y=550 width=20 height=20 xlink:href=\"%s\"/>\n",MANA);
+			printf("<image x=700 y=550 width=20 height=20 xlink:href=\"%s\"/>\n", MANA);
 	printf("</a>\n");
 }
+
 void selectRange(ESTADO e){ // funcao que permite selecionar um inimigo para mostrar o seu range
 	ESTADO newE; int i=0;
 	
@@ -305,6 +331,16 @@ void selectRange(ESTADO e){ // funcao que permite selecionar um inimigo para mos
 }
 
 
+int atk_Player(int vida, int crit, int atk){
+	srand(time(NULL));
+	int x=rand()%10, r;
+
+	if(x<crit) r=vida-2*atk;
+	else r=vida-atk;
+	if (r<0) r=0;
+
+	return r;
+}
 
 void print_image(int px, int py, int tam, char *imagem){
 	printf("<image x=%d y=%d width=%d height=%d xlink:href=\"%s\"/>\n", px*tam, py*tam, tam, tam, imagem); 
@@ -317,6 +353,11 @@ void print_player(ESTADO e){
 	print_move(e, +0, +1);
 	print_move(e, +0, -1);
 	print_move(e, -1, +0);
+}
+
+
+void print_lama(ESTADO e){
+	print_image(e.lama.x, e.lama.y, TAM, DOOR);
 }
 
 
@@ -416,7 +457,7 @@ void print_stats(ESTADO e){
 
 	printf("<text x=800 y=210 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.nivel); // Nivel
 	printf("<text x=680 y=210 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.jog.atk); // Ataque
-	printf("<text x=680 y=245 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.jog.crit); // Crit
+	printf("<text x=680 y=245 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.jog.crit*10); // Crit
 	printf("<text x=800 y=245 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.score); // Score
 }
 
@@ -447,7 +488,7 @@ void parser(){
 	else 
 		e = str2estado(args);
 	if(e.acao==1)
-		e = inicializar(++e.nivel, e.door.x, e.door.y, e.score+10, e.jog.vida+1, e.jog.mana, e.jog.atk, e.jog.crit);
+		e = inicializar(++e.nivel, e.door.x, e.door.y, e.score+10, e.jog.vida, e.jog.mana, e.jog.atk, e.jog.crit);
 
 	print_board();
 	print_item(e);
@@ -455,6 +496,7 @@ void parser(){
 	print_treasure(e);
 	print_treasure_item(e);
 	print_door(e);
+	print_lama(e);
 	if(e.jog.vida != 0) print_player(e);
 	print_wall(e);
 	print_menu();
