@@ -297,6 +297,36 @@ int itemInimigo(int rand){
 	return item;
 }
 
+
+void opcaoVida(ESTADO e){ // funcao que define se o range de ataque dos inimigos é ou nao impresso 
+	ESTADO newE; int i;
+	newE=e;
+	
+	newE.vidas = abs(e.vidas -1);
+	if(newE.vidas == 1)
+		for(i=0;i<e.num_inimigos;i++)
+			if(newE.inimigo[i].vida!=0) newE.inimigo[i].showVida=1;
+	if(newE.vidas == 0)
+		for(i=0;i<e.num_inimigos;i++)
+			if(newE.inimigo[i].vida!=0) newE.inimigo[i].showVida=0;	
+
+	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
+			printf("<image x=750 y=550 width=20 height=20 xlink:href=\"%s\"/>\n", MANA);
+	printf("</a>\n");
+}
+
+void print_enemy_vida(ESTADO e){
+	int i;
+
+	for(i=0;i<e.num_inimigos;i++){
+		if(e.inimigo[i].showVida == 1){
+			print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, DOOR);
+			printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", e.inimigo[i].x*TAM, e.inimigo[i].y*TAM, e.inimigo[i].vida); // Vida inimigo
+		}
+	}
+
+}
+
 void opcaoRange(ESTADO e){ // funcao que define se o range de ataque dos inimigos é ou nao impresso 
 	ESTADO newE; int i;
 	newE=e;
@@ -503,6 +533,8 @@ void parser(){
 	print_menu();
 	print_stats(e);
 	opcaoRange(e);
+	opcaoVida(e);
+	print_enemy_vida(e);
 	print_rangeEnemy(e);
 	selectRange(e);
 }

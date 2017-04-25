@@ -30,6 +30,7 @@ typedef struct enemyState {
 	char item;
 	char visivel;
 	char range;
+	char showVida;
 } ENEMY;
 
 
@@ -92,6 +93,8 @@ typedef struct estado {
 	POSICAO obstaculo[MAX_OBSTACULOS];
 	/** Opção de mostrar casas que os inimigos podem atacar */
 	char range;
+	/** Opção de mostrar a vida dos inimigos */
+	char vidas;
 
 } ESTADO;
 

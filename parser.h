@@ -58,6 +58,9 @@ void print_specific_item(int i, ESTADO e);
 void print_rangeEnemy(ESTADO e);
 int atk_Player(int vida, int crit, int atk);
 void print_lama(ESTADO e);
+void opcaoVida(ESTADO e);
+void print_enemy_vida(ESTADO e);
+
 
 
 #endif
