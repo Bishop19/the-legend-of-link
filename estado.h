@@ -27,6 +27,7 @@ typedef struct enemyState {
 	char y;
 	char tipo;
 	char vida;
+	char atk;
 	char item;
 	char visivel;
 	char range;

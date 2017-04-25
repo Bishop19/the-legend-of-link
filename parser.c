@@ -61,7 +61,8 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
     			e.inimigo[i].x=x;
     			e.inimigo[i].y=y;
     			e.inimigo[i].vida=2;
-    			e.inimigo[i].tipo=tipoInimigo(e.nivel,rand());
+    			e.inimigo[i].atk=2;
+    			e.inimigo[i].tipo=tipoInimigo(e.nivel, rand());
     			e.inimigo[i].item=itemInimigo(z);
     			e.inimigo[i].visivel=0;
     			i++;
@@ -132,7 +133,7 @@ void print_move(ESTADO e, int difx, int dify){
 	else if (isEnemy(e, px, py)!=(-1)){
 		int i = isEnemy(e, px, py);
 		newE.inimigo[i].vida=atk_Player(newE.inimigo[i].vida, newE.jog.crit, newE.jog.atk);
-		if (newE.inimigo[i].vida==0) {
+		if (newE.inimigo[i].vida==0){
 			newE.inimigo[i].visivel=1;
 			newE.score+=5;
 		}
@@ -174,7 +175,7 @@ ESTADO enemyMove(ESTADO newE){
 	for(i=0; i<newE.num_inimigos; i++){
 		if(newE.inimigo[i].vida>0){
 			if (inRange(newE,i)==1){
-				z++;
+				z+=newE.inimigo[i].atk;
 				i++;
 			}
 			if (newE.jog.x > newE.inimigo[i].x){
@@ -251,11 +252,11 @@ ESTADO itemTesouro (ESTADO e, int x, int y){
 
 	if (z<=3) e.item.tipo=0;	
 	else if (z>=4 && z<=6) e.item.tipo=1;
-	else if (z==7 && z==8) e.item.tipo=2;
+	else if (z==7 || z==8) e.item.tipo=2;
 	else if (z>=9 && z<=11) e.item.tipo=3;
 	else if (z>=12 && z<=14) e.item.tipo=4;
 	else if (z>=15 && z<=17) e.item.tipo=5;
-	else if (z==18 && z==19) e.item.tipo=6;
+	else if (z==18 || z==19) e.item.tipo=6;
 
 	return e;
 }
@@ -316,12 +317,18 @@ void opcaoVida(ESTADO e){ // funcao que define se o range de ataque dos inimigos
 }
 
 void print_enemy_vida(ESTADO e){
-	int i;
+	int i, x1, x2, y, vida, atk;
 
 	for(i=0;i<e.num_inimigos;i++){
 		if(e.inimigo[i].showVida == 1){
-			print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, DOOR);
-			printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", e.inimigo[i].x*TAM, e.inimigo[i].y*TAM, e.inimigo[i].vida); // Vida inimigo
+			x1=e.inimigo[i].x*TAM+5;
+			x2=e.inimigo[i].x*TAM+47;
+			y=e.inimigo[i].y*TAM+13;
+			atk=e.inimigo[i].atk;
+			vida=e.inimigo[i].vida;
+			print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, STATS);
+			printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x1, y, atk); // Ataque inimigo
+			printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x2, y, vida); // Vida inimigo
 		}
 	}
 
@@ -533,8 +540,8 @@ void parser(){
 	print_menu();
 	print_stats(e);
 	opcaoRange(e);
-	opcaoVida(e);
-	print_enemy_vida(e);
 	print_rangeEnemy(e);
 	selectRange(e);
+	opcaoVida(e);
+	print_enemy_vida(e);
 }

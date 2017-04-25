@@ -24,6 +24,7 @@ $(EXEC):	$(OBJS)
 			sudo cp score10.png /var/www/html
 			sudo cp score25.png /var/www/html
 			sudo cp lama.png /var/www/html
+			sudo cp stats.png /var/www/html
 
 
 clean:

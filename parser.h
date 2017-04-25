@@ -27,6 +27,8 @@
 #define SCORE_10 "http://127.0.0.1/score10.png"
 #define SCORE_25 "http://127.0.0.1/score25.png"
 #define LAMA "http://127.0.0.1/lama.png"
+#define STATS "http://127.0.0.1/stats.png"
+
 
 
 
