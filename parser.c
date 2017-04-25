@@ -60,9 +60,9 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
     		if(casaLivre(e,x,y)==1){
     			e.inimigo[i].x=x;
     			e.inimigo[i].y=y;
-    			e.inimigo[i].vida=2;
-    			e.inimigo[i].atk=2;
     			e.inimigo[i].tipo=tipoInimigo(e.nivel, rand());
+    			e.inimigo[i].vida=vida_Inimigo(e.inimigo[i].tipo);
+    			e.inimigo[i].atk=atk_Inimigo(e.inimigo[i].tipo);
     			e.inimigo[i].item=itemInimigo(z);
     			e.inimigo[i].visivel=0;
     			i++;
@@ -205,6 +205,7 @@ int inRange(ESTADO e, int i){
 	int r=0;
 	if (e.jog.x == e.inimigo[i].x && e.inimigo[i].vida!=0 && (abs(e.jog.y-e.inimigo[i].y) == 1)) r=1;
 	if (e.jog.y == e.inimigo[i].y && e.inimigo[i].vida!=0 && (abs(e.jog.x-e.inimigo[i].x) == 1)) r=1;
+	if (e.inimigo[i].tipo==3 && abs(e.jog.x-e.inimigo[i].x)+abs(e.jog.y-e.inimigo[i].y) <= 2) r=1;
 	return r;
 }
 
@@ -227,6 +228,7 @@ int casaLivre (ESTADO e, int x, int y){
 	return r;
 }
 
+
 int isEnemy (ESTADO e, int x, int y){ // funcao que retorna -1 se a casa nao tem inimigo, ou entao o seu numero
 	int i, r=-1;
 
@@ -235,6 +237,7 @@ int isEnemy (ESTADO e, int x, int y){ // funcao que retorna -1 se a casa nao tem
 	return r;
 }
 
+
 int isItem (ESTADO e, int px, int py){ // funcao que retorna -1 se a casa nao tem item, ou entao o inimigo que tem o item
 	int i,r=(-1);
 
@@ -242,6 +245,27 @@ int isItem (ESTADO e, int px, int py){ // funcao que retorna -1 se a casa nao te
 		if(e.inimigo[i].x==px &&  e.inimigo[i].y == py && e.inimigo[i].visivel==1) r=i;
 	return r;
 }
+
+
+int atk_Inimigo(int tipo){
+	int atk;
+
+	if (tipo<4) atk=1;
+	else atk=2;
+
+	return atk;
+}
+
+
+int vida_Inimigo(int tipo){
+	int vida;
+
+	if (tipo==1 || tipo==3) vida=1;
+	else vida=2;
+
+	return vida;
+}
+
 
 ESTADO itemTesouro (ESTADO e, int x, int y){
 	srand(time(NULL));
@@ -279,8 +303,9 @@ ESTADO catchItem(int item, ESTADO e){
 int tipoInimigo(int nivel, int x){
 	if (nivel==1) x=1;
 	else if (nivel==2){
-		if (x%2==0) x=1;
-		else x=2;
+		if (x%3==0) x=1;
+		else if (x%3==1) x=2;
+		else x=3;
 	}
 	return x;
 }
@@ -317,18 +342,15 @@ void opcaoVida(ESTADO e){ // funcao que define se o range de ataque dos inimigos
 }
 
 void print_enemy_vida(ESTADO e){
-	int i, x1, x2, y, vida, atk;
+	int i, x, y, vida;
 
 	for(i=0;i<e.num_inimigos;i++){
 		if(e.inimigo[i].showVida == 1){
-			x1=e.inimigo[i].x*TAM+5;
-			x2=e.inimigo[i].x*TAM+47;
+			x=e.inimigo[i].x*TAM+47;
 			y=e.inimigo[i].y*TAM+13;
-			atk=e.inimigo[i].atk;
 			vida=e.inimigo[i].vida;
-			print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, STATS);
-			printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x1, y, atk); // Ataque inimigo
-			printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x2, y, vida); // Vida inimigo
+			print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, VIDA_INIMIGO);
+			printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x, y, vida); // Vida inimigo
 		}
 	}
 
@@ -405,12 +427,14 @@ void print_enemy(ESTADO e){
 	for(i = 0; i < e.num_inimigos; i++){
 		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==1) print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, ENEMY);
 		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==2) print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, ENEMY2);
+		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==3) print_image(e.inimigo[i].x, e.inimigo[i].y, TAM, ENEMY3);
 	}
 }
 
 void print_enemy_specific(int x, int y, int tipo){
 	if (tipo==1) print_image(x, y, TAM, ENEMY);
-	else print_image(x, y, TAM, ENEMY2);
+	else if (tipo==2) print_image(x, y, TAM, ENEMY2);
+	else print_image(x, y, TAM, ENEMY3);
 }
 
 void print_rangeEnemy(ESTADO e){
@@ -455,7 +479,7 @@ void print_specific_item(int i, ESTADO e){
 void print_item(ESTADO e){
 	int i;
 
-	for(i=0;i<e.num_inimigos;i++)
+	for(i=0; i<e.num_inimigos; i++)
 		print_specific_item(i, e);
 }
 

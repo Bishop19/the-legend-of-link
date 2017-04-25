@@ -11,6 +11,7 @@
 #define PLAYER "http://127.0.0.1/player.png"
 #define ENEMY "http://127.0.0.1/enemy1.png"
 #define ENEMY2 "http://127.0.0.1/enemy2.png"
+#define ENEMY3 "http://127.0.0.1/enemy3.png"
 #define WALL "http://127.0.0.1/wall.png"
 #define DOOR "http://127.0.0.1/door.png"
 #define FLOOR "http://127.0.0.1/floor.png"
@@ -27,7 +28,7 @@
 #define SCORE_10 "http://127.0.0.1/score10.png"
 #define SCORE_25 "http://127.0.0.1/score25.png"
 #define LAMA "http://127.0.0.1/lama.png"
-#define STATS "http://127.0.0.1/stats.png"
+#define VIDA_INIMIGO "http://127.0.0.1/vida_inimigo.png"
 
 
 
@@ -62,6 +63,8 @@ int atk_Player(int vida, int crit, int atk);
 void print_lama(ESTADO e);
 void opcaoVida(ESTADO e);
 void print_enemy_vida(ESTADO e);
+int atk_Inimigo(int tipo);
+int vida_Inimigo(int tipo);
 
 
 
