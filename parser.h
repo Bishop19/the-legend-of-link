@@ -29,6 +29,7 @@
 #define SCORE_25 "http://127.0.0.1/score25.png"
 #define LAMA "http://127.0.0.1/lama.png"
 #define VIDA_INIMIGO "http://127.0.0.1/vida_inimigo.png"
+#define HEX_FLOOR "http://127.0.0.1/floor_hex.png"
 
 
 
@@ -44,6 +45,7 @@ void print_rangeAttack(int px, int py, int tam);
 ESTADO enemyMove(ESTADO newE);
 int isEnemy (ESTADO e, int x, int y);
 void print_image(int px, int py, int tam, char *imagem);
+void print_image2(int px, int py, int tam, char *imagem);
 void print_treasure(ESTADO e);
 int scoreTesouro ();
 int tipoInimigo(int nivel, int x);
