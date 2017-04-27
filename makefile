@@ -11,7 +11,7 @@ $(EXEC):	$(OBJS)
 			sudo cp menu.png /var/www/html
 			sudo cp floor.png /var/www/html
 			sudo cp door.png /var/www/html
-			sudo cp rangeMov10.png /var/www/html
+			sudo cp rangeMove.png /var/www/html
 			sudo cp wall.png /var/www/html
 			sudo cp rangeAttack.png /var/www/html
 			sudo cp tesouro.png /var/www/html

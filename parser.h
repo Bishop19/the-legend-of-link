@@ -15,7 +15,7 @@
 #define WALL "http://127.0.0.1/wall.png"
 #define DOOR "http://127.0.0.1/door.png"
 #define FLOOR "http://127.0.0.1/floor.png"
-#define RANGEMOV "http://127.0.0.1/rangeMov10.png"
+#define RANGEMOV "http://127.0.0.1/rangeMove.png"
 #define RANGEATTACK "http://127.0.0.1/rangeAttack.png"
 #define TREASURE "http://127.0.0.1/tesouro.png"
 #define VIDA "http://127.0.0.1/vida.png"
@@ -61,7 +61,7 @@ ESTADO catchItem(int item, ESTADO e);
 int isItem (ESTADO e, int px, int py);
 void print_specific_item(int i, ESTADO e);
 void print_rangeEnemy(ESTADO e);
-int atk_Player(int vida, int crit, int atk);
+int atk_Player(int vida, int crit, int atk, int sword);
 void print_lama(ESTADO e);
 void opcaoVida(ESTADO e);
 void print_enemy_vida(ESTADO e);

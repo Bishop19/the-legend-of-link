@@ -48,6 +48,10 @@ typedef struct playerState {
 	char crit;
 	char item_vida;
 	char item_mana;
+	char item_sword;
+	char item_shield;
+	char powerUp_sword;
+	char powerUp_shield;
 } PLAYER;
 
 /**
