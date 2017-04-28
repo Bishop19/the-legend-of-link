@@ -20,6 +20,6 @@ Ideias:
 - Inimigos dropam items (DONE);
 - Tesouro - items (DONE);
 - Crit Chance (DONE);
-- PowerUps (Almost DONE);
+- PowerUps (DONE);
 - Mostrar vida dos inimigos (Almost DONE);
 
