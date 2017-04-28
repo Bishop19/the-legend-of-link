@@ -30,6 +30,8 @@
 #define LAMA "http://127.0.0.1/lama.png"
 #define VIDA_INIMIGO "http://127.0.0.1/vida_inimigo.png"
 #define HEX_FLOOR "http://127.0.0.1/floor_hex.png"
+#define SHIELD "http://127.0.0.1/shield.png"
+
 
 
 

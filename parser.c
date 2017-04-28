@@ -288,7 +288,9 @@ ESTADO itemTesouro (ESTADO e, int x, int y){
 	else if (z>=9 && z<=11) e.item.tipo=3;
 	else if (z>=12 && z<=14) e.item.tipo=4;
 	else if (z>=15 && z<=17) e.item.tipo=5;
-	else if (z==18 || z==19) e.item.tipo=6;
+	else if (z==18 || z==19) e.item.tipo=6;	
+	else if (z==20 || z==21) e.item.tipo=7;
+	else if (z==22 || z==23) e.item.tipo=8;
 
 	return e;
 }
@@ -301,6 +303,8 @@ ESTADO catchItem(int item, ESTADO e){
 	else if (item==4) e.jog.item_mana+=1;
 	else if (item==5) e.jog.atk+=1;
 	else if (item==6) e.jog.crit+=1;
+	else if (item==7) e.jog.item_sword+=1;
+	else if (item==8) e.jog.item_shield+=1;
 
 	return e;
 }
@@ -317,15 +321,17 @@ int tipoInimigo(int nivel, int x){
 }
 
 int itemInimigo(int rand){
-	int item=rand%20;
+	int item=rand%24;
 	
-	if (item<=3) item=0;	
-	else if (item>=4 && item<=6) item=1;
-	else if (item==7 || item==8) item=2;
-	else if (item>=9 && item<=11) item=3;
-	else if (item>=12 && item<=14) item=4;
-	else if (item>=15 && item<=17) item=5;
-	else if (item==18 || item==19) item=6;		
+	if (item<=3) item=0;								// 5 score 		4
+	else if (item>=4 && item<=6) item=1;				// 10 Score 	3
+	else if (item==7 || item==8) item=2;				// 25 score 	2
+	else if (item>=9 && item<=11) item=3;				// vida 		3
+	else if (item>=12 && item<=14) item=4;				// mana 		3
+	else if (item>=15 && item<=17) item=5;				// sword 		3
+	else if (item==18 || item==19) item=6;				// crit 		2
+	else if (item==20 || item==21) item=7;				// sword pu     2
+	else if (item==22 || item==23) item=8;				// shield 		2
 	return item;
 }
 
@@ -554,7 +560,7 @@ void print_inventory(ESTADO e){
 		if(newE.jog.vida<8) newE.jog.vida+=2;
 		else newE.jog.vida=10;
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			printf("<image x=%d y=300 width=70 height=62 xlink:href=\"%s\"/>\n", 600+94+40*i, VIDADROP); /
+			printf("<image x=%d y=300 width=70 height=62 xlink:href=\"%s\"/>\n", 600+94+40*i, VIDADROP);
 		printf("</a>\n");	
 		printf("<text x=%d y=350 font-family=Verdana font-size=9 fill=white> %d </text> \n", 600+29+80+40*i, e.jog.item_vida);
 		i++;
@@ -576,9 +582,9 @@ void print_inventory(ESTADO e){
 		newE.jog.powerUp_sword=1;
 
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			printf("<image x=%d y=312 width=40 height=40 xlink:href=\"%s\"/>\n", 600+80+30+40*i, MANADROP); // mudar escala, tamanho e figuras
+			printf("<image x=%d y=308 width=60 height=46 xlink:href=\"%s\"/>\n", 600+94+44*i, SWORD); // mudar escala, tamanho
 		printf("</a>\n");	
-		printf("<text x=%d y=350 font-family=Verdana font-size=9 fill=white> %d </text> \n", 600+29+80+2*i+40*i, e.jog.item_mana);
+		printf("<text x=%d y=350 font-family=Verdana font-size=9 fill=white> %d </text> \n", 600+29+80+2*i+40*i, e.jog.item_sword);
 		i++;
 	}
 	if(e.jog.item_shield>0){
@@ -586,9 +592,9 @@ void print_inventory(ESTADO e){
 		newE.jog.powerUp_shield=1;
 
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			printf("<image x=%d y=312 width=40 height=40 xlink:href=\"%s\"/>\n", 600+80+30+40*i, MANADROP);
+			printf("<image x=%d y=308 width=55 height=46 xlink:href=\"%s\"/>\n", 600+94+44*i, SHIELD);
 		printf("</a>\n");	
-		printf("<text x=%d y=350 font-family=Verdana font-size=9 fill=white> %d </text> \n", 600+29+80+2*i+40*i, e.jog.item_mana);
+		printf("<text x=%d y=350 font-family=Verdana font-size=9 fill=white> %d </text> \n", 600+29+80+2*i+40*i, e.jog.item_shield);
 		i++;
 	}
 }
@@ -608,7 +614,7 @@ void parser(){
 	char *args=getenv("QUERY_STRING");
 
 	if(strlen(args) == 0) 
-		e = inicializar(1,0,0,0,10,10,1,0,1,1,0,0);
+		e = inicializar(1,0,0,0,10,10,1,0,1,1,1,1);
 	else 
 		e = str2estado(args);
 	if(e.acao==1)

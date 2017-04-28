@@ -27,6 +27,7 @@ $(EXEC):	$(OBJS)
 			sudo cp lama.png /var/www/html
 			sudo cp vida_inimigo.png /var/www/html
 			sudo cp floor_hex.png /var/www/html
+			sudo cp shield.png /var/www/html
 
 
 clean:
