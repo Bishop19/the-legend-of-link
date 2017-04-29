@@ -69,6 +69,7 @@ void opcaoVida(ESTADO e);
 void print_enemy_vida(ESTADO e);
 int atk_Inimigo(int tipo);
 int vida_Inimigo(int tipo);
+void print_hex(int x, int y);
 
 
 

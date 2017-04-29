@@ -114,18 +114,20 @@ void print_move(ESTADO e, int difx, int dify){
 
 	if (px==e.door.x && py==e.door.y){
 		newE.acao=1;
+		print_rangeMov(px, py, TAM); 
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			print_door(e);
-			print_rangeMov(px, py, TAM); 
+			print_hex(e.door.x,e.door.y);
 		printf("</a>\n");
 	}
 	else if (casaLivre(e, px, py)==1){ 
 		newE.jog.x = px; 
 		newE.jog.y = py;
 		newE=enemyMove(newE); //jogada dos inimigos
+		print_rangeMov(px, py, TAM);
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			print_rangeMov(px, py, TAM);
+			print_hex(px,py);
 		printf("</a>\n");
+		
 	}
 	else if (isItem(e,px, py)!=(-1)){
 		int i = isItem(e,px, py); // int i - indica o inimigo que tem o item em causa
@@ -133,7 +135,7 @@ void print_move(ESTADO e, int difx, int dify){
 		newE.inimigo[i].visivel=0; // e torna-o invisivel
 		newE=enemyMove(newE); //jogada dos inimigos
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			print_specific_item(i, e);
+			print_hex(px,py);
 		printf("</a>\n");
 	}
 	else if (isEnemy(e, px, py)!=(-1)){
@@ -146,7 +148,7 @@ void print_move(ESTADO e, int difx, int dify){
 		newE=enemyMove(newE); // jogada dos inimigos
 		print_rangeAttack(px, py, TAM); //indica ao jogador que pode atacar o inimigo
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			print_enemy_specific(px, py, e.inimigo[i].tipo); //cria hiperligacao para atacar o inimigo em especifico
+			print_hex(px,py);
 		printf("</a>\n");
 	}	
 	else if (px==e.treasure.x && py==e.treasure.y && newE.treasure.visivel==1){
@@ -155,7 +157,7 @@ void print_move(ESTADO e, int difx, int dify){
 		newE.item.visivel=1; 
 		newE=enemyMove(newE); //jogada dos inimigos
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			print_treasure(e);
+			print_hex(px,py);
 		printf("</a>\n");
 	}
 	else if (px==e.item.x && py==e.item.y && e.item.visivel==1){
@@ -163,13 +165,13 @@ void print_move(ESTADO e, int difx, int dify){
 		newE=catchItem(e.item.tipo, newE);
 		newE=enemyMove(newE);
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			print_treasure_item(e);
+			print_hex(px,py);
 		printf("</a>\n");
 	}
 	else if (px==e.lama.x && py==e.lama.y){
 		newE=enemyMove(enemyMove(newE));
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			print_lama(e); 
+			print_hex(px,py);
 		printf("</a>\n");
 	}
 }
@@ -221,7 +223,7 @@ int inRange(ESTADO e, int i){
 int casaLivre (ESTADO e, int x, int y){
 	int i=0, r=1;
 
-	if(x<0 || y<0 || x>=SIZE || y>=SIZE) r=0; // verificar se está fora do tabuleiro
+	if(x<0 || y<0 || x>10 || y>7) r=0; // verificar se está fora do tabuleiro
 	if(e.jog.x==x && e.jog.y==y) r=0; // verificar se está jogador
 	if(e.door.x==x && e.door.y==y) r=0; // verificar se está por cima da porta
 	if(isItem(e,x,y)!=(-1)) r=0; // verificar se está item
@@ -394,7 +396,7 @@ void selectRange(ESTADO e){ // funcao que permite selecionar um inimigo para mos
 				newE=e;
 				newE.inimigo[i].range = abs(newE.inimigo[i].range-1);
 				printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-					print_enemy_specific(e.inimigo[i].x, e.inimigo[i].y, e.inimigo[i].tipo);
+					print_hex(e.inimigo[i].x, e.inimigo[i].y);
 				printf("</a>\n");
 			}	
 			i++;	
@@ -426,10 +428,22 @@ void print_image2(int px, int py, int tam, char *imagem){
 
 void print_player(ESTADO e){
 	print_image2(e.jog.x, e.jog.y, TAM, PLAYER);
-	print_move(e, +1, +0);
-	print_move(e, +0, +1);
-	print_move(e, +0, -1);
-	print_move(e, -1, +0);
+	if(e.jog.x%2==0){
+		print_move(e, +1, +0);
+		print_move(e, +0, +1);
+		print_move(e, +0, -1);
+		print_move(e, -1, +0);
+		print_move(e, +1,+1);
+		print_move(e,-1,+1);
+	}
+	else{
+		print_move(e, +1, +0);
+		print_move(e, +0, +1);
+		print_move(e, +0, -1);
+		print_move(e, -1, +0);
+		print_move(e, +1,-1);
+		print_move(e,-1,-1);
+	}
 }
 
 
@@ -609,6 +623,16 @@ void print_board(){
 }
 
 
+
+void print_hex(int x, int y){
+	if(x%2==1) {
+			printf("<polygon points='%d,%d %d,%d %d,%d %d,%d %d,%d %d,%d' fill=%s stroke=%s opacity='0'/> \n", 20+60*x,70*y,60+60*x,70*y,80+60*x,35+70*y,60+60*x,70+70*y,20+60*x,70+70*y,60*x,35+70*y,"green","purple");	
+	}
+	else{
+		printf("<polygon points='%d,%d %d,%d %d,%d %d,%d %d,%d %d,%d' fill=%s stroke=%s opacity='0'/> \n", 20+60*x,70*y+35,60+60*x,70*y+35,80+60*x,35+70*y+35,60+60*x,70+70*y+35,20+60*x,70+70*y+35,60*x,35+70*y+35,"green","purple");
+	}
+}
+
 void parser(){
 	ESTADO e;
 	char *args=getenv("QUERY_STRING");
@@ -619,11 +643,10 @@ void parser(){
 		e = str2estado(args);
 	if(e.acao==1)
 		e = inicializar(++e.nivel, e.door.x, e.door.y, e.score+10, e.jog.vida, e.jog.mana, e.jog.atk, e.jog.crit, e.jog.item_vida, e.jog.item_mana, e.jog.item_sword, e.jog.item_shield);
-
 	print_menu();
 	print_board();
 	print_item(e);
-	print_enemy(e);
+	print_enemy(e); 
 	print_treasure(e);
 	print_treasure_item(e);
 	print_door(e);
