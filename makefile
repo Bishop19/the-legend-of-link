@@ -28,7 +28,11 @@ $(EXEC):	$(OBJS)
 			sudo cp vida_inimigo.png /var/www/html
 			sudo cp floor_hex.png /var/www/html
 			sudo cp shield.png /var/www/html
-
+			sudo cp sword_PU.png /var/www/html
+			sudo cp sword_PU_inv.png /var/www/html
+			sudo cp vida_inv.png /var/www/html
+			sudo cp mana_inv.png /var/www/html
+			sudo cp shield_inv.png /var/www/html
 
 clean:
 	rm	$(EXEC)	*.o

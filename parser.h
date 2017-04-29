@@ -30,7 +30,12 @@
 #define LAMA "http://127.0.0.1/lama.png"
 #define VIDA_INIMIGO "http://127.0.0.1/vida_inimigo.png"
 #define HEX_FLOOR "http://127.0.0.1/floor_hex.png"
-#define SHIELD "http://127.0.0.1/shield.png"
+#define SHIELD_PU "http://127.0.0.1/shield.png"
+#define SWORD_PU "http://127.0.0.1/sword_pu.png"
+#define SWORD_PU_INV "http://127.0.0.1/sword_PU_inv.png"
+#define SHIELD_PU_INV "http://127.0.0.1/shield_inv.png"
+#define VIDA_INV "http://127.0.0.1/vida_inv.png"
+#define MANA_INV "http://127.0.0.1/mana_inv.png"
 
 
 
@@ -69,6 +74,7 @@ void opcaoVida(ESTADO e);
 void print_enemy_vida(ESTADO e);
 int atk_Inimigo(int tipo);
 int vida_Inimigo(int tipo);
+void print_hex(int x, int y);
 
 
 
