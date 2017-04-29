@@ -277,7 +277,7 @@ int vida_Inimigo(int tipo){
 
 ESTADO itemTesouro (ESTADO e, int x, int y){
 	srand(time(NULL));
-	int z=rand()%20;
+	int z=rand()%24;
 
 	e.item.x=x;
 	e.item.y=y;
