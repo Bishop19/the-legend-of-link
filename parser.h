@@ -31,7 +31,7 @@
 #define VIDA_INIMIGO "http://127.0.0.1/vida_inimigo.png"
 #define HEX_FLOOR "http://127.0.0.1/floor_hex.png"
 #define SHIELD_PU "http://127.0.0.1/shield.png"
-#define SWORD_PU "http://127.0.0.1/sword_pu.png"
+#define SWORD_PU "http://127.0.0.1/sword_PU.png"
 #define SWORD_PU_INV "http://127.0.0.1/sword_PU_inv.png"
 #define SHIELD_PU_INV "http://127.0.0.1/shield_inv.png"
 #define VIDA_INV "http://127.0.0.1/vida_inv.png"
@@ -43,7 +43,6 @@
 
 
 void print_door(ESTADO e);
-void print_square(int px, int py, int tam);
 void print_rangeMov(int px, int py, int tam);
 int casaLivre (ESTADO e, int x, int y);
 void parser();
@@ -51,8 +50,7 @@ void print_move(ESTADO e, int difx, int dify);
 void print_rangeAttack(int px, int py, int tam);
 ESTADO enemyMove(ESTADO newE);
 int isEnemy (ESTADO e, int x, int y);
-void print_image(int px, int py, int tam, char *imagem);
-void print_image2(int px, int py, int tam, char *imagem);
+void print_image(int px, int py, char *imagem);
 void print_treasure(ESTADO e);
 int scoreTesouro ();
 int tipoInimigo(int nivel, int x);

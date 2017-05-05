@@ -8,7 +8,7 @@
 
 
 ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int atk, int crit, int vida_potion, int mana_potion, int sword, int shield){
-	int i, x, y, z, l; 
+	int i, x, y, z; 
 	ESTADO e = {0};
 	srand(time(NULL));
 
@@ -89,20 +89,6 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
     		}	 
     }
 
-    i=0;
-    l=rand()%10;
-	if (l<6){
-		while(i==0){ // gerar lama com 60% de possibilidade
-			x=rand()%11;
-			y=rand()%8;
-			if(casaLivre(e,x,y)==1){
-				e.lama.x = x;
-				e.lama.y = y;
-				i++;
-			}
-		}
-	}
-
 	return e;
 }
 
@@ -164,12 +150,6 @@ void print_move(ESTADO e, int difx, int dify){
 		newE.item.visivel=0;
 		newE=catchItem(e.item.tipo, newE);
 		newE=enemyMove(newE);
-		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			print_hex(px,py);
-		printf("</a>\n");
-	}
-	else if (px==e.lama.x && py==e.lama.y){
-		newE=enemyMove(enemyMove(newE));
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
 			print_hex(px,py);
 		printf("</a>\n");
@@ -360,16 +340,14 @@ void print_enemy_vida(ESTADO e){
 
 	for(i=0;i<e.num_inimigos;i++){
 		if(e.inimigo[i].showVida == 1){
-			x=e.inimigo[i].x*TAM+47;
-			y=e.inimigo[i].y*TAM+13;
+			x=e.inimigo[i].x*60+48;
+			y=e.inimigo[i].y*70+15;
 			vida=e.inimigo[i].vida;
-			print_image2(e.inimigo[i].x, e.inimigo[i].y, TAM, VIDA_INIMIGO);
-			if(x%2==1) printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x, y, vida); // Vida inimigo MUDAR!!!!!!!
-			else printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x, y+35*i, vida); // Vida inimigo
-
+			print_image(e.inimigo[i].x, e.inimigo[i].y, VIDA_INIMIGO);
+			if(e.inimigo[i].x%2==1) printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x, y, vida); // Vida inimigo MUDAR!!!!!!!
+			else printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x, y+35, vida); // Vida inimigo
 		}
 	}
-
 }
 
 void opcaoRange(ESTADO e){ // funcao que define se o range de ataque dos inimigos é ou nao impresso 
@@ -418,17 +396,15 @@ int atk_Player(int vida, int crit, int atk, int sword){
 	return vida;
 }
 
-void print_image(int px, int py, int tam, char *imagem){
-	printf("<image x=%d y=%d width=%d height=%d xlink:href=\"%s\"/>\n", px*tam, py*tam, tam, tam, imagem); 
-}
 
-void print_image2(int px, int py, int tam, char *imagem){
+void print_image(int px, int py, char *imagem){
 	if(px%2==0) printf("<image x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70 + 35,imagem); 
 	else printf("<image x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70,imagem);
 } 
 
+
 void print_player(ESTADO e){
-	print_image2(e.jog.x, e.jog.y, TAM, PLAYER);
+	print_image(e.jog.x, e.jog.y, PLAYER);
 	if(e.jog.x%2==0){
 		print_move(e, +1, +0);
 		print_move(e, +0, +1);
@@ -448,25 +424,20 @@ void print_player(ESTADO e){
 }
 
 
-void print_lama(ESTADO e){
-	print_image2(e.lama.x, e.lama.y, TAM, LAMA);
-}
-
-
 void print_enemy(ESTADO e){
 	int i;
 
 	for(i = 0; i < e.num_inimigos; i++){
-		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==1) print_image2(e.inimigo[i].x, e.inimigo[i].y, TAM, ENEMY);
-		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==2) print_image2(e.inimigo[i].x, e.inimigo[i].y, TAM, ENEMY2);
-		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==3) print_image2(e.inimigo[i].x, e.inimigo[i].y, TAM, ENEMY3);
+		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==1) print_image(e.inimigo[i].x, e.inimigo[i].y, ENEMY);
+		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==2) print_image(e.inimigo[i].x, e.inimigo[i].y, ENEMY2);
+		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==3) print_image(e.inimigo[i].x, e.inimigo[i].y, ENEMY3);
 	}
 }
 
 void print_enemy_specific(int x, int y, int tipo){
-	if (tipo==1) print_image2(x, y, TAM, ENEMY);
-	else if (tipo==2) print_image2(x, y, TAM, ENEMY2);
-	else print_image2(x, y, TAM, ENEMY3);
+	if (tipo==1) print_image(x, y, ENEMY);
+	else if (tipo==2) print_image(x, y, ENEMY2);
+	else print_image(x, y, ENEMY3);
 }
 
 void print_rangeEnemy(ESTADO e){
@@ -488,25 +459,25 @@ void print_wall(ESTADO e){
 	int i;
 
 	for(i = 0; i < e.num_obstaculos; i++)
-		print_image2(e.obstaculo[i].x, e.obstaculo[i].y, TAM, WALL);
+		print_image(e.obstaculo[i].x, e.obstaculo[i].y, WALL);
 }
 
 
 void print_door(ESTADO e){ 
-	print_image2(e.door.x, e.door.y, TAM, DOOR);
+	print_image(e.door.x, e.door.y, DOOR);
 }
 
 void print_specific_item(int i, ESTADO e){ 
 	if (e.inimigo[i].visivel==1){
-		if (e.inimigo[i].item==0) print_image2(e.inimigo[i].x, e.inimigo[i].y, TAM, SCORE_5);
-		if (e.inimigo[i].item==1) print_image2(e.inimigo[i].x, e.inimigo[i].y, TAM, SCORE_10);
-		if (e.inimigo[i].item==2) print_image2(e.inimigo[i].x, e.inimigo[i].y, TAM, SCORE_25);
-		if (e.inimigo[i].item==3) print_image2(e.inimigo[i].x, e.inimigo[i].y, TAM, VIDADROP);
-		if (e.inimigo[i].item==4) print_image2(e.inimigo[i].x, e.inimigo[i].y, TAM, MANADROP);
-		if (e.inimigo[i].item==5) print_image2(e.inimigo[i].x, e.inimigo[i].y, TAM, SWORD);
-		if (e.inimigo[i].item==6) print_image2(e.inimigo[i].x, e.inimigo[i].y, TAM, CRIT);
-		if (e.inimigo[i].item==7) print_image2(e.inimigo[i].x, e.inimigo[i].y, TAM, SWORD_PU);
-		if (e.inimigo[i].item==8) print_image2(e.inimigo[i].x, e.inimigo[i].y, TAM, SHIELD_PU);
+		if (e.inimigo[i].item==0) print_image(e.inimigo[i].x, e.inimigo[i].y, SCORE_5);
+		if (e.inimigo[i].item==1) print_image(e.inimigo[i].x, e.inimigo[i].y, SCORE_10);
+		if (e.inimigo[i].item==2) print_image(e.inimigo[i].x, e.inimigo[i].y, SCORE_25);
+		if (e.inimigo[i].item==3) print_image(e.inimigo[i].x, e.inimigo[i].y, VIDADROP);
+		if (e.inimigo[i].item==4) print_image(e.inimigo[i].x, e.inimigo[i].y, MANADROP);
+		if (e.inimigo[i].item==5) print_image(e.inimigo[i].x, e.inimigo[i].y, SWORD);
+		if (e.inimigo[i].item==6) print_image(e.inimigo[i].x, e.inimigo[i].y, CRIT);
+		if (e.inimigo[i].item==7) print_image(e.inimigo[i].x, e.inimigo[i].y, SWORD_PU);
+		if (e.inimigo[i].item==8) print_image(e.inimigo[i].x, e.inimigo[i].y, SHIELD_PU);
 
 	}
 } 
@@ -519,30 +490,25 @@ void print_item(ESTADO e){
 }
 
 void print_treasure(ESTADO e){
-	if (e.treasure.visivel==1) print_image2(e.treasure.x, e.treasure.y, TAM, TREASURE);
+	if (e.treasure.visivel==1) print_image(e.treasure.x, e.treasure.y, TREASURE);
 }
 
 void print_treasure_item(ESTADO e){
 	if(e.item.visivel==1){
-		if (e.item.tipo==0) print_image2(e.item.x, e.item.y, TAM, SCORE_5);
-		if (e.item.tipo==1) print_image2(e.item.x, e.item.y, TAM, SCORE_10);
-		if (e.item.tipo==2) print_image2(e.item.x, e.item.y, TAM, SCORE_25);
-		if (e.item.tipo==3) print_image2(e.item.x, e.item.y, TAM, VIDADROP);
-		if (e.item.tipo==4) print_image2(e.item.x, e.item.y, TAM, MANADROP);
-		if (e.item.tipo==5) print_image2(e.item.x, e.item.y, TAM, SWORD);
-		if (e.item.tipo==6) print_image2(e.item.x, e.item.y, TAM, CRIT);
-		if (e.item.tipo==7) print_image2(e.item.x, e.item.y, TAM, SWORD_PU);
-		if (e.item.tipo==8) print_image2(e.item.x, e.item.y, TAM, SHIELD_PU);
+		if (e.item.tipo==0) print_image(e.item.x, e.item.y, SCORE_5);
+		if (e.item.tipo==1) print_image(e.item.x, e.item.y, SCORE_10);
+		if (e.item.tipo==2) print_image(e.item.x, e.item.y, SCORE_25);
+		if (e.item.tipo==3) print_image(e.item.x, e.item.y, VIDADROP);
+		if (e.item.tipo==4) print_image(e.item.x, e.item.y, MANADROP);
+		if (e.item.tipo==5) print_image(e.item.x, e.item.y, SWORD);
+		if (e.item.tipo==6) print_image(e.item.x, e.item.y, CRIT);
+		if (e.item.tipo==7) print_image(e.item.x, e.item.y, SWORD_PU);
+		if (e.item.tipo==8) print_image(e.item.x, e.item.y, SHIELD_PU);
 	}
 }
 void print_menu(){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"http://127.0.0.1/menu.png\"/>\n");
 }
-
-
-void print_square(int px, int py, int tam){
-	print_image(px, py, tam, FLOOR);
-} 
 
 
 void print_stats(ESTADO e){
@@ -555,19 +521,20 @@ void print_stats(ESTADO e){
 		printf("<image x=%d y=80 width=20 height=20 xlink:href=\"%s\"/>\n", 600+81+80+20*i, MANA); // Mana
 
 	printf("<text x=880 y=210 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.nivel); // Nivel
-	printf("<text x=760 y=210 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.jog.atk); // Ataque
+	if(e.jog.powerUp_sword==1) printf("<text x=760 y=210 font-family=Verdana font-size=24 fill=green> %d </text> \n", e.jog.atk*2); // Ataque
+	else printf("<text x=760 y=210 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.jog.atk);
 	printf("<text x=760 y=245 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.jog.crit*10); // Crit
 	printf("<text x=880 y=245 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.score); // Score
 }
 
  
 void print_rangeMov(int px, int py, int tam){
-	print_image2(px, py, tam, RANGEMOV);
+	print_image(px, py, RANGEMOV);
 } 
 
 
 void print_rangeAttack (int px, int py, int tam){
-	 print_image2(px, py, tam, RANGEATTACK);
+	 print_image(px, py, RANGEATTACK);
 }
 
 
@@ -645,7 +612,7 @@ void parser(){
 	char *args=getenv("QUERY_STRING");
 
 	if(strlen(args) == 0) 
-		e = inicializar(2,0,0,0,10,10,1,0,1,1,1,1);
+		e = inicializar(1,0,0,0,10,10,1,0,1,1,1,1);
 	else 
 		e = str2estado(args);
 	if(e.acao==1)
@@ -657,7 +624,6 @@ void parser(){
 	print_treasure(e);
 	print_treasure_item(e);
 	print_door(e);
-	print_lama(e);
 	if(e.jog.vida != 0) print_player(e);
 	print_wall(e);
 	print_inventory(e);
