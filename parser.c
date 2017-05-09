@@ -396,6 +396,19 @@ int atk_Player(int vida, int crit, int atk, int sword){
 	return vida;
 }
 
+ESTADO espada_giratoria(ESTADO e){
+	int i;
+
+	if (e.jog.mana>=2){
+		for(i=0; i<e.num_inimigos; i++){
+			if((abs(e.jog.x-e.inimigo[i].x)+abs(e.jog.y)-e.inimigo[i].y)==1) e.inimigo[i].vida--;
+			else if((e.jog.x!=e.inimigo[i].x) && (e.jog.y!=e.inimigo[i].y) && (abs(e.jog.x-e.inimigo[i].x)+abs(e.jog.y-e.inimigo[i].y)==2)) e.inimigo[i].vida--;
+		}
+	}
+	e.jog.mana-=2;
+	return e;
+}
+
 
 void print_image(int px, int py, char *imagem){
 	if(px%2==0) printf("<image x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70 + 35,imagem); 
@@ -410,16 +423,16 @@ void print_player(ESTADO e){
 		print_move(e, +0, +1);
 		print_move(e, +0, -1);
 		print_move(e, -1, +0);
-		print_move(e, +1,+1);
-		print_move(e,-1,+1);
+		print_move(e, +1, +1);
+		print_move(e, -1, +1);
 	}
 	else{
 		print_move(e, +1, +0);
 		print_move(e, +0, +1);
 		print_move(e, +0, -1);
 		print_move(e, -1, +0);
-		print_move(e, +1,-1);
-		print_move(e,-1,-1);
+		print_move(e, +1, -1);
+		print_move(e, -1, -1);
 	}
 }
 
@@ -523,7 +536,7 @@ void print_stats(ESTADO e){
 	printf("<text x=880 y=210 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.nivel); // Nivel
 	if(e.jog.powerUp_sword==1) printf("<text x=760 y=210 font-family=Verdana font-size=24 fill=green> %d </text> \n", e.jog.atk*2); // Ataque
 	else printf("<text x=760 y=210 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.jog.atk);
-	printf("<text x=760 y=245 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.jog.crit*10); // Crit
+	printf("<text x=760 y=245 font-family=Verdana font-size=24 fill=white> %d%c</text> \n", e.jog.crit*10, '%'); // Crit
 	printf("<text x=880 y=245 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.score); // Score
 }
 
@@ -607,7 +620,98 @@ void print_hex(int x, int y){
 	}
 }
 
+
+
+
+void guardar_estado(ESTADO e, char *nomef){ // no fim do parser guardar_estado(e, nomef)
+	char path[200];
+	FILE *fp;
+
+	strcpy(path, "/var/www/html/estado/");
+	strcat(path, nomef);
+
+	fp=fopen(path, "w");
+	if (fp==NULL) printf ("Erro");
+	else{
+		fprintf(fp,"%s\n", estado2str(e));
+		fclose(fp);
+	}
+}
+
+ESTADO ler_estado(char *nomef){
+	ESTADO e;
+	char path[200];
+	FILE *fp;
+	char st[5000];
+
+	strcpy(path, "/var/www/html/estado/");
+	strcat(path, nomef);
+
+	fp=fopen(path, "r");
+	if (fp==NULL) printf ("Erro");
+	else{ 
+		fscanf(fp, "%s\n", st);
+		fclose(fp);
+	}
+	e=str2estado(st);
+
+	return e;
+}
+
+ESTADO processar_acao(ESTADO e, int acao, char *nomef){
+	if (acao==0) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1);
+	if (acao==1) e=ler_estado(nomef);
+	if (acao==2){
+		e=ler_estado(nomef);
+		e.jog.y=e.jog.y-1;
+		e=enemyMove(e);
+	}
+	
+	return e;
+}
+
 void parser(){
+	ESTADO e;
+	char *args=getenv("QUERRY_STRING");
+	char nomef[20];
+	int acao, num=sscanf(args,"%s,%d", nomef, &acao);
+
+	if (num<=0){ // cria jogador generico
+		acao=0;
+		strcpy(nomef, "Default");
+	}
+	else if (num==1) acao=1; // so mostrar
+		
+	e=processar_acao(e, acao, nomef); //equivalente a print_move
+
+	guardar_estado(e, nomef);
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* void parser(){
 	ESTADO e;
 	char *args=getenv("QUERY_STRING");
 
@@ -633,4 +737,4 @@ void parser(){
 	selectRange(e);
 	opcaoVida(e);
 	print_enemy_vida(e);
-}
+} */

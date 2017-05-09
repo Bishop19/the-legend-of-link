@@ -2,7 +2,6 @@
 #include "estado.h"
 #define ___PARSER_H___
 
-
 #define SIZE 10
 #define TAM 60
 #define NUM_INIMIGOS 10
@@ -27,7 +26,6 @@
 #define SCORE_5 "http://127.0.0.1/score5.png"
 #define SCORE_10 "http://127.0.0.1/score10.png"
 #define SCORE_25 "http://127.0.0.1/score25.png"
-#define LAMA "http://127.0.0.1/lama.png"
 #define VIDA_INIMIGO "http://127.0.0.1/vida_inimigo.png"
 #define HEX_FLOOR "http://127.0.0.1/floor_hex.png"
 #define SHIELD_PU "http://127.0.0.1/shield.png"

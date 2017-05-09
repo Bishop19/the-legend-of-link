@@ -1,4 +1,4 @@
-CFLAGS = -Wall -O2 
+CFLAGS = -Wall -Wextra -pedantic -O2
 OBJS = $(patsubst %.c ,%.o ,$(wildcard *.c))
 EXEC = Rogue
 $(EXEC):	$(OBJS)
@@ -24,7 +24,6 @@ $(EXEC):	$(OBJS)
 			sudo cp score5.png /var/www/html
 			sudo cp score10.png /var/www/html
 			sudo cp score25.png /var/www/html
-			sudo cp lama.png /var/www/html
 			sudo cp vida_inimigo.png /var/www/html
 			sudo cp floor_hex.png /var/www/html
 			sudo cp shield.png /var/www/html
