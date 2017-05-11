@@ -59,7 +59,7 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 
 	e.num_inimigos = 0;
 	i=0;
-	while(i<NUM_INIMIGOS+(e.nivel/2)){ // gerar inimigos conforme o nivel
+	while(i<NUM_INIMIGOS){
 		x=rand()%11; 
 		y=rand()%8;
 		z=rand();
@@ -78,7 +78,7 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 
    	e.num_obstaculos = 0;
   	i=0;
-    while(i<NUM_OBSTACULOS+e.nivel){ // gerar objetos conforme o nivel
+    while(i<NUM_OBSTACULOS){
 		x=rand()%11; 
 		y=rand()%8; 
     		if(casaLivre(e,x,y)==1){
@@ -93,28 +93,37 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 }
 
 
-void print_move(ESTADO e, int difx, int dify){
-	ESTADO newE = e;
+void print_move(ESTADO e, int difx, int dify, char *nomef, int acao){
 	int px = e.jog.x + difx;
 	int py = e.jog.y + dify;
 
+
 	if (px==e.door.x && py==e.door.y){
-		newE.acao=1;
-		print_rangeMov(px, py, TAM); 
-		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
+		acao=1;
+		print_rangeMov(e, px, py);
+		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
 			print_hex(e.door.x,e.door.y);
 		printf("</a>\n");
 	}
-	else if (casaLivre(e, px, py)==1){ 
-		newE.jog.x = px; 
-		newE.jog.y = py;
-		newE=enemyMove(newE); //jogada dos inimigos
-		print_rangeMov(px, py, TAM);
-		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
+	
+	else if (difx==0 && dify==(-1) && py>=0 && py<=8){
+		acao=2; 
+		print_rangeMov(e, px, py);
+		print_rangeAttack(e, px, py);
+		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
 			print_hex(px,py);
 		printf("</a>\n");
-		
 	}
+	else if (difx==0 && dify==1 && py>=0 && py<=8){
+		acao=3; 
+		print_rangeMov(e, px, py);
+		print_rangeAttack(e, px, py);
+		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
+			print_hex(px,py);
+		printf("</a>\n");
+
+		
+	} /*
 	else if (isItem(e,px, py)!=(-1)){
 		int i = isItem(e,px, py); // int i - indica o inimigo que tem o item em causa
 		newE=catchItem(e.inimigo[i].item, e); // apanha o respetivo item
@@ -153,7 +162,7 @@ void print_move(ESTADO e, int difx, int dify){
 		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
 			print_hex(px,py);
 		printf("</a>\n");
-	}
+	} */
 }
 
 
@@ -416,23 +425,23 @@ void print_image(int px, int py, char *imagem){
 } 
 
 
-void print_player(ESTADO e){
+void print_player(ESTADO e, int acao, char *nomef){
 	print_image(e.jog.x, e.jog.y, PLAYER);
 	if(e.jog.x%2==0){
-		print_move(e, +1, +0);
-		print_move(e, +0, +1);
-		print_move(e, +0, -1);
-		print_move(e, -1, +0);
-		print_move(e, +1, +1);
-		print_move(e, -1, +1);
+		print_move(e, +1, +0, nomef, acao);
+		print_move(e, +0, +1, nomef, acao);
+		print_move(e, +0, -1, nomef, acao);
+		print_move(e, -1, +0, nomef, acao);
+		print_move(e, +1, +1, nomef, acao);
+		print_move(e, -1, +1, nomef, acao);
 	}
 	else{
-		print_move(e, +1, +0);
-		print_move(e, +0, +1);
-		print_move(e, +0, -1);
-		print_move(e, -1, +0);
-		print_move(e, +1, -1);
-		print_move(e, -1, -1);
+		print_move(e, +1, +0, nomef, acao);
+		print_move(e, +0, +1, nomef, acao);
+		print_move(e, +0, -1, nomef, acao);
+		print_move(e, -1, +0, nomef, acao);
+		print_move(e, +1, -1, nomef, acao);
+		print_move(e, -1, -1, nomef, acao);
 	}
 }
 
@@ -460,10 +469,10 @@ void print_rangeEnemy(ESTADO e){
 		if(e.inimigo[i].range == 1 && e.inimigo[i].vida >0){
 			x = e.inimigo[i].x;
 			y = e.inimigo[i].y;
-			if(casaLivre(e,x+1,y)==1) print_rangeAttack(x+1, y,TAM);
-			if(casaLivre(e,x-1,y)==1) print_rangeAttack(x-1, y,TAM);
-			if(casaLivre(e,x,y+1)==1) print_rangeAttack(x, y+1,TAM);
-			if(casaLivre(e,x,y-1)==1) print_rangeAttack(x, y-1,TAM);
+			if(casaLivre(e,x+1,y)==1) print_rangeAttack(e, x+1, y);
+			if(casaLivre(e,x-1,y)==1) print_rangeAttack(e, x-1, y);
+			if(casaLivre(e,x,y+1)==1) print_rangeAttack(e, x, y+1);
+			if(casaLivre(e,x,y-1)==1) print_rangeAttack(e, x, y-1);
 	}
 }
 
@@ -541,13 +550,13 @@ void print_stats(ESTADO e){
 }
 
  
-void print_rangeMov(int px, int py, int tam){
-	print_image(px, py, RANGEMOV);
+void print_rangeMov(ESTADO e, int px, int py){
+	if(casaLivre(e, px, py)==1) print_image(px, py, RANGEMOV);
 } 
 
 
-void print_rangeAttack (int px, int py, int tam){
-	 print_image(px, py, RANGEATTACK);
+void print_rangeAttack (ESTADO e, int px, int py){
+	if(isEnemy(e, px, py)!=(-1)) print_image(px, py, RANGEATTACK);
 }
 
 
@@ -660,34 +669,98 @@ ESTADO ler_estado(char *nomef){
 
 ESTADO processar_acao(ESTADO e, int acao, char *nomef){
 	if (acao==0) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1);
-	if (acao==1) e=ler_estado(nomef);
-	if (acao==2){
+	else if (acao==1) {e=ler_estado(nomef);
+		e = inicializar(++e.nivel, e.door.x, e.door.y, e.score+10, e.jog.vida, e.jog.mana, e.jog.atk, e.jog.crit, e.jog.item_vida, e.jog.item_mana, e.jog.item_sword, e.jog.item_shield);
+	}
+	else if (acao==2){
 		e=ler_estado(nomef);
-		e.jog.y=e.jog.y-1;
-		e=enemyMove(e);
+		e=processar_mov(e, e.jog.x, e.jog.y-1);
+	}
+	else if (acao==3){
+		e=ler_estado(nomef);
+		e=processar_mov(e, e.jog.x, e.jog.y+1);
 	}
 	
 	return e;
 }
 
-void parser(){
-	ESTADO e;
-	char *args=getenv("QUERRY_STRING");
-	char nomef[20];
-	int acao, num=sscanf(args,"%s,%d", nomef, &acao);
+ESTADO processar_mov(ESTADO e, int px, int py){
+	int i;
 
-	if (num<=0){ // cria jogador generico
-		acao=0;
-		strcpy(nomef, "Default");
+	if (casaLivre(e, px, py)==1){
+		e.jog.x=px;
+		e.jog.y=py;
 	}
-	else if (num==1) acao=1; // so mostrar
+	else if(isItem(e, px, py)!=(-1)){
+		i=isItem(e, px, py);
+		e=catchItem(e.inimigo[i].item, e);
+		e.inimigo[i].visivel=0;
+	}
+	else if(isEnemy(e, px, py)!=(-1)){
+		i=isEnemy(e, px, py);
+		e.inimigo[i].vida=atk_Player(e.inimigo[i].vida, e.jog.crit, e.jog.atk, e.jog.powerUp_sword);
+		if(e.inimigo[i].vida==0){
+			e.score+=5;
+			e.inimigo[i].visivel=1;
+		}
+	}
+	else if(px==e.treasure.x && py==e.treasure.y && e.treasure.visivel==1){
+		e=itemTesouro(e, px, py);
+		e.treasure.visivel=0;
+		e.item.visivel=1;
+	}
+	else if(px==e.item.x && py==e.item.y && e.item.visivel==1){
+		e.item.visivel=0;
+		e=catchItem(e.item.tipo, e);
+	}
+
+
+	e=enemyMove(e);
+
+	return e;
+}
+
+
+void parser(){
+	ESTADO e={{0}};
+    int num,acao;
+    char nomef[100];
+    char *args = getenv("QUERY_STRING");
+
+    if(strlen(args) == 0){ //aqui detecta-se que não foi passado nenhum parametro, neste caso precisas de escolher um nome para o ficheiro e que acao queres fazer
+                        acao=0;
+            strcpy(nomef,"Default");
+
+    }
+    else { //aqui vou fazer um scan dos parametros ficando em num a quantidade de parametros lidos
+            num =sscanf(args,"%[^,],%d", nomef, &acao);
+            if (num==1)acao = 1;  //se só for 1 quer dizer que só coloquei o nome do jogador(ficheiro) pelo que escolho uma acao para mostrar esse estado
+          }                                    // se for maior que 1 então estou a receber nos parametros o nome do ficheiro e a acao pelo que devo
+
+                                                //avançar para o processamento da acao especificada no link
 		
 	e=processar_acao(e, acao, nomef); //equivalente a print_move
 
+
+
+	print_menu();
+	print_board();
+	print_item(e);
+	print_enemy(e); 
+	print_treasure(e);
+	print_treasure_item(e);
+	print_door(e);
+	if(e.jog.vida != 0) print_player(e, acao, nomef);
+	print_wall(e);
+	print_inventory(e);
+	print_stats(e);
+	opcaoRange(e);
+	print_rangeEnemy(e);
+	selectRange(e);
+	opcaoVida(e);
+	print_enemy_vida(e);
+
 	guardar_estado(e, nomef);
-
-
-
 
 }
 

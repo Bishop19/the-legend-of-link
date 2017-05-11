@@ -41,11 +41,11 @@
 
 
 void print_door(ESTADO e);
-void print_rangeMov(int px, int py, int tam);
+void print_rangeMov(ESTADO e, int px, int py);
 int casaLivre (ESTADO e, int x, int y);
 void parser();
-void print_move(ESTADO e, int difx, int dify);
-void print_rangeAttack(int px, int py, int tam);
+void print_move(ESTADO e, int difx, int dify, char *nomef, int acao);
+void print_rangeAttack(ESTADO e, int px, int py);
 ESTADO enemyMove(ESTADO newE);
 int isEnemy (ESTADO e, int x, int y);
 void print_image(int px, int py, char *imagem);
@@ -71,6 +71,7 @@ void print_enemy_vida(ESTADO e);
 int atk_Inimigo(int tipo);
 int vida_Inimigo(int tipo);
 void print_hex(int x, int y);
+ESTADO processar_mov(ESTADO e, int px, int py);
 
 
 
