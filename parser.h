@@ -47,7 +47,7 @@ void parser();
 void print_move(ESTADO e, int difx, int dify, char *nomef, int acao);
 void print_rangeAttack(ESTADO e, int px, int py);
 ESTADO enemyMove(ESTADO newE);
-int isEnemy (ESTADO e, int x, int y);
+int isEnemy (ESTADO e, int px, int py);
 void print_image(int px, int py, char *imagem);
 void print_treasure(ESTADO e);
 int scoreTesouro ();
@@ -72,6 +72,9 @@ int atk_Inimigo(int tipo);
 int vida_Inimigo(int tipo);
 void print_hex(int x, int y);
 ESTADO processar_mov(ESTADO e, int px, int py);
+ESTADO processar_acao(ESTADO e,int acao, char *nomef);
+void guardar_estado(ESTADO e, char *nomef);
+ESTADO ler_estado(char *nomef);
 
 
 

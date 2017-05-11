@@ -116,7 +116,7 @@ void print_move(ESTADO e, int difx, int dify, char *nomef, int acao){
 		acao=4; 
 	}
 	else if (difx==1 && dify==0 && px>=0 && px<=11){
-		acao=5; 
+		acao=5;  
 	}
 	else if (e.jog.x%2==0 && difx==1 && dify==1 && py>=0 && py<8 && px>=0 && px<11){
 		acao=6; 
@@ -191,7 +191,7 @@ int casaLivre (ESTADO e, int x, int y){
 	if(e.item.x==x && e.item.y==y && e.item.visivel ==1)r=0;
 	if(e.treasure.x==x && e.treasure.y==y && e.treasure.visivel==1) r=0; // verificar se está tesouro		 
 	for(i=0; i < e.num_inimigos && r!=0; i++){ // verificar se está inimigo
-		if(e.inimigo[i].x==x && e.inimigo[i].y==y && e.inimigo[i].vida!=0) r=0;
+		if(e.inimigo[i].x==x && e.inimigo[i].y==y && e.inimigo[i].vida>0) r=0;
 	}
 	for(i=0; i < e.num_obstaculos && r!=0; i++){ // verificar se está obstáculo
 		if(e.obstaculo[i].x==x && e.obstaculo[i].y==y) r=0;
@@ -331,19 +331,10 @@ void print_enemy_vida(ESTADO e){
 	}
 }
 
-void opcaoRange(ESTADO e){ // funcao que define se o range de ataque dos inimigos é ou nao impresso 
-	ESTADO newE; int i;
-	newE=e;
-	
-	newE.range = abs(e.range -1);
-	if(newE.range == 1)
-		for(i=0;i<e.num_inimigos;i++)
-			if(newE.inimigo[i].vida!=0) newE.inimigo[i].range=1;
-	if(newE.range == 0)
-		for(i=0;i<e.num_inimigos;i++)
-			if(newE.inimigo[i].vida!=0) newE.inimigo[i].range=0;	
+void opcaoRange(ESTADO e, char *nomef){ // funcao que define se o range de ataque dos inimigos é ou nao impresso 
+	int acao=11;
 
-	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
+	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n",nomef,acao);
 			printf("<image x=700 y=550 width=20 height=20 xlink:href=\"%s\"/>\n", MANA);
 	printf("</a>\n");
 }
@@ -442,10 +433,10 @@ void print_rangeEnemy(ESTADO e){
 		if(e.inimigo[i].range == 1 && e.inimigo[i].vida >0){
 			x = e.inimigo[i].x;
 			y = e.inimigo[i].y;
-			if(casaLivre(e,x+1,y)==1) print_rangeAttack(e, x+1, y);
-			if(casaLivre(e,x-1,y)==1) print_rangeAttack(e, x-1, y);
-			if(casaLivre(e,x,y+1)==1) print_rangeAttack(e, x, y+1);
-			if(casaLivre(e,x,y-1)==1) print_rangeAttack(e, x, y-1);
+			if(casaLivre(e,x+1,y)==1 ||(x+1==e.jog.x && y==e.jog.y)) print_image(x+1,y,RANGEATTACK);
+			if(casaLivre(e,x-1,y)==1 ||(x-1==e.jog.x && y==e.jog.y)) print_image(x-1,y,RANGEATTACK);
+			if(casaLivre(e,x,y+1)==1 ||(x==e.jog.x && (y+1)==e.jog.y)) print_image(x,y+1,RANGEATTACK);
+			if(casaLivre(e,x,y-1)==1 ||(x==e.jog.x && (y-1)==e.jog.y)) print_image(x,y-1,RANGEATTACK);
 	}
 }
 
@@ -641,6 +632,7 @@ ESTADO ler_estado(char *nomef){
 }
 
 ESTADO processar_acao(ESTADO e, int acao, char *nomef){
+	int i;
 
 	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1);
 	else{
@@ -672,6 +664,15 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef){
 		}
 		else if (acao==9){
 			e=processar_mov(e,x+1,y-1);
+		}
+		else if(acao==11){
+				e.range = abs(e.range -1);
+				if(e.range == 1)
+					for(i=0;i<e.num_inimigos;i++)
+						if(e.inimigo[i].vida!=0) e.inimigo[i].range=1;
+				else 
+					for(i=0;i<e.num_inimigos;i++)
+						if(e.inimigo[i].vida!=0) e.inimigo[i].range=0;	
 		}
 	}
 	return e;
@@ -738,6 +739,8 @@ void parser(){
 	print_board();
 	print_item(e);
 	print_enemy(e); 
+	opcaoRange(e, nomef);
+	//selectRange(e);
 	print_treasure(e);
 	print_treasure_item(e);
 	print_door(e);
@@ -745,11 +748,9 @@ void parser(){
 	if(e.jog.vida != 0) print_player(e, acao, nomef);
 	print_inventory(e);
 	print_stats(e);
-	opcaoRange(e);
-	print_rangeEnemy(e);
-	selectRange(e);
 	opcaoVida(e);
 	print_enemy_vida(e);
+	print_rangeEnemy(e);
 
 	guardar_estado(e, nomef);
 
