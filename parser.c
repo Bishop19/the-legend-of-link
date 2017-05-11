@@ -12,7 +12,7 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 	ESTADO e = {0};
 	srand(time(NULL));
  
-	e.nivel = nivel; 
+	e.nivel = nivel;
 	e.acao = 0; 
 	e.jog.x = px;
 	e.jog.y = py; 
@@ -691,7 +691,7 @@ ESTADO processar_mov(ESTADO e, int px, int py){
 	}
 	else if(isEnemy(e, px, py)!=(-1)){ 
 		i=isEnemy(e, px, py);
-		e.inimigo[i].vida=0;//atk_Player(e.inimigo[i].vida, e.jog.crit, e.jog.atk, e.jog.powerUp_sword);
+		e.inimigo[i].vida=atk_Player(e.inimigo[i].vida, e.jog.crit, e.jog.atk, e.jog.powerUp_sword);
 		if(e.inimigo[i].vida==0){
 			e.score+=5;
 			e.inimigo[i].visivel=1;
