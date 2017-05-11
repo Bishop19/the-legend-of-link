@@ -11,7 +11,7 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 	int i, x, y, z; 
 	ESTADO e = {0};
 	srand(time(NULL));
-
+ 
 	e.nivel = nivel; 
 	e.acao = 0; 
 	e.jog.x = px;
@@ -106,63 +106,35 @@ void print_move(ESTADO e, int difx, int dify, char *nomef, int acao){
 		printf("</a>\n");
 	}
 	
-	else if (difx==0 && dify==(-1) && py>=0 && py<=8){
+	else if (difx==0 && dify==(-1) && py>=0 && py<8){
 		acao=2; 
-		print_rangeMov(e, px, py);
-		print_rangeAttack(e, px, py);
-		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
-			print_hex(px,py);
-		printf("</a>\n");
 	}
-	else if (difx==0 && dify==1 && py>=0 && py<=8){
+	else if (difx==0 && dify==1 && py>=0 && py<8){
 		acao=3; 
-		print_rangeMov(e, px, py);
-		print_rangeAttack(e, px, py);
-		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
-			print_hex(px,py);
-		printf("</a>\n");
-
-		
-	} /*
-	else if (isItem(e,px, py)!=(-1)){
-		int i = isItem(e,px, py); // int i - indica o inimigo que tem o item em causa
-		newE=catchItem(e.inimigo[i].item, e); // apanha o respetivo item
-		newE.inimigo[i].visivel=0; // e torna-o invisivel
-		newE=enemyMove(newE); //jogada dos inimigos
-		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			print_hex(px,py);
-		printf("</a>\n");
 	}
-	else if (isEnemy(e, px, py)!=(-1)){
-		int i = isEnemy(e, px, py);
-		newE.inimigo[i].vida=atk_Player(newE.inimigo[i].vida, newE.jog.crit, newE.jog.atk, newE.jog.powerUp_sword);
-		if (newE.inimigo[i].vida==0){
-			newE.inimigo[i].visivel=1;
-			newE.score+=5;
-		}
-		newE=enemyMove(newE); // jogada dos inimigos
-		print_rangeAttack(px, py, TAM); //indica ao jogador que pode atacar o inimigo
-		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			print_hex(px,py);
-		printf("</a>\n");
-	}	
-	else if (px==e.treasure.x && py==e.treasure.y && newE.treasure.visivel==1){
-		newE=itemTesouro(e, px, py);
-		newE.treasure.visivel=0;
-		newE.item.visivel=1; 
-		newE=enemyMove(newE); //jogada dos inimigos
-		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			print_hex(px,py);
-		printf("</a>\n");
+	else if (difx==(-1) && dify==0 && px>=0 && px<11){
+		acao=4; 
 	}
-	else if (px==e.item.x && py==e.item.y && e.item.visivel==1){
-		newE.item.visivel=0;
-		newE=catchItem(e.item.tipo, newE);
-		newE=enemyMove(newE);
-		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
-			print_hex(px,py);
-		printf("</a>\n");
-	} */
+	else if (difx==1 && dify==0 && px>=0 && px<=11){
+		acao=5; 
+	}
+	else if (e.jog.x%2==0 && difx==1 && dify==1 && py>=0 && py<8 && px>=0 && px<11){
+		acao=6; 
+	}
+	else if (e.jog.x%2==1 && difx==(-1) && dify==(-1) && py>=0 && py<8 && px>=0 && px<11){
+		acao=7; 
+	}
+	else if (e.jog.x%2==0 && difx==(-1) && dify==1 && py>=0 && py<8 && px>=0 && px<11){
+		acao=8; 
+	}
+	else if (e.jog.x%2==1 && difx==1 && dify==(-1) && py>=0 && py<8 && px>=0 && px<11){
+		acao=9; 		
+	}
+	print_rangeMov(e, px, py);
+	print_rangeAttack(e, px, py);
+	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
+		print_hex(px,py);
+	printf("</a>\n");
 }
 
 
@@ -231,7 +203,7 @@ int casaLivre (ESTADO e, int x, int y){
 int isEnemy (ESTADO e, int x, int y){ // funcao que retorna -1 se a casa nao tem inimigo, ou entao o seu numero
 	int i, r=-1;
 
-	for (i=0; i<e.num_inimigos; i++)
+	for (i=0; i<e.num_inimigos && r==(-1); i++)
 		if (x==e.inimigo[i].x && y==e.inimigo[i].y && e.inimigo[i].vida!=0) r=i;
 	return r;
 }
@@ -443,7 +415,7 @@ void print_player(ESTADO e, int acao, char *nomef){
 		print_move(e, +1, -1, nomef, acao);
 		print_move(e, -1, -1, nomef, acao);
 	}
-}
+} 
 
 
 void print_enemy(ESTADO e){
@@ -668,19 +640,39 @@ ESTADO ler_estado(char *nomef){
 }
 
 ESTADO processar_acao(ESTADO e, int acao, char *nomef){
-	if (acao==0) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1);
-	else if (acao==1) {e=ler_estado(nomef);
-		e = inicializar(++e.nivel, e.door.x, e.door.y, e.score+10, e.jog.vida, e.jog.mana, e.jog.atk, e.jog.crit, e.jog.item_vida, e.jog.item_mana, e.jog.item_sword, e.jog.item_shield);
-	}
-	else if (acao==2){
+
+	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1);
+	else{
 		e=ler_estado(nomef);
-		e=processar_mov(e, e.jog.x, e.jog.y-1);
+		int x=e.jog.x; int y=e.jog.y;
+		if (acao==1){
+			e = inicializar(++e.nivel, e.door.x, e.door.y, e.score+10, e.jog.vida, e.jog.mana, e.jog.atk, e.jog.crit, e.jog.item_vida, e.jog.item_mana, e.jog.item_sword, e.jog.item_shield);
+		}
+		else if (acao==2){
+			e=processar_mov(e,x,y-1);
+		}
+		else if (acao==3){
+			e=processar_mov(e,x,y+1);
+		}
+		else if (acao==4){
+			e=processar_mov(e,x-1,y);
+		}
+		else if (acao==5){
+			e=processar_mov(e,x+1,y);
+		}
+		else if (acao==6){
+			e=processar_mov(e,x+1,y+1);
+		}
+		else if (acao==7){
+			e=processar_mov(e,x-1,y-1);
+		}
+		else if (acao==8){
+			e=processar_mov(e,x-1,y+1);
+		}
+		else if (acao==9){
+			e=processar_mov(e,x+1,y-1);
+		}
 	}
-	else if (acao==3){
-		e=ler_estado(nomef);
-		e=processar_mov(e, e.jog.x, e.jog.y+1);
-	}
-	
 	return e;
 }
 
@@ -696,9 +688,9 @@ ESTADO processar_mov(ESTADO e, int px, int py){
 		e=catchItem(e.inimigo[i].item, e);
 		e.inimigo[i].visivel=0;
 	}
-	else if(isEnemy(e, px, py)!=(-1)){
+	else if(isEnemy(e, px, py)!=(-1)){ 
 		i=isEnemy(e, px, py);
-		e.inimigo[i].vida=atk_Player(e.inimigo[i].vida, e.jog.crit, e.jog.atk, e.jog.powerUp_sword);
+		e.inimigo[i].vida=0;//atk_Player(e.inimigo[i].vida, e.jog.crit, e.jog.atk, e.jog.powerUp_sword);
 		if(e.inimigo[i].vida==0){
 			e.score+=5;
 			e.inimigo[i].visivel=1;
@@ -715,7 +707,7 @@ ESTADO processar_mov(ESTADO e, int px, int py){
 	}
 
 
-	e=enemyMove(e);
+	//e=enemyMove(e);
 
 	return e;
 }
@@ -734,24 +726,22 @@ void parser(){
     }
     else { //aqui vou fazer um scan dos parametros ficando em num a quantidade de parametros lidos
             num =sscanf(args,"%[^,],%d", nomef, &acao);
-            if (num==1)acao = 1;  //se só for 1 quer dizer que só coloquei o nome do jogador(ficheiro) pelo que escolho uma acao para mostrar esse estado
-          }                                    // se for maior que 1 então estou a receber nos parametros o nome do ficheiro e a acao pelo que devo
+            if (num==1)acao = 10;  //se só for 1 quer dizer que só coloquei o nome do jogador(ficheiro) pelo que escolho uma acao para mostrar esse estado
+          }                                     // se for maior que 1 então estou a receber nos parametros o nome do ficheiro e a acao pelo que devo
 
                                                 //avançar para o processamento da acao especificada no link
 		
 	e=processar_acao(e, acao, nomef); //equivalente a print_move
 
-
-
-	print_menu();
+	print_menu(); 
 	print_board();
 	print_item(e);
 	print_enemy(e); 
 	print_treasure(e);
 	print_treasure_item(e);
 	print_door(e);
-	if(e.jog.vida != 0) print_player(e, acao, nomef);
 	print_wall(e);
+	if(e.jog.vida != 0) print_player(e, acao, nomef);
 	print_inventory(e);
 	print_stats(e);
 	opcaoRange(e);
