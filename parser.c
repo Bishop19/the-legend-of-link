@@ -415,6 +415,7 @@ ESTADO espada_giratoria(ESTADO e){
 		}
 	}
 	e.jog.mana-=2;
+
 	return e;
 }
 
@@ -722,7 +723,7 @@ ESTADO processar_mov(ESTADO e, int px, int py){
 
 
 void parser(){
-	ESTADO e={{0}};
+	ESTADO e={0};
     int num,acao;
     char nomef[100];
     char *args = getenv("QUERY_STRING");
