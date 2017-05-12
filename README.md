@@ -21,5 +21,5 @@ Ideias:
 - Tesouro - items (DONE);
 - Crit Chance (DONE);
 - PowerUps (DONE);
-- Mostrar vida dos inimigos (Almost DONE);
+- Mostrar vida dos inimigos (DONE);
 

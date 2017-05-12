@@ -299,19 +299,10 @@ int itemInimigo(int rand){
 }
 
 
-void opcaoVida(ESTADO e){ // funcao que define se o range de ataque dos inimigos é ou nao impresso 
-	ESTADO newE; int i;
-	newE=e;
-	
-	newE.vidas = abs(e.vidas -1);
-	if(newE.vidas == 1)
-		for(i=0;i<e.num_inimigos;i++)
-			if(newE.inimigo[i].vida!=0) newE.inimigo[i].showVida=1;
-	if(newE.vidas == 0)
-		for(i=0;i<e.num_inimigos;i++)
-			if(newE.inimigo[i].vida!=0) newE.inimigo[i].showVida=0;	
+void opcaoVida(ESTADO e, char *nomef){ // funcao que define se o range de ataque dos inimigos é ou nao impresso 
+	int acao=17;
 
-	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
+	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n",nomef,acao);
 			printf("<image x=750 y=550 width=20 height=20 xlink:href=\"%s\"/>\n", MANA);
 	printf("</a>\n");
 }
@@ -524,48 +515,36 @@ void print_rangeAttack (ESTADO e, int px, int py){
 }
 
 
-void print_inventory(ESTADO e){
-	int i=0;
-	ESTADO newE=e;
+void print_inventory(ESTADO e, char *nomef){
+	int i=0, acao;
 
 	if(e.jog.item_vida>0){
-		newE.jog.item_vida--;
-		if(newE.jog.vida<8) newE.jog.vida+=2;
-		else newE.jog.vida=10;
-		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
+		acao=13;
+		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
 			printf("<image x=%d y=312 width=39 height=39 xlink:href=\"%s\"/>\n", 708+43*i, VIDA_INV);
 		printf("</a>\n");	
 		printf("<text x=%d y=350 font-family=Verdana font-size=9 fill=white> %d </text> \n", 600+29+80+40*i, e.jog.item_vida);
 		i++;
 	}
-	newE=e;
 	if(e.jog.item_mana>0){
-		newE.jog.item_mana--;
-		if(newE.jog.mana<8) newE.jog.mana+=2;
-		else newE.jog.mana=10;
-		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
+		acao=14;
+		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
 			printf("<image x=%d y=312 width=39 height=39 xlink:href=\"%s\"/>\n", 708+43*i, MANA_INV);
 		printf("</a>\n");	
 		printf("<text x=%d y=350 font-family=Verdana font-size=9 fill=white> %d </text> \n", 600+29+80+2*i+40*i, e.jog.item_mana);
 		i++;
 	}
-	newE=e;
 	if(e.jog.item_sword>0){
-		newE.jog.item_sword--;
-		newE.jog.powerUp_sword=1;
-
-		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
+		acao=15;
+		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
 			printf("<image x=%d y=312 width=39 height=39 xlink:href=\"%s\"/>\n", 708+43*i, SWORD_PU_INV); // mudar IMAGEM
 		printf("</a>\n");	
 		printf("<text x=%d y=350 font-family=Verdana font-size=9 fill=white> %d </text> \n", 600+29+80+2*i+40*i, e.jog.item_sword);
 		i++;
 	}
-	newE=e;
 	if(e.jog.item_shield>0){
-		newE.jog.item_shield--;
-		newE.jog.powerUp_shield=1;
-
-		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s\">\n", estado2str(newE));
+		acao=16;
+		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
 			printf("<image x=%d y=312 width=39 height=39 xlink:href=\"%s\"/>\n", 708+43*i, SHIELD_PU_INV);
 		printf("</a>\n");	
 		printf("<text x=%d y=350 font-family=Verdana font-size=9 fill=white> %d </text> \n", 600+29+80+2*i+40*i, e.jog.item_shield);
@@ -666,15 +645,43 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef){
 			e=processar_mov(e,x+1,y-1);
 		}
 		else if(acao==11){
-				e.range = abs(e.range -1);
+				e.range = abs(e.range-1);
 				if(e.range == 1)
 					for(i=0;i<e.num_inimigos;i++)
 						if(e.inimigo[i].vida!=0) e.inimigo[i].range=1;
-				else 
+				if(e.range == 0)
 					for(i=0;i<e.num_inimigos;i++)
-						if(e.inimigo[i].vida!=0) e.inimigo[i].range=0;	
+						if(e.inimigo[i].vida!=0) e.inimigo[i].range=0;
+		}
+		else if(acao==13){
+			e.jog.item_vida--;
+			if(e.jog.vida<8) e.jog.vida+=2;
+			else e.jog.vida=10;
+		}
+		else if(acao==14){
+			e.jog.item_mana--;
+			if(e.jog.mana<8) e.jog.mana+=2;
+			else e.jog.mana=10;
+		}
+		else if(acao==15){
+			e.jog.item_sword--;
+			e.jog.powerUp_sword=1;
+		}
+		else if(acao==16){
+			e.jog.item_shield--;
+			e.jog.powerUp_shield=1;
+		}
+		else if(acao==17){
+			e.vidas = abs(e.vidas -1);
+			if(e.vidas == 1)
+				for(i=0;i<e.num_inimigos;i++)
+					if(e.inimigo[i].vida!=0) e.inimigo[i].showVida=1;
+			if(e.vidas == 0)
+				for(i=0;i<e.num_inimigos;i++)
+					if(e.inimigo[i].vida!=0) e.inimigo[i].showVida=0;	
 		}
 	}
+
 	return e;
 }
 
@@ -707,8 +714,6 @@ ESTADO processar_mov(ESTADO e, int px, int py){
 		e.item.visivel=0;
 		e=catchItem(e.item.tipo, e);
 	}
-
-
 	//e=enemyMove(e);
 
 	return e;
@@ -746,9 +751,9 @@ void parser(){
 	print_door(e);
 	print_wall(e);
 	if(e.jog.vida != 0) print_player(e, acao, nomef);
-	print_inventory(e);
+	print_inventory(e, nomef);
 	print_stats(e);
-	opcaoVida(e);
+	opcaoVida(e, nomef);
 	print_enemy_vida(e);
 	print_rangeEnemy(e);
 

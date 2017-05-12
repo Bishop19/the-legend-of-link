@@ -7,10 +7,10 @@ Definição do estado e das funções que convertem estados em strings e vice-ve
 */
 
 /** \brief O nº máximo de inimigos */
-#define MAX_INIMIGOS		100
+#define MAX_INIMIGOS		20
 
 /** \brief O nº máximo de obstáculos */
-#define MAX_OBSTACULOS		100
+#define MAX_OBSTACULOS		20
 
 /**
 \brief Estrutura que armazena uma posição
