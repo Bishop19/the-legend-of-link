@@ -72,7 +72,7 @@ int atk_Inimigo(int tipo);
 int vida_Inimigo(int tipo);
 void print_hex(int x, int y);
 ESTADO processar_mov(ESTADO e, int px, int py);
-ESTADO processar_acao(ESTADO e,int acao, char *nomef);
+ESTADO processar_acao(ESTADO e,int acao, char *nomef, int numI);
 void guardar_estado(ESTADO e, char *nomef);
 ESTADO ler_estado(char *nomef);
 
