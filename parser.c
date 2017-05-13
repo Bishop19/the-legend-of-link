@@ -13,7 +13,7 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 	srand(time(NULL));
  
 	e.nivel = nivel;
-	e.acao = 0; 
+	e.bolaFogo = 0; 
 	e.jog.x = px;
 	e.jog.y = py;  
 	e.jog.vida=vida;
@@ -361,8 +361,8 @@ void opcaoRange(ESTADO e, char *nomef){ // funcao que define se o range de ataqu
 	printf("</a>\n");
 }
 
-void selectRange(ESTADO e,char *nomef){ // funcao que permite selecionar um inimigo para mostrar o seu range
-	ESTADO newE; int i=0;
+void selectRange(ESTADO e, char *nomef){ // funcao que permite selecionar um inimigo para mostrar o seu range
+	int i=0;
 	
 	if(e.range == 0)
 		while(i<e.num_inimigos){
@@ -388,6 +388,21 @@ int atk_Player(int vida, int crit, int atk, int sword){
 
 	return vida;
 }
+
+
+/*
+void bola_Fogo(ESTADO e, char *nomef){
+	int acao=20, i;
+
+	if(e.bolaFogo==1){
+     ...
+	}
+	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d, %d\">\n", nomef, acao, i);
+			printf("<image x=600 y=550 width=20 height=20 xlink:href=\"%s\"/>\n", MANA);
+	printf("</a>\n");
+} */
+
+
 
 void espada_giratoria(ESTADO e, char *nomef){
 	int acao= 18;
@@ -751,6 +766,14 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 		else if(acao==19){
 			e.inimigo[numI].range=abs(e.inimigo[numI].range -1);
 		}
+		/*else if(acao==20){
+			e.bolaFogo=abs(e.bolaFogo-1);
+			if (e.jog.mana>=3 && e.bolaFogo==1){
+				if(e.inimigo[numI].vida>2) e.inimigo[numI].vida-=2;
+				else e.inimigo[numI].vida=0;
+				e.jog.mana-=3;
+			}
+		} */
 	}
 	return e;
 }	
@@ -808,7 +831,7 @@ void parser(){
 
                                                 //avançar para o processamento da acao especificada no link
 		
-	e=processar_acao(e, acao, nomef,i); //equivalente a print_move
+	e=processar_acao(e, acao, nomef, i); //equivalente a print_move
 
 	print_menu(); 
 	print_board();
@@ -827,6 +850,7 @@ void parser(){
 	print_enemy_vida(e);
 	print_rangeEnemy(e);
 	espada_giratoria(e,nomef);
+//	bola_Fogo(e, nomef);
 
 	guardar_estado(e, nomef);
 }

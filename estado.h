@@ -76,8 +76,8 @@ typedef struct itemState {
 typedef struct estado {
 	/** Nivel de jogo*/
 	char nivel;
-	/** Ação 0-em jogo 1-novo nivel */
-	char acao;
+	/**  */
+	char bolaFogo;
 	/**Pontuação do jogador */
 	int score;
 	/** A posição do jogador */
