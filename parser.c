@@ -770,7 +770,7 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 			}
 		}
 		else if(acao==19){
-			e.inimigo[numI].range=abs(e.inimigo[numI].range -1);
+			e.inimigo[numI].range=abs(e.inimigo[numI].range-1);
 		}
 		else if(acao==20){
 			e.bolaFogo=abs(e.bolaFogo-1);
@@ -845,6 +845,11 @@ void parser(){
 	print_menu(); 
 	print_board();
 	print_item(e);
+	if(e.bolaFogo==1){
+		for(int j=0; j<e.num_inimigos;j++){
+			if (e.inimigo[j].vida>0) print_image(e.inimigo[j].x, e.inimigo[j].y, RANGEATTACK);
+		}
+	}
 	print_enemy(e); 
 	opcaoRange(e, nomef);
 	selectRange(e,nomef);
