@@ -390,17 +390,23 @@ int atk_Player(int vida, int crit, int atk, int sword){
 }
 
 
-/*
 void bola_Fogo(ESTADO e, char *nomef){
 	int acao=20, i;
 
-	if(e.bolaFogo==1){
-     ...
-	}
-	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d, %d\">\n", nomef, acao, i);
+	if(e.bolaFogo == 1)
+		while(i<e.num_inimigos){
+			if(e.inimigo[i].vida>0 && inRange(e,i)==0){
+				int acao=21;
+				printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d,%d\">\n",nomef,acao,i);
+					print_hex(e.inimigo[i].x, e.inimigo[i].y);
+				printf("</a>\n");
+			}	
+			i++;	
+		}
+	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
 			printf("<image x=600 y=550 width=20 height=20 xlink:href=\"%s\"/>\n", MANA);
 	printf("</a>\n");
-} */
+} 
 
 
 
@@ -766,14 +772,17 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 		else if(acao==19){
 			e.inimigo[numI].range=abs(e.inimigo[numI].range -1);
 		}
-		/*else if(acao==20){
+		else if(acao==20){
 			e.bolaFogo=abs(e.bolaFogo-1);
-			if (e.jog.mana>=3 && e.bolaFogo==1){
+		}		
+		else if(acao==21){
+			if (e.jog.mana>=3){
 				if(e.inimigo[numI].vida>2) e.inimigo[numI].vida-=2;
 				else e.inimigo[numI].vida=0;
 				e.jog.mana-=3;
 			}
-		} */
+			e.bolaFogo=0;
+		}
 	}
 	return e;
 }	
@@ -850,7 +859,7 @@ void parser(){
 	print_enemy_vida(e);
 	print_rangeEnemy(e);
 	espada_giratoria(e,nomef);
-//	bola_Fogo(e, nomef);
+	bola_Fogo(e, nomef);
 
 	guardar_estado(e, nomef);
 }
