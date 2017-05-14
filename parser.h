@@ -34,6 +34,7 @@
 #define SHIELD_PU_INV "http://127.0.0.1/shield_inv.png"
 #define VIDA_INV "http://127.0.0.1/vida_inv.png"
 #define MANA_INV "http://127.0.0.1/mana_inv.png"
+#define MENU "http://127.0.0.1/menu1.png"
 
 
 

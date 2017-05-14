@@ -8,7 +8,7 @@ $(EXEC):	$(OBJS)
 			sudo cp enemy1.png /var/www/html
 			sudo cp enemy2.png /var/www/html
 			sudo cp enemy3.png /var/www/html
-			sudo cp menu.png /var/www/html
+			sudo cp menu1.png /var/www/html
 			sudo cp floor.png /var/www/html
 			sudo cp door.png /var/www/html
 			sudo cp rangeMove.png /var/www/html

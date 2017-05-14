@@ -78,6 +78,8 @@ typedef struct estado {
 	char nivel;
 	/**  */
 	char bolaFogo;
+	/**  */
+	char flash;
 	/**Pontuação do jogador */
 	int score;
 	/** A posição do jogador */
