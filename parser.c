@@ -809,7 +809,8 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 							e.inimigo[i].vida=0;
 							e.inimigo[i].visivel=1;
 						}
-					else if((e.inimigo[i].vida>0) && (e.jog.x!=e.inimigo[i].x) && (e.jog.y!=e.inimigo[i].y) && (abs(e.jog.x-e.inimigo[i].x)+abs(e.jog.y-e.inimigo[i].y)==2)){
+					else if( ((e.inimigo[i].vida>0) && (e.jog.x%2==0) && ( (e.jog.x==e.inimigo[i].x+1) || (e.jog.x==e.inimigo[i].x-1) ) && (e.jog.y==e.inimigo[i].y-1) && (abs(e.jog.x-e.inimigo[i].x)+abs(e.jog.y-e.inimigo[i].y)==2)) || 
+							 ((e.inimigo[i].vida>0) && (e.jog.x%2==1) && ( (e.jog.x==e.inimigo[i].x+1) || (e.jog.x==e.inimigo[i].x-1) ) && (e.jog.y==e.inimigo[i].y+1) && (abs(e.jog.x-e.inimigo[i].x)+abs(e.jog.y-e.inimigo[i].y)==2)) ){
 						if (e.inimigo[i].vida>1) e.inimigo[i].vida--;
 						else{
 							e.inimigo[i].vida=0;
