@@ -32,6 +32,14 @@ $(EXEC):	$(OBJS)
 			sudo cp vida_inv.png /var/www/html
 			sudo cp mana_inv.png /var/www/html
 			sudo cp shield_inv.png /var/www/html
+			sudo cp Title_Screen.png /var/www/html
+			sudo cp start_button.png /var/www/html
+			sudo cp back_button.png /var/www/html
+			sudo cp square_link.png /var/www/html
+			sudo cp toggle_range.png /var/www/html
+			sudo cp toggle_vida.png /var/www/html
+			sudo cp topScore_button.png /var/www/html
+
 
 clean:
 	rm	$(EXEC)	*.o

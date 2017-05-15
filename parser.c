@@ -7,11 +7,12 @@
 
 
 
-ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int atk, int crit, int vida_potion, int mana_potion, int sword, int shield){
+ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int atk, int crit, int vida_potion, int mana_potion, int sword, int shield, int screen){
 	int i, x, y, z; 
 	ESTADO e = {0};
 	srand(time(NULL));
- 
+
+	e.screen=screen;
 	e.nivel = nivel;
 	e.bolaFogo = 0; 
 	e.flash=0;
@@ -307,11 +308,16 @@ ESTADO catchItem(int item, ESTADO e){
 
 int tipoInimigo(int nivel, int x){
 	if (nivel==1) x=1;
-	else{ 
-		if (x%3==0) x=1;
-		else if (x%3==1) x=2;
+	else if(nivel==2){
+		if(x%2==0) x=1;
+		else x=2;
+	}
+	else if (nivel==3 || nivel==4){ 
+		if (x%5==0 || x%5==1) x=1;
+		else if (x%5==2 || x%5==3) x=2;
 		else x=3;
 	}
+//	else if (nivel==5)
 	return x;
 }
 
@@ -331,11 +337,11 @@ int itemInimigo(int rand){
 }
 
 
-void opcaoVida(ESTADO e, char *nomef){ // funcao que define se o range de ataque dos inimigos é ou nao impresso 
+void opcaoVida(char *nomef){ // funcao que define se o range de ataque dos inimigos é ou nao impresso 
 	int acao=17;
 
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n",nomef,acao);
-			printf("<image x=750 y=550 width=20 height=20 xlink:href=\"%s\"/>\n", MANA);
+			printf("<image x=942 y=563 xlink:href=\"%s\"/>\n", TOGGLE_VIDA);
 	printf("</a>\n");
 }
 
@@ -348,17 +354,20 @@ void print_enemy_vida(ESTADO e){
 			y=e.inimigo[i].y*70+15;
 			vida=e.inimigo[i].vida;
 			print_image(e.inimigo[i].x, e.inimigo[i].y, VIDA_INIMIGO);
-			if(e.inimigo[i].x%2==1) printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x, y, vida); // Vida inimigo MUDAR!!!!!!!
-			else printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x, y+35, vida); // Vida inimigo
+
+			//if(e.inimigo[i].tipo==?) print_image(e.inimigo[i].x, e.inimigo[i].y, ????); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+			if(e.inimigo[i].x%2==1)	printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x, y, vida);			
+			else printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x, y+35, vida);
 		}
 	}
 }
 
-void opcaoRange(ESTADO e, char *nomef){ // funcao que define se o range de ataque dos inimigos é ou nao impresso 
+void opcaoRange(char *nomef){ // funcao que define se o range de ataque dos inimigos é ou nao impresso 
 	int acao=11;
 
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n",nomef,acao);
-			printf("<image x=700 y=550 width=20 height=20 xlink:href=\"%s\"/>\n", MANA);
+			printf("<image x=903 y=563 xlink:href=\"%s\"/>\n", TOGGLE_RANGE);
 	printf("</a>\n");
 }
 
@@ -392,7 +401,7 @@ int atk_Player(int vida, int crit, int atk, int sword){
 
 
 void bola_Fogo(ESTADO e, char *nomef){
-	int acao=20, i;
+	int acao=20, i=0;
 
 	if(e.bolaFogo == 1)
 		while(i<e.num_inimigos){
@@ -405,30 +414,31 @@ void bola_Fogo(ESTADO e, char *nomef){
 			i++;	
 		}
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
-			printf("<image x=600 y=550 width=20 height=20 xlink:href=\"%s\"/>\n", MANA);
+			printf("<image x=753 y=416 xlink:href=\"%s\"/>\n", SQUARE_LINK);
 	printf("</a>\n");
 	printf("<text x=%d y=453 font-family=Verdana font-size=9 fill=white> %d </text> \n", 600+29+80+3+42, 3);
 
 }
 
 void mov_Flash(ESTADO e, char *nomef){
-	int acao=22, i;
+	int acao=22;
 
 	if(e.flash == 1){
 		if(casaLivre(e, e.jog.x+2, e.jog.y)==1) print_move(e, +2, +0, nomef, 23);
 	}		
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
-			printf("<image x=600 y=450 width=20 height=20 xlink:href=\"%s\"/>\n", MANA);
+			printf("<image x=711 y=512 xlink:href=\"%s\"/>\n", SQUARE_LINK);
 	printf("</a>\n");
+	printf("<text x=%d y=550 font-family=Verdana font-size=9 fill=white> %d </text> \n", 600+29+80+3, 2);
 } 
 
 
 
-void espada_giratoria(ESTADO e, char *nomef){
+void espada_giratoria(char *nomef){
 	int acao=18;
 
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n",nomef,acao);
-			printf("<image x=500 y=550 width=20 height=20 xlink:href=\"%s\"/>\n", MANA);
+			printf("<image x=711 y=416 xlink:href=\"%s\"/>\n", SQUARE_LINK);
 	printf("</a>\n");
 	printf("<text x=%d y=453 font-family=Verdana font-size=9 fill=white> %d </text> \n", 600+29+80+3, 2);
 
@@ -569,8 +579,32 @@ void print_treasure_item(ESTADO e){
 		if (e.item.tipo==8) print_image(e.item.x, e.item.y, SHIELD_PU);
 	}
 }
+
+
 void print_menu(){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", MENU);
+}
+
+
+void print_start(char *nomef){
+	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", TITLE);
+	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, 40);
+		printf("<image x=378 y=351 xlink:href=\"%s\"/>\n", START_BUTTON);
+	printf("</a>\n");
+	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, 41);
+		printf("<image x=880 y=515 xlink:href=\"%s\"/>\n", TOPSCORE_BUTTON);
+	printf("</a>\n");	
+
+
+}
+
+
+void print_score_screen(char *nomef){
+	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", TITLE);
+	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, 42);
+		printf("<image x=830 y=535 xlink:href=\"%s\"/>\n", BACK_BUTTON);
+	printf("</a>\n");
+
 }
 
 
@@ -699,12 +733,12 @@ ESTADO ler_estado(char *nomef){
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1);
+	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,0);
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
 		if (acao==1){
-			e = inicializar(++e.nivel, e.door.x, e.door.y, e.score+10, e.jog.vida, e.jog.mana, e.jog.atk, e.jog.crit, e.jog.item_vida, e.jog.item_mana, e.jog.item_sword, e.jog.item_shield);
+			e = inicializar(++e.nivel, e.door.x, e.door.y, e.score+10, e.jog.vida, e.jog.mana, e.jog.atk, e.jog.crit, e.jog.item_vida, e.jog.item_mana, e.jog.item_sword, e.jog.item_shield, 1);
 		}
 		else if (acao==2){
 			e=processar_mov(e,x,y-1);
@@ -771,17 +805,18 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 				for(i=0; i<e.num_inimigos; i++){
 					if(e.inimigo[i].vida>0 && (abs(e.jog.x-e.inimigo[i].x)+abs(e.jog.y-e.inimigo[i].y))==1) 
 						if (e.inimigo[i].vida>1) e.inimigo[i].vida--;
-						else {
+						else{
 							e.inimigo[i].vida=0;
 							e.inimigo[i].visivel=1;
 						}
-					else if(e.inimigo[i].vida>0 && (e.jog.x!=e.inimigo[i].x) && (e.jog.y!=e.inimigo[i].y) && (abs(e.jog.x-e.inimigo[i].x)+abs(e.jog.y-e.inimigo[i].y)==2))
+					else if((e.inimigo[i].vida>0) && (e.jog.x!=e.inimigo[i].x) && (e.jog.y!=e.inimigo[i].y) && (abs(e.jog.x-e.inimigo[i].x)+abs(e.jog.y-e.inimigo[i].y)==2)){
 						if (e.inimigo[i].vida>1) e.inimigo[i].vida--;
 						else{
 							e.inimigo[i].vida=0;
 							e.inimigo[i].visivel=1;
 						}
-					}	
+					}
+				}	
 				e.jog.mana-=2;
 			}
 		}
@@ -807,8 +842,15 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 			e.jog.mana-=2;
 			e.flash=0;
 		}
-
-	}
+		else if(acao==40){
+			e.screen=1;
+		}
+		else if(acao==41){
+			e.screen=2;
+		}
+		else if(acao==42){
+			e.screen=0;
+		}	}
 	return e;
 }	
 
@@ -867,33 +909,39 @@ void parser(){
 		
 	e=processar_acao(e, acao, nomef, i); //equivalente a print_move
 
-	print_menu(); 
-	print_board();
-	print_item(e);
-	if(e.bolaFogo==1){
-		for(int j=0; j<e.num_inimigos;j++){
-			if (e.inimigo[j].vida>0) 
-				print_image(e.inimigo[j].x, e.inimigo[j].y, RANGEATTACK);
-		}
-	}
-	print_enemy(e); 
-	opcaoRange(e, nomef);
-	selectRange(e,nomef);
-	print_treasure(e);
-	print_treasure_item(e);
-	print_door(e);
-	print_wall(e);
-	if(e.jog.vida != 0) print_player(e, acao, nomef);
-	print_inventory(e, nomef);
-	print_stats(e);
-	opcaoVida(e, nomef);
-	print_enemy_vida(e);
-	print_rangeEnemy(e);
-	espada_giratoria(e,nomef);
-	bola_Fogo(e, nomef);
-	mov_Flash(e, nomef);
 
+
+	if(e.screen==0) print_start(nomef);
+	else if(e.screen==2) print_score_screen(nomef);
+	else{
+		print_menu(); 
+		print_board();
+		print_item(e);
+		if(e.bolaFogo==1){
+			for(int j=0; j<e.num_inimigos;j++){
+				if (e.inimigo[j].vida>0) 
+					print_image(e.inimigo[j].x, e.inimigo[j].y, RANGEATTACK);
+			}
+		}
+		print_enemy(e); 
+		opcaoRange(nomef);
+		selectRange(e,nomef);
+		print_treasure(e);
+		print_treasure_item(e);
+		print_door(e);
+		print_wall(e);
+		if(e.jog.vida != 0) print_player(e, acao, nomef);
+		print_inventory(e, nomef);
+		print_stats(e);
+		opcaoVida(nomef);
+		print_enemy_vida(e);
+		print_rangeEnemy(e);
+		espada_giratoria(nomef);
+		bola_Fogo(e, nomef);
+		mov_Flash(e, nomef);
+	}
 	guardar_estado(e, nomef);
+	
 }
 
 

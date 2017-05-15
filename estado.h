@@ -77,6 +77,8 @@ typedef struct estado {
 	/** Nivel de jogo*/
 	char nivel;
 	/**  */
+	char screen;
+	/**  */
 	char bolaFogo;
 	/**  */
 	char flash;

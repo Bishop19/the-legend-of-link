@@ -35,7 +35,13 @@
 #define VIDA_INV "http://127.0.0.1/vida_inv.png"
 #define MANA_INV "http://127.0.0.1/mana_inv.png"
 #define MENU "http://127.0.0.1/menu1.png"
-
+#define TITLE "http://127.0.0.1/Title_Screen.png"
+#define START_BUTTON "http://127.0.0.1/start_button.png"
+#define BACK_BUTTON "http://127.0.0.1/back_button.png"
+#define SQUARE_LINK "http://127.0.0.1/square_link.png"
+#define TOGGLE_RANGE "http://127.0.0.1/toggle_range.png"
+#define TOGGLE_VIDA "http://127.0.0.1/toggle_vida.png"
+#define TOPSCORE_BUTTON "http://127.0.0.1/topScore_button.png"
 
 
 
@@ -67,7 +73,7 @@ void print_specific_item(int i, ESTADO e);
 void print_rangeEnemy(ESTADO e);
 int atk_Player(int vida, int crit, int atk, int sword);
 void print_lama(ESTADO e);
-void opcaoVida(ESTADO e, char *nomef);
+void opcaoVida(char *nomef);
 void print_enemy_vida(ESTADO e);
 int atk_Inimigo(int tipo);
 int vida_Inimigo(int tipo);
