@@ -61,6 +61,23 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 
 	e.num_inimigos = 0;
 	i=0;
+	if (e.nivel%5==0){ // cria boss
+		while(i==0){
+			x=rand()%11; 
+			y=rand()%8;
+			if((casaLivre(e,x,y)==1) && (abs(e.door.x-x)+abs(e.door.y-y)>5) && (abs(e.jog.x-x)+abs(e.jog.y-y)>5)){
+				e.inimigo[i].x=x;
+	    		e.inimigo[i].y=y;
+	    		e.inimigo[i].tipo=4*(e.nivel/5);
+	    		e.inimigo[i].vida=4+2*(e.nivel/5);
+	    		e.inimigo[i].atk=1+(e.nivel/5);
+	    		e.inimigo[i].item=itemInimigo(z);
+	    		e.inimigo[i].visivel=0;
+	    		e.num_inimigos++;
+	    		i=4; //   !!! ver erro  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 	
+			}
+		}
+	}
 	while(i<NUM_INIMIGOS){
 		x=rand()%11; 
 		y=rand()%8;
@@ -312,12 +329,11 @@ int tipoInimigo(int nivel, int x){
 		if(x%2==0) x=1;
 		else x=2;
 	}
-	else if (nivel==3 || nivel==4){ 
+	else if (nivel==3 || nivel==4 || nivel==5){ 
 		if (x%5==0 || x%5==1) x=1;
 		else if (x%5==2 || x%5==3) x=2;
 		else x=3;
 	}
-//	else if (nivel==5)
 	return x;
 }
 
@@ -354,9 +370,7 @@ void print_enemy_vida(ESTADO e){
 			y=e.inimigo[i].y*70+15;
 			vida=e.inimigo[i].vida;
 			print_image(e.inimigo[i].x, e.inimigo[i].y, VIDA_INIMIGO);
-
-			//if(e.inimigo[i].tipo==?) print_image(e.inimigo[i].x, e.inimigo[i].y, ????); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+			if(e.inimigo[i].tipo==4*(e.nivel/5)) print_image(e.inimigo[i].x, e.inimigo[i].y, BOSS_SYMBOL);
 			if(e.inimigo[i].x%2==1)	printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x, y, vida);			
 			else printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x, y+35, vida);
 		}
@@ -479,12 +493,14 @@ void print_enemy(ESTADO e){
 		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==1) print_image(e.inimigo[i].x, e.inimigo[i].y, ENEMY);
 		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==2) print_image(e.inimigo[i].x, e.inimigo[i].y, ENEMY2);
 		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==3) print_image(e.inimigo[i].x, e.inimigo[i].y, ENEMY3);
+		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==4) print_image(e.inimigo[i].x, e.inimigo[i].y, ENEMY3);
 	}
 }
 
 void print_enemy_specific(int x, int y, int tipo){
 	if (tipo==1) print_image(x, y, ENEMY);
 	else if (tipo==2) print_image(x, y, ENEMY2);
+	else if (tipo==3) print_image(x, y, ENEMY3);
 	else print_image(x, y, ENEMY3);
 }
 
@@ -617,11 +633,11 @@ void print_stats(ESTADO e){
 	for (i=0;i<e.jog.mana;i++) 
 		printf("<image x=%d y=80 width=20 height=20 xlink:href=\"%s\"/>\n", 600+81+80+20*i, MANA); // Mana
 
-	printf("<text x=880 y=210 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.nivel); // Nivel
-	if(e.jog.powerUp_sword==1) printf("<text x=760 y=210 font-family=Verdana font-size=24 fill=green> %d </text> \n", e.jog.atk*2); // Ataque
-	else printf("<text x=760 y=210 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.jog.atk);
-	printf("<text x=760 y=245 font-family=Verdana font-size=24 fill=white> %d%c</text> \n", e.jog.crit*10, '%'); // Crit
-	printf("<text x=880 y=245 font-family=Verdana font-size=24 fill=white> %d </text> \n", e.score); // Score
+	printf("<text x=877 y=207 font-family=Verdana font-size=22 fill=white> %d </text> \n", e.nivel); // Nivel
+	if(e.jog.powerUp_sword==1) printf("<text x=753 y=207 font-family=Verdana font-size=22 fill=green> %d </text> \n", e.jog.atk*2); // Ataque
+	else printf("<text x=753 y=207 font-family=Verdana font-size=22 fill=white> %d </text> \n", e.jog.atk);
+	printf("<text x=753 y=242 font-family=Verdana font-size=22 fill=white> %d%c</text> \n", e.jog.crit*10, '%'); // Crit
+	printf("<text x=877 y=242 font-family=Verdana font-size=22 fill=white> %d </text> \n", e.score); // Score
 }
 
  
@@ -733,7 +749,7 @@ ESTADO ler_estado(char *nomef){
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,0);
+	if (acao==0 || acao==10) e=inicializar(5,0,0,0,10,10,1,0,1,1,1,1,0);
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
