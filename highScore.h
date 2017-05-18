@@ -1,0 +1,1 @@
+void guardar_Score(char *jogador, int new_score);

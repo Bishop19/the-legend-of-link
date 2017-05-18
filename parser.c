@@ -4,6 +4,7 @@
 #include "parser.h"
 #include "estado.h"
 #include <time.h>
+#include "highScore.h"
 
 
 
@@ -749,7 +750,7 @@ ESTADO ler_estado(char *nomef){
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-	if (acao==0 || acao==10) e=inicializar(5,0,0,0,10,10,1,0,1,1,1,1,0);
+	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,0);
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
@@ -948,6 +949,7 @@ void parser(){
 		print_door(e);
 		print_wall(e);
 		if(e.jog.vida != 0) print_player(e, acao, nomef);
+		else guardar_Score(nomef, e.score);
 		print_inventory(e, nomef);
 		print_stats(e);
 		opcaoVida(nomef);
