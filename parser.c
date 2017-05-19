@@ -167,22 +167,22 @@ ESTADO enemyMove(ESTADO newE){
 				z+=newE.inimigo[i].atk;
 				i++;
 			}
-			//if (newE.jog.x > newE.inimigo[i].x){
-			//	x=newE.inimigo[i].x + 1;
-			//	if(casaLivre(newE, x, newE.inimigo[i].y)==1) newE.inimigo[i].x = x;
-			//}
-			//if (newE.jog.y > newE.inimigo[i].y){
-			//	y=newE.inimigo[i].y + 1;
-			//	if(casaLivre(newE, newE.inimigo[i].x, y)==1) newE.inimigo[i].y = y;
-			//}
-			//if (newE.jog.x < newE.inimigo[i].x){
-			//	x=newE.inimigo[i].x - 1;
-			//	if(casaLivre(newE, x, newE.inimigo[i].y)==1) newE.inimigo[i].x = x;
-			//}
-			//if (newE.jog.y < newE.inimigo[i].y){
-			//		y=newE.inimigo[i].y - 1;
-			//	if(casaLivre(newE, newE.inimigo[i].x, y)==1) newE.inimigo[i].y = y;
-			//}
+			if (newE.jog.x > newE.inimigo[i].x){
+				x=newE.inimigo[i].x + 1;
+				if(casaLivre(newE, x, newE.inimigo[i].y)==1) newE.inimigo[i].x = x;
+			}
+			if (newE.jog.y > newE.inimigo[i].y){
+				y=newE.inimigo[i].y + 1;
+				if(casaLivre(newE, newE.inimigo[i].x, y)==1) newE.inimigo[i].y = y;
+			}
+			if (newE.jog.x < newE.inimigo[i].x){
+				x=newE.inimigo[i].x - 1;
+				if(casaLivre(newE, x, newE.inimigo[i].y)==1) newE.inimigo[i].x = x;
+			}
+			if (newE.jog.y < newE.inimigo[i].y){
+					y=newE.inimigo[i].y - 1;
+				if(casaLivre(newE, newE.inimigo[i].x, y)==1) newE.inimigo[i].y = y;
+			}
 		}
 	}
 	if (newE.jog.powerUp_shield==1) z=(z+1)/2;
@@ -420,7 +420,7 @@ void bola_Fogo(ESTADO e, char *nomef){
 
 	if(e.bolaFogo == 1)
 		while(i<e.num_inimigos){
-			if(e.inimigo[i].vida>0 && inRange(e,i)==0){
+			if(e.inimigo[i].vida>0){
 				int acao=21;
 				printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d,%d\">\n",nomef,acao,i);
 					print_hex(e.inimigo[i].x, e.inimigo[i].y);
@@ -440,6 +440,19 @@ void mov_Flash(ESTADO e, char *nomef){
 
 	if(e.flash == 1){
 		if(casaLivre(e, e.jog.x+2, e.jog.y)==1) print_move(e, +2, +0, nomef, 23);
+		if(casaLivre(e, e.jog.x-2, e.jog.y)==1) print_move(e, -2, +0, nomef, 24);
+		if(e.jog.x%2==0){
+			if(casaLivre(e, e.jog.x-1, e.jog.y-1)==1) print_move(e, -1, -1, nomef, 25);
+			if(casaLivre(e, e.jog.x+1, e.jog.y-1)==1) print_move(e, -1, +1, nomef, 26);
+			if(casaLivre(e, e.jog.x-1, e.jog.y+2)==1) print_move(e, -1, +2, nomef, 27);
+			if(casaLivre(e, e.jog.x+1, e.jog.y+2)==1) print_move(e, +1, +2, nomef, 28);
+		}
+		else{
+			if(casaLivre(e, e.jog.x-1, e.jog.y-2)==1) print_move(e, -1, -2, nomef, 29);
+			if(casaLivre(e, e.jog.x+1, e.jog.y-2)==1) print_move(e, +1, -2, nomef, 30);
+			if(casaLivre(e, e.jog.x-1, e.jog.y+1)==1) print_move(e, -1, +1, nomef, 31);
+			if(casaLivre(e, e.jog.x+1, e.jog.y+1)==1) print_move(e, +1, +1, nomef, 32);
+		}
 	}		
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
 			printf("<image x=711 y=512 xlink:href=\"%s\"/>\n", SQUARE_LINK);
@@ -465,9 +478,17 @@ void print_image(int px, int py, char *imagem){
 	else printf("<image x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70,imagem);
 } 
 
+void print_image2(int px, int py, char *imagem){
+	if(px%2==0) {
+		printf("<image id=jog x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70 + 35,imagem);
+		//printf("<animate xlink:href=#jog attributeName=cx from=50 to=450 dur=5s begin=click fill=freeze />\n");
+	}
+	else printf("<image id=jog x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70,imagem);
+} 
+
 
 void print_player(ESTADO e, int acao, char *nomef){
-	print_image(e.jog.x, e.jog.y, PLAYER);
+	print_image2(e.jog.x, e.jog.y, PLAYER);
 	if(e.jog.x%2==0){
 		print_move(e, +1, +0, nomef, acao);
 		print_move(e, +0, +1, nomef, acao);
@@ -602,6 +623,10 @@ void print_menu(){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", MENU);
 }
 
+void print_dead_screen(){
+	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", DEAD);
+}
+
 
 void print_start(char *nomef){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", TITLE);
@@ -611,8 +636,6 @@ void print_start(char *nomef){
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, 41);
 		printf("<image x=880 y=515 xlink:href=\"%s\"/>\n", TOPSCORE_BUTTON);
 	printf("</a>\n");	
-
-
 }
 
 
@@ -758,6 +781,7 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 			e = inicializar(++e.nivel, e.door.x, e.door.y, e.score+10, e.jog.vida, e.jog.mana, e.jog.atk, e.jog.crit, e.jog.item_vida, e.jog.item_mana, e.jog.item_sword, e.jog.item_shield, 1);
 		}
 		else if (acao==2){
+			printf("<animateMotion xlink:href=#jog dur=0.25s begin=0s fill=freeze path='M0,0 0,-70' /> \n");
 			e=processar_mov(e,x,y-1);
 		}
 		else if (acao==3){
@@ -860,6 +884,51 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 			e.jog.mana-=2;
 			e.flash=0;
 		}
+		else if(acao==24){
+			e=processar_mov(e, x-2, y);
+			e.jog.mana-=2;
+			e.flash=0;
+		}
+		else if(acao==25){
+			e=processar_mov(e, x-1, y-1);
+			e.jog.mana-=2;
+			e.flash=0;
+		}
+		else if(acao==26){
+			e=processar_mov(e, x+1, y-1);
+			e.jog.mana-=2;
+			e.flash=0;
+		}
+		else if(acao==27){
+			e=processar_mov(e, x-1, y+2);
+			e.jog.mana-=2;
+			e.flash=0;
+		}
+		else if(acao==28){
+			e=processar_mov(e, x+1, y+2);
+			e.jog.mana-=2;
+			e.flash=0;
+		}
+		else if(acao==29){
+			e=processar_mov(e, x-1, y-2);
+			e.jog.mana-=2;
+			e.flash=0;
+		}
+		else if(acao==30){
+			e=processar_mov(e, x+1, y-2);
+			e.jog.mana-=2;
+			e.flash=0;
+		}
+		else if(acao==31){
+			e=processar_mov(e, x-1, y+1);
+			e.jog.mana-=2;
+			e.flash=0;
+		}
+		else if(acao==32){
+			e=processar_mov(e, x+1, y+1);
+			e.jog.mana-=2;
+			e.flash=0;
+		}
 		else if(acao==40){
 			e.screen=1;
 		}
@@ -868,7 +937,11 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 		}
 		else if(acao==42){
 			e.screen=0;
-		}	}
+		}
+		else if(acao==43){
+			e.screen=3;
+		}
+	}
 	return e;
 }	
 
@@ -919,7 +992,7 @@ void parser(){
 
     }
     else { //aqui vou fazer um scan dos parametros ficando em num a quantidade de parametros lidos
-            num =sscanf(args,"%[^,],%d,%d", nomef, &acao, &i);
+            num=sscanf(args,"%[^,],%d,%d", nomef, &acao, &i);
             if (num==1)acao = 10;  //se só for 1 quer dizer que só coloquei o nome do jogador(ficheiro) pelo que escolho uma acao para mostrar esse estado
           }                                     // se for maior que 1 então estou a receber nos parametros o nome do ficheiro e a acao pelo que devo
 
@@ -930,8 +1003,11 @@ void parser(){
 
 
 	if(e.screen==0) print_start(nomef);
-	else if(e.screen==2) print_score_screen(nomef);
-	else{
+	else if(e.screen==2){
+		print_score_screen(nomef);
+		print_score();
+	}
+	else if(e.jog.vida>0){ // e.screen==1
 		print_menu(); 
 		print_board();
 		print_item(e);
@@ -948,8 +1024,7 @@ void parser(){
 		print_treasure_item(e);
 		print_door(e);
 		print_wall(e);
-		if(e.jog.vida != 0) print_player(e, acao, nomef);
-		else guardar_Score(nomef, e.score);
+		print_player(e, acao, nomef);
 		print_inventory(e, nomef);
 		print_stats(e);
 		opcaoVida(nomef);
@@ -958,6 +1033,10 @@ void parser(){
 		espada_giratoria(nomef);
 		bola_Fogo(e, nomef);
 		mov_Flash(e, nomef);
+	}
+	else{
+		guardar_Score(nomef, e.score);
+		print_dead_screen();
 	}
 	guardar_estado(e, nomef);
 	

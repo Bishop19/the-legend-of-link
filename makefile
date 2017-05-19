@@ -40,6 +40,7 @@ $(EXEC):	$(OBJS)
 			sudo cp toggle_vida.png /var/www/html
 			sudo cp topScore_button.png /var/www/html
 			sudo cp boss_symbol.png /var/www/html
+			sudo cp dead_screen.png /var/www/html
 
 clean:
 	rm	$(EXEC)	*.o

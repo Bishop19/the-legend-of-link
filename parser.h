@@ -43,6 +43,8 @@
 #define TOGGLE_VIDA "http://127.0.0.1/toggle_vida.png"
 #define TOPSCORE_BUTTON "http://127.0.0.1/topScore_button.png"
 #define BOSS_SYMBOL "http://127.0.0.1/boss_symbol.png"
+#define DEAD "http://127.0.0.1/dead_screen.png"
+
 
 
 
