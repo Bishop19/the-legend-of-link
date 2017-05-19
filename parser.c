@@ -713,6 +713,13 @@ void print_inventory(ESTADO e, char *nomef){
 }
 
 
+void print_animation(int acao){
+	if (acao==2) printf("<animateMotion xlink:href=#jog dur=0.25s begin=0s fill=freeze path='M0,70 0,0' /> \n");
+	else if (acao==3) printf("<animateMotion xlink:href=#jog dur=0.25s begin=0s fill=freeze path='M0,-70 0,0' /> \n");
+
+}
+
+
 void print_board(){ 
 	int x, y;
 	for (x=0;x<11;x++)
@@ -781,7 +788,6 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 			e = inicializar(++e.nivel, e.door.x, e.door.y, e.score+10, e.jog.vida, e.jog.mana, e.jog.atk, e.jog.crit, e.jog.item_vida, e.jog.item_mana, e.jog.item_sword, e.jog.item_shield, 1);
 		}
 		else if (acao==2){
-			printf("<animateMotion xlink:href=#jog dur=0.25s begin=0s fill=freeze path='M0,0 0,-70' /> \n");
 			e=processar_mov(e,x,y-1);
 		}
 		else if (acao==3){
@@ -997,7 +1003,8 @@ void parser(){
           }                                     // se for maior que 1 então estou a receber nos parametros o nome do ficheiro e a acao pelo que devo
 
                                                 //avançar para o processamento da acao especificada no link
-		
+	print_animation(acao);
+	
 	e=processar_acao(e, acao, nomef, i); //equivalente a print_move
 
 
