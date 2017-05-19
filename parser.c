@@ -767,7 +767,7 @@ ESTADO ler_estado(char *nomef){
 	}
 	e=str2estado(st);
 
-	return e;
+	return e; 
 }
 
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
