@@ -169,19 +169,34 @@ ESTADO enemyMove(ESTADO newE){
 			}
 			if (newE.jog.x > newE.inimigo[i].x){
 				x=newE.inimigo[i].x + 1;
-				if(casaLivre(newE, x, newE.inimigo[i].y)==1) newE.inimigo[i].x = x;
+				if(casaLivre(newE, x, newE.inimigo[i].y)==1){ 
+						newE.inimigo[i].x = x;
+						print_animation(1,0,x,newE.inimigo[i].y,i);
+				}
 			}
-			if (newE.jog.y > newE.inimigo[i].y){
+			else if (newE.jog.y > newE.inimigo[i].y){
 				y=newE.inimigo[i].y + 1;
-				if(casaLivre(newE, newE.inimigo[i].x, y)==1) newE.inimigo[i].y = y;
+				if(casaLivre(newE, newE.inimigo[i].x, y)==1){ 
+						newE.inimigo[i].y = y;
+						print_animation(0,1,newE.inimigo[i].x,y,i);
+
+				}
 			}
-			if (newE.jog.x < newE.inimigo[i].x){
+			else if (newE.jog.x < newE.inimigo[i].x){
 				x=newE.inimigo[i].x - 1;
-				if(casaLivre(newE, x, newE.inimigo[i].y)==1) newE.inimigo[i].x = x;
+				if(casaLivre(newE, x, newE.inimigo[i].y)==1){ 
+						newE.inimigo[i].x = x;
+						print_animation(-1,0,x,newE.inimigo[i].y,i);
+
+				}
 			}
-			if (newE.jog.y < newE.inimigo[i].y){
+			else if (newE.jog.y < newE.inimigo[i].y){
 					y=newE.inimigo[i].y - 1;
-				if(casaLivre(newE, newE.inimigo[i].x, y)==1) newE.inimigo[i].y = y;
+				if(casaLivre(newE, newE.inimigo[i].x, y)==1){ 
+						newE.inimigo[i].y = y;
+						print_animation(0,-1,newE.inimigo[i].x,y,i);
+
+				}
 			}
 		}
 	}
@@ -478,17 +493,22 @@ void print_image(int px, int py, char *imagem){
 	else printf("<image x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70,imagem);
 } 
 
-void print_image2(int px, int py, char *imagem){
-	if(px%2==0) {
-		printf("<image id=jog x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70 + 35,imagem);
-		//printf("<animate xlink:href=#jog attributeName=cx from=50 to=450 dur=5s begin=click fill=freeze />\n");
-	}
-	else printf("<image id=jog x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70,imagem);
+void print_imageID(int px, int py, char *imagem, int jog){
+	if(jog==-1)
+		if(px%2==0) {
+			printf("<image id=jog x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70 + 35,imagem);
+		}
+		else printf("<image id=jog x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70,imagem);
+	else 
+		if(px%2==0) {
+			printf("<image id=%d x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n",jog, px*60, py*70 + 35,imagem);
+		}
+		else printf("<image id=%d x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n",jog, px*60, py*70,imagem);
 } 
 
 
 void print_player(ESTADO e, int acao, char *nomef){
-	print_image2(e.jog.x, e.jog.y, PLAYER);
+	print_imageID(e.jog.x, e.jog.y, PLAYER,-1);
 	if(e.jog.x%2==0){
 		print_move(e, +1, +0, nomef, acao);
 		print_move(e, +0, +1, nomef, acao);
@@ -512,10 +532,10 @@ void print_enemy(ESTADO e){
 	int i;
 
 	for(i = 0; i < e.num_inimigos; i++){
-		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==1) print_image(e.inimigo[i].x, e.inimigo[i].y, ENEMY);
-		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==2) print_image(e.inimigo[i].x, e.inimigo[i].y, ENEMY2);
-		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==3) print_image(e.inimigo[i].x, e.inimigo[i].y, ENEMY3);
-		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==4) print_image(e.inimigo[i].x, e.inimigo[i].y, ENEMY3);
+		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==1) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY,i);
+		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==2) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY2,i);
+		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==3) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY3,i);
+		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==4) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY3,i);
 	}
 }
 
@@ -713,12 +733,38 @@ void print_inventory(ESTADO e, char *nomef){
 }
 
 
-void print_animation(int acao){
-	if (acao==2) printf("<animateMotion xlink:href=#jog dur=0.25s begin=0s fill=freeze path='M0,70 0,0' /> \n");
-	else if (acao==3) printf("<animateMotion xlink:href=#jog dur=0.25s begin=0s fill=freeze path='M0,-70 0,0' /> \n");
-
+void print_animation(int x,int y, int px, int py, int id){
+	if(id==-1)
+		if((x==0&&y==-1)||(x==0&&y==1))
+			printf("<animateMotion xlink:href=#jog dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",0,-(70*y));
+		else if(x==1&&y==1)
+			printf("<animateMotion xlink:href=#jog dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",-60,-35);
+		else if(x==-1&&y==-1)
+			printf("<animateMotion xlink:href=#jog dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",60,35);
+		else if(x==-1&&y==1)
+			printf("<animateMotion xlink:href=#jog dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",60,-35);
+		else if(x==1&&y==-1)
+			printf("<animateMotion xlink:href=#jog dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",-60,35);
+		else if(px%2==0)
+			printf("<animateMotion xlink:href=#jog dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",-(60*x),-35);
+		else 
+			printf("<animateMotion xlink:href=#jog dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",-(60*x),35);
+	else
+		if((x==0&&y==-1)||(x==0&&y==1))
+			printf("<animateMotion xlink:href=#%d dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",id,0,-(70*y));
+		else if(x==1&&y==1)
+			printf("<animateMotion xlink:href=#%d dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",id,-60,-35);
+		else if(x==-1&&y==-1)
+			printf("<animateMotion xlink:href=#%d dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",id,60,35);
+		else if(x==-1&&y==1)
+			printf("<animateMotion xlink:href=#%d dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",id,60,-35);
+		else if(x==1&&y==-1)
+			printf("<animateMotion xlink:href=#%d dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",id,-60,35);
+		else if(px%2==0)
+			printf("<animateMotion xlink:href=#%d dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",id,-(60*x),-35);
+		else 
+			printf("<animateMotion xlink:href=#%d dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",id,-(60*x),35);
 }
-
 
 void print_board(){ 
 	int x, y;
@@ -780,7 +826,7 @@ ESTADO ler_estado(char *nomef){
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,0);
+	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,1);
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
@@ -952,11 +998,13 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 }	
 
 ESTADO processar_mov(ESTADO e, int px, int py){
-	int i;
+	int i,x,y;
 
 	if (casaLivre(e, px, py)==1){
+		x=px-e.jog.x,y=py-e.jog.y;
 		e.jog.x=px;
 		e.jog.y=py;
+		print_animation(x,y,px,py,-1);
 	}
 	else if(isItem(e, px, py)!=(-1)){
 		i=isItem(e, px, py);
@@ -988,7 +1036,7 @@ ESTADO processar_mov(ESTADO e, int px, int py){
 
 void parser(){
 	ESTADO e={0};
-    int num,acao, i=0;
+    int num,acao, i=0, j;
     char nomef[100];
     char *args = getenv("QUERY_STRING");
 
@@ -1003,7 +1051,6 @@ void parser(){
           }                                     // se for maior que 1 então estou a receber nos parametros o nome do ficheiro e a acao pelo que devo
 
                                                 //avançar para o processamento da acao especificada no link
-	print_animation(acao);
 	
 	e=processar_acao(e, acao, nomef, i); //equivalente a print_move
 
@@ -1019,7 +1066,7 @@ void parser(){
 		print_board();
 		print_item(e);
 		if(e.bolaFogo==1){
-			for(int j=0; j<e.num_inimigos;j++){
+			for(j=0; j<e.num_inimigos;j++){
 				if (e.inimigo[j].vida>0) 
 					print_image(e.inimigo[j].x, e.inimigo[j].y, RANGEATTACK);
 			}
