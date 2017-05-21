@@ -736,34 +736,34 @@ void print_inventory(ESTADO e, char *nomef){
 void print_animation(int x,int y, int px, int py, int id){
 	if(id==-1)
 		if((x==0&&y==-1)||(x==0&&y==1))
-			printf("<animateMotion xlink:href=#jog dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",0,-(70*y));
+			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", 0, -(70*y));
 		else if(x==1&&y==1)
-			printf("<animateMotion xlink:href=#jog dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",-60,-35);
+			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", -60, -35);
 		else if(x==-1&&y==-1)
-			printf("<animateMotion xlink:href=#jog dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",60,35);
+			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", 60, 35);
 		else if(x==-1&&y==1)
-			printf("<animateMotion xlink:href=#jog dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",60,-35);
+			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", 60, -35);
 		else if(x==1&&y==-1)
-			printf("<animateMotion xlink:href=#jog dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",-60,35);
+			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", -60, 35);
 		else if(px%2==0)
-			printf("<animateMotion xlink:href=#jog dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",-(60*x),-35);
+			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", -(60*x), -35);
 		else 
-			printf("<animateMotion xlink:href=#jog dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",-(60*x),35);
+			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", -(60*x), 35);
 	else
 		if((x==0&&y==-1)||(x==0&&y==1))
-			printf("<animateMotion xlink:href=#%d dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",id,0,-(70*y));
+			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, 0, -(70*y));
 		else if(x==1&&y==1)
-			printf("<animateMotion xlink:href=#%d dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",id,-60,-35);
+			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, -60, -35);
 		else if(x==-1&&y==-1)
-			printf("<animateMotion xlink:href=#%d dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",id,60,35);
+			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, 60, 35);
 		else if(x==-1&&y==1)
-			printf("<animateMotion xlink:href=#%d dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",id,60,-35);
+			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, 60, -35);
 		else if(x==1&&y==-1)
-			printf("<animateMotion xlink:href=#%d dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",id,-60,35);
+			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, -60, 35);
 		else if(px%2==0)
-			printf("<animateMotion xlink:href=#%d dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",id,-(60*x),-35);
+			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, -(60*x), -35);
 		else 
-			printf("<animateMotion xlink:href=#%d dur=1s begin=0s fill=freeze path='M%d,%d 0,0' /> \n",id,-(60*x),35);
+			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, -(60*x), 35);
 }
 
 void print_board(){ 
@@ -1092,8 +1092,7 @@ void parser(){
 		guardar_Score(nomef, e.score);
 		print_dead_screen();
 	}
-	guardar_estado(e, nomef);
-	
+	guardar_estado(e, nomef);	
 }
 
 
