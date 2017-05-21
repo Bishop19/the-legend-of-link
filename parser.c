@@ -7,7 +7,6 @@
 #include "highScore.h"
 
 
-
 ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int atk, int crit, int vida_potion, int mana_potion, int sword, int shield, int screen){
 	int i, x, y, z; 
 	ESTADO e = {0};

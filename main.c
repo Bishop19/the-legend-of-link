@@ -4,7 +4,7 @@
 
 void print_header (){
 	printf("Content-Type: text/html; charset=utf-8\n\n"); 
-	printf("<header><title> Rogue.</title></header>\n");  
+	printf("<header><title> The Legend of Link </title></header>\n");  
 	printf("<body>\n");
 	printf("<svg width=1000 height=600>\n");  
 }
