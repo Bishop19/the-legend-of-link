@@ -283,7 +283,7 @@ int isItem (ESTADO e, int px, int py){ // funcao que retorna -1 se a casa nao te
 	int i,r=(-1);
 
 	for(i=0;i<e.num_inimigos && r==(-1) ;i++)
-		if(e.inimigo[i].x==px &&  e.inimigo[i].y == py && e.inimigo[i].visivel==1) r=i;
+		if(e.inimigo[i].x==px &&  e.inimigo[i].y == py && e.inimigo[i].visivel==1 && e.inimigo[i].item<24) r=i;
 	return r;
 }
 
@@ -358,7 +358,7 @@ int tipoInimigo(int nivel, int x){
 }
 
 int itemInimigo(int rand){
-	int item=rand%24;
+	int item=rand%240;
 	
 	if (item<=3) item=0;								// 5 score 		4
 	else if (item>=4 && item<=6) item=1;				// 10 Score 	3
@@ -652,15 +652,6 @@ void print_dead_screen(){
 }
 
 
-void print_start(char *nomef){
-	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", TITLE);
-	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, 40);
-		printf("<image x=378 y=351 xlink:href=\"%s\"/>\n", START_BUTTON);
-	printf("</a>\n");
-	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, 41);
-		printf("<image x=880 y=515 xlink:href=\"%s\"/>\n", TOPSCORE_BUTTON);
-	printf("</a>\n");	
-}
 
 
 void print_score_screen(char *nomef){
@@ -668,7 +659,6 @@ void print_score_screen(char *nomef){
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, 42);
 		printf("<image x=830 y=535 xlink:href=\"%s\"/>\n", BACK_BUTTON);
 	printf("</a>\n");
-
 }
 
 
@@ -688,6 +678,19 @@ void print_stats(ESTADO e){
 	printf("<text x=877 y=242 font-family=Verdana font-size=22 fill=white> %d </text> \n", e.score); // Score
 }
 
+void print_start(char *nomef){
+	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", TITLE);
+
+	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, 40);
+		printf("<image x=378 y=351 xlink:href=\"%s\"/>\n", START_BUTTON);
+	printf("</a>\n");
+
+	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, 41);
+		printf("<image x=880 y=515 xlink:href=\"%s\"/>\n", TOPSCORE_BUTTON);
+	printf("</a>\n");	
+}
+
+
  
 void print_rangeMov(ESTADO e, int px, int py){
 	if(casaLivre(e, px, py)==1) print_image(px, py, RANGEMOV);
@@ -697,6 +700,7 @@ void print_rangeMov(ESTADO e, int px, int py){
 	@param px posição
 	@param px posição
 */
+
 void print_rangeAttack (ESTADO e, int px, int py){
 	if(isEnemy(e, px, py)!=(-1)) print_image(px, py, RANGEATTACK);
 }
@@ -833,7 +837,7 @@ ESTADO ler_estado(char *nomef){
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,0);
+	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,1);
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
@@ -1023,7 +1027,8 @@ ESTADO processar_mov(ESTADO e, int px, int py){
 		e.inimigo[i].vida=atk_Player(e.inimigo[i].vida, e.jog.crit, e.jog.atk, e.jog.powerUp_sword);
 		if(e.inimigo[i].vida==0){
 			e.score+=5;
-			e.inimigo[i].visivel=1;
+
+			if (e.inimigo[i].item<24) e.inimigo[i].visivel=1;
 		}
 	}
 	else if(px==e.treasure.x && py==e.treasure.y && e.treasure.visivel==1){
