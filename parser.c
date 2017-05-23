@@ -7,6 +7,11 @@
 #include "highScore.h"
 
 
+/**
+@file parser.c
+Definição do estado e das funções que convertem estados em strings e vice-versa
+*/
+
 ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int atk, int crit, int vida_potion, int mana_potion, int sword, int shield, int screen){
 	int i, x, y, z; 
 	ESTADO e = {0};
@@ -679,7 +684,7 @@ void print_stats(ESTADO e){
 	printf("<text x=877 y=207 font-family=Verdana font-size=22 fill=white> %d </text> \n", e.nivel); // Nivel
 	if(e.jog.powerUp_sword==1) printf("<text x=753 y=207 font-family=Verdana font-size=22 fill=green> %d </text> \n", e.jog.atk*2); // Ataque
 	else printf("<text x=753 y=207 font-family=Verdana font-size=22 fill=white> %d </text> \n", e.jog.atk);
-	printf("<text x=753 y=242 font-family=Verdana font-size=22 fill=white> %d%c</text> \n", e.jog.crit*10, '%'); // Crit
+	printf("<text x=753 y=242 font-family=Verdana font-size=22 fill=white> %d%c </text> \n", e.jog.crit*10, '%'); // Crit
 	printf("<text x=877 y=242 font-family=Verdana font-size=22 fill=white> %d </text> \n", e.score); // Score
 }
 
@@ -688,7 +693,10 @@ void print_rangeMov(ESTADO e, int px, int py){
 	if(casaLivre(e, px, py)==1) print_image(px, py, RANGEMOV);
 } 
 
-
+/** Função que imprime o possivel movimento do jogador
+	@param px posição
+	@param px posição
+*/
 void print_rangeAttack (ESTADO e, int px, int py){
 	if(isEnemy(e, px, py)!=(-1)) print_image(px, py, RANGEATTACK);
 }
@@ -825,7 +833,7 @@ ESTADO ler_estado(char *nomef){
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,1);
+	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,0);
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
@@ -1079,13 +1087,14 @@ void parser(){
 		print_wall(e);
 		print_player(e, acao, nomef);
 		print_inventory(e, nomef);
-		print_stats(e);
 		opcaoVida(nomef);
 		print_enemy_vida(e);
 		print_rangeEnemy(e);
 		espada_giratoria(nomef);
 		bola_Fogo(e, nomef);
 		mov_Flash(e, nomef);
+				print_stats(e);
+
 	}
 	else{
 		guardar_Score(nomef, e.score);

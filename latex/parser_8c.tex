@@ -1,0 +1,182 @@
+\hypertarget{parser_8c}{}\section{parser.\+c File Reference}
+\label{parser_8c}\index{parser.\+c@{parser.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}parser.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}estado.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$time.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}high\+Score.\+h\char`\"{}}\\*
+Include dependency graph for parser.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} {\bfseries inicializar} (int nivel, int px, int py, int score, int vida, int mana, int atk, int crit, int vida\+\_\+potion, int mana\+\_\+potion, int sword, int shield, int screen)\hypertarget{parser_8c_adb20e96394cfb578329303b238e2bb9d}{}\label{parser_8c_adb20e96394cfb578329303b238e2bb9d}
+
+\item 
+void {\bfseries print\+\_\+move} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, int difx, int dify, char $\ast$nomef, int acao)\hypertarget{parser_8c_a5abfcddb9c802c8f2b1205f4d2e910e8}{}\label{parser_8c_a5abfcddb9c802c8f2b1205f4d2e910e8}
+
+\item 
+\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} {\bfseries enemy\+Move} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} newE)\hypertarget{parser_8c_afa4eaff660e6e19151c1f88ebf4e95bd}{}\label{parser_8c_afa4eaff660e6e19151c1f88ebf4e95bd}
+
+\item 
+int {\bfseries in\+Range} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, int i)\hypertarget{parser_8c_a9563943f0f8766a8a3a0d41812d7b4e6}{}\label{parser_8c_a9563943f0f8766a8a3a0d41812d7b4e6}
+
+\item 
+int {\bfseries casa\+Livre} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, int x, int y)\hypertarget{parser_8c_af56fb4b66707102e2da4becee70ff115}{}\label{parser_8c_af56fb4b66707102e2da4becee70ff115}
+
+\item 
+int {\bfseries is\+Enemy} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, int x, int y)\hypertarget{parser_8c_a3ff694f4163cb211056dcfb95c8fdc8d}{}\label{parser_8c_a3ff694f4163cb211056dcfb95c8fdc8d}
+
+\item 
+int {\bfseries is\+Item} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, int px, int py)\hypertarget{parser_8c_ab1428e3d17992b5a1c250be9e1e8a1e1}{}\label{parser_8c_ab1428e3d17992b5a1c250be9e1e8a1e1}
+
+\item 
+int {\bfseries atk\+\_\+\+Inimigo} (int tipo)\hypertarget{parser_8c_a2b0433a24235b06f764a19caeba899a9}{}\label{parser_8c_a2b0433a24235b06f764a19caeba899a9}
+
+\item 
+int {\bfseries vida\+\_\+\+Inimigo} (int tipo)\hypertarget{parser_8c_ab6d04e6c6048655caa1b112f91ce52d6}{}\label{parser_8c_ab6d04e6c6048655caa1b112f91ce52d6}
+
+\item 
+\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} {\bfseries item\+Tesouro} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, int x, int y)\hypertarget{parser_8c_ac4bc1cefd8ccacc00689ad9b2cbc3dda}{}\label{parser_8c_ac4bc1cefd8ccacc00689ad9b2cbc3dda}
+
+\item 
+\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} {\bfseries catch\+Item} (int item, \hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e)\hypertarget{parser_8c_add110f9af69e08e58f004fc41e1f4eaf}{}\label{parser_8c_add110f9af69e08e58f004fc41e1f4eaf}
+
+\item 
+int {\bfseries tipo\+Inimigo} (int nivel, int x)\hypertarget{parser_8c_a86cbabca8902020305cbf846a93cebad}{}\label{parser_8c_a86cbabca8902020305cbf846a93cebad}
+
+\item 
+int {\bfseries item\+Inimigo} (int rand)\hypertarget{parser_8c_a1b3e6ec23f9e379f482fe5a2fbaf6cfc}{}\label{parser_8c_a1b3e6ec23f9e379f482fe5a2fbaf6cfc}
+
+\item 
+void {\bfseries opcao\+Vida} (char $\ast$nomef)\hypertarget{parser_8c_a6153a731922f81b563f8072f3bd76698}{}\label{parser_8c_a6153a731922f81b563f8072f3bd76698}
+
+\item 
+void {\bfseries print\+\_\+enemy\+\_\+vida} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e)\hypertarget{parser_8c_a410f05004adbecb610b40c06b0a7d5ed}{}\label{parser_8c_a410f05004adbecb610b40c06b0a7d5ed}
+
+\item 
+void {\bfseries opcao\+Range} (char $\ast$nomef)\hypertarget{parser_8c_a36ce60b70d04913d0d351603c8d1a226}{}\label{parser_8c_a36ce60b70d04913d0d351603c8d1a226}
+
+\item 
+void {\bfseries select\+Range} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, char $\ast$nomef)\hypertarget{parser_8c_ae48ce6582e06a738e7fcaf06321a0f24}{}\label{parser_8c_ae48ce6582e06a738e7fcaf06321a0f24}
+
+\item 
+int {\bfseries atk\+\_\+\+Player} (int vida, int crit, int atk, int sword)\hypertarget{parser_8c_aac060002c5eda311b3f36338e4aecafb}{}\label{parser_8c_aac060002c5eda311b3f36338e4aecafb}
+
+\item 
+void {\bfseries bola\+\_\+\+Fogo} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, char $\ast$nomef)\hypertarget{parser_8c_a7a7fb39430869342c19a184b4b24f9eb}{}\label{parser_8c_a7a7fb39430869342c19a184b4b24f9eb}
+
+\item 
+void {\bfseries mov\+\_\+\+Flash} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, char $\ast$nomef)\hypertarget{parser_8c_a292f629d3f0e5d6b78e47f87c0300f33}{}\label{parser_8c_a292f629d3f0e5d6b78e47f87c0300f33}
+
+\item 
+void {\bfseries espada\+\_\+giratoria} (char $\ast$nomef)\hypertarget{parser_8c_a4c42aa2c70720feb8494c1df05f00929}{}\label{parser_8c_a4c42aa2c70720feb8494c1df05f00929}
+
+\item 
+void {\bfseries print\+\_\+image} (int px, int py, char $\ast$imagem)\hypertarget{parser_8c_a7c82011f18d7084781962e79c84a8919}{}\label{parser_8c_a7c82011f18d7084781962e79c84a8919}
+
+\item 
+void {\bfseries print\+\_\+image\+ID} (int px, int py, char $\ast$imagem, int jog)\hypertarget{parser_8c_af05d97c7be241ea13866b1f111de68be}{}\label{parser_8c_af05d97c7be241ea13866b1f111de68be}
+
+\item 
+void {\bfseries print\+\_\+player} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, int acao, char $\ast$nomef)\hypertarget{parser_8c_a967c357c05520949cd39d0871e3b98a6}{}\label{parser_8c_a967c357c05520949cd39d0871e3b98a6}
+
+\item 
+void {\bfseries print\+\_\+enemy} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e)\hypertarget{parser_8c_a482faedcfd27ca6dedf94f05571dc504}{}\label{parser_8c_a482faedcfd27ca6dedf94f05571dc504}
+
+\item 
+void {\bfseries print\+\_\+enemy\+\_\+specific} (int x, int y, int tipo)\hypertarget{parser_8c_aada3cc639daf915d049962e682225201}{}\label{parser_8c_aada3cc639daf915d049962e682225201}
+
+\item 
+void {\bfseries print\+\_\+range\+Enemy} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e)\hypertarget{parser_8c_adfd6c89abdaef64b9fd534af1330c322}{}\label{parser_8c_adfd6c89abdaef64b9fd534af1330c322}
+
+\item 
+void {\bfseries print\+\_\+wall} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e)\hypertarget{parser_8c_afc640e37a4f63e9d4542f1af28a3fa2f}{}\label{parser_8c_afc640e37a4f63e9d4542f1af28a3fa2f}
+
+\item 
+void {\bfseries print\+\_\+door} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e)\hypertarget{parser_8c_abda8f17fa0e298c6fb3f20ae361d83c4}{}\label{parser_8c_abda8f17fa0e298c6fb3f20ae361d83c4}
+
+\item 
+void {\bfseries print\+\_\+specific\+\_\+item} (int i, \hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e)\hypertarget{parser_8c_acd06e12df270e5fec972cd234dfc7281}{}\label{parser_8c_acd06e12df270e5fec972cd234dfc7281}
+
+\item 
+void {\bfseries print\+\_\+item} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e)\hypertarget{parser_8c_a408a92ca7166062436d062f30c3504f5}{}\label{parser_8c_a408a92ca7166062436d062f30c3504f5}
+
+\item 
+void {\bfseries print\+\_\+treasure} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e)\hypertarget{parser_8c_aba1351ab25c83ab4dad1e0fbf9a670ce}{}\label{parser_8c_aba1351ab25c83ab4dad1e0fbf9a670ce}
+
+\item 
+void {\bfseries print\+\_\+treasure\+\_\+item} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e)\hypertarget{parser_8c_a82c469f869c2ebd3abfdcceeff782b8a}{}\label{parser_8c_a82c469f869c2ebd3abfdcceeff782b8a}
+
+\item 
+void {\bfseries print\+\_\+menu} ()\hypertarget{parser_8c_ae91d4cbee2dab64187187499dd0eecd4}{}\label{parser_8c_ae91d4cbee2dab64187187499dd0eecd4}
+
+\item 
+void {\bfseries print\+\_\+dead\+\_\+screen} ()\hypertarget{parser_8c_a02cbda697c0fdf27c86cb9e5954747e5}{}\label{parser_8c_a02cbda697c0fdf27c86cb9e5954747e5}
+
+\item 
+void {\bfseries print\+\_\+start} (char $\ast$nomef)\hypertarget{parser_8c_a56cdfba4c705a2cd816adde415aa4723}{}\label{parser_8c_a56cdfba4c705a2cd816adde415aa4723}
+
+\item 
+void {\bfseries print\+\_\+score\+\_\+screen} (char $\ast$nomef)\hypertarget{parser_8c_abf5de78c71536d349f44f79a8ad3ec51}{}\label{parser_8c_abf5de78c71536d349f44f79a8ad3ec51}
+
+\item 
+void {\bfseries print\+\_\+stats} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e)\hypertarget{parser_8c_ad80284da7644601852ffea9fecff1a63}{}\label{parser_8c_ad80284da7644601852ffea9fecff1a63}
+
+\item 
+void {\bfseries print\+\_\+range\+Mov} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, int px, int py)\hypertarget{parser_8c_a27b85c944cbcb9414c0d89da3c480d25}{}\label{parser_8c_a27b85c944cbcb9414c0d89da3c480d25}
+
+\item 
+void \hyperlink{parser_8c_a03945f3596fdf9d208e72b0be2ed4b31}{print\+\_\+range\+Attack} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, int px, int py)
+\item 
+void {\bfseries print\+\_\+inventory} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, char $\ast$nomef)\hypertarget{parser_8c_ad49ffda4460e65c4a84ff9f0468f4feb}{}\label{parser_8c_ad49ffda4460e65c4a84ff9f0468f4feb}
+
+\item 
+void {\bfseries print\+\_\+animation} (int x, int y, int px, int py, int id)\hypertarget{parser_8c_a9a92c746f2b4519a625a56d2582bd4a7}{}\label{parser_8c_a9a92c746f2b4519a625a56d2582bd4a7}
+
+\item 
+void {\bfseries print\+\_\+board} ()\hypertarget{parser_8c_a6f31a24fe416c9ce9259ce11ea23a1f1}{}\label{parser_8c_a6f31a24fe416c9ce9259ce11ea23a1f1}
+
+\item 
+void {\bfseries print\+\_\+hex} (int x, int y)\hypertarget{parser_8c_a7afc2552217f3a6478a9572e2d08cdf8}{}\label{parser_8c_a7afc2552217f3a6478a9572e2d08cdf8}
+
+\item 
+void {\bfseries guardar\+\_\+estado} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, char $\ast$nomef)\hypertarget{parser_8c_acc107ef338d7a5ae93c6d47b13f8cd04}{}\label{parser_8c_acc107ef338d7a5ae93c6d47b13f8cd04}
+
+\item 
+\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} {\bfseries ler\+\_\+estado} (char $\ast$nomef)\hypertarget{parser_8c_a21dfcbccfc63d805294b5c6b7d95ccf8}{}\label{parser_8c_a21dfcbccfc63d805294b5c6b7d95ccf8}
+
+\item 
+\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} {\bfseries processar\+\_\+acao} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, int acao, char $\ast$nomef, int numI)\hypertarget{parser_8c_a3b00ed31001048c67ef274c5c88bec74}{}\label{parser_8c_a3b00ed31001048c67ef274c5c88bec74}
+
+\item 
+\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} {\bfseries processar\+\_\+mov} (\hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO} e, int px, int py)\hypertarget{parser_8c_a604b0d521e62aedb20c962ac62f25860}{}\label{parser_8c_a604b0d521e62aedb20c962ac62f25860}
+
+\item 
+void {\bfseries parser} ()\hypertarget{parser_8c_ac15f7c36f6055edec43d0f0f611c4dc0}{}\label{parser_8c_ac15f7c36f6055edec43d0f0f611c4dc0}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Definição do estado e das funções que convertem estados em strings e vice-\/versa 
+
+\subsection{Function Documentation}
+\index{parser.\+c@{parser.\+c}!print\+\_\+range\+Attack@{print\+\_\+range\+Attack}}
+\index{print\+\_\+range\+Attack@{print\+\_\+range\+Attack}!parser.\+c@{parser.\+c}}
+\subsubsection[{\texorpdfstring{print\+\_\+range\+Attack(\+E\+S\+T\+A\+D\+O e, int px, int py)}{print_rangeAttack(ESTADO e, int px, int py)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+range\+Attack (
+\begin{DoxyParamCaption}
+\item[{{\bf E\+S\+T\+A\+DO}}]{e, }
+\item[{int}]{px, }
+\item[{int}]{py}
+\end{DoxyParamCaption}
+)}\hypertarget{parser_8c_a03945f3596fdf9d208e72b0be2ed4b31}{}\label{parser_8c_a03945f3596fdf9d208e72b0be2ed4b31}
+Função que imprime o possivel movimento do jogador 
+\begin{DoxyParams}{Parameters}
+{\em px} & posição \\
+\hline
+{\em px} & posição \\
+\hline
+\end{DoxyParams}
