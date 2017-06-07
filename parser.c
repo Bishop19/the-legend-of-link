@@ -12,6 +12,23 @@
 Definição do estado e das funções que convertem estados em strings e vice-versa
 */
 
+
+/** \brief ????????????????????????????????????????????
+
+	@param nivel
+	@param px
+	@param py
+	@param score
+	@param vida
+	@param mana
+	@param atk
+	@param crit
+	@param vida_potion
+	@param mana_potion
+	@param sword
+	@param shield
+	@param screen
+*/ 
 ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int atk, int crit, int vida_potion, int mana_potion, int sword, int shield, int screen){
 	int i, x, y, z; 
 	ESTADO e = {0};
@@ -117,7 +134,17 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 }
 
 
-void print_move(ESTADO e, int difx, int dify, char *nomef, int acao){
+/** \brief Função que movimenta o jogador.
+
+	Os vários tipos de movimento do jogador são mover-se para uma casa livre, atacar um inimigo que esteja no range, apanhar um item ou avançar
+	de nível.
+	@param e
+	@param difx posição
+	@param dify posição
+	@param *nomef
+	@param acao
+*/
+void print_move(ESTADO e, int difx, int dify, char *nomef, int acao){ // será preciso o param acao???
 	int px = e.jog.x + difx;
 	int py = e.jog.y + dify;
 
@@ -162,6 +189,11 @@ void print_move(ESTADO e, int difx, int dify, char *nomef, int acao){
 }
 
 
+/** \brief Função que move os inimigos.
+
+	O movimento dos inimigos é feito conforme a posição do jogador e o estado do tabuleiro (onde se situa a porta e o tesouro).
+	@param newE
+*/
 ESTADO enemyMove(ESTADO newE){
 	int i, x, y, z=0;
 
@@ -211,6 +243,12 @@ ESTADO enemyMove(ESTADO newE){
 }
 
 
+/** \brief Função que determina se o jogador está em range do ataque do inimigo.
+
+	Conforme o tipo do inimigo (meelee ou ranged) é determinado se o jogador está no range para ser atacado.
+	@param e Estado do jogo.
+	@param i Índice do inimigo.
+*/
 int inRange(ESTADO e, int i){
 	int r=0;
 	int x=e.inimigo[i].x, y=e.inimigo[i].y;
@@ -251,6 +289,13 @@ int inRange(ESTADO e, int i){
 }
 
 
+/** \brief Função que determina se uma casa do tabuleiro de jogo está livre.
+
+	A função retorna 0 caso esteja ocupada, ou seja, caso contenha um monstro, um obstáculo, um item, o tesouro, a porta ou o próprio jogador.
+	@param e
+	@param x posição
+	@param y posição
+*/
 int casaLivre (ESTADO e, int x, int y){
 	int i=0, r=1;
 
@@ -270,6 +315,13 @@ int casaLivre (ESTADO e, int x, int y){
 }
 
 
+/** \brief Função que verifica qual o índice do monstro numa casa.
+
+	A função retorna o índice do monstro na posição (x,y) do tabuleiro. Caso não esteja nenhum monstro a função retorna -1.
+	@param e
+	@param x posição
+	@param y posição
+*/
 int isEnemy (ESTADO e, int x, int y){ // funcao que retorna -1 se a casa nao tem inimigo, ou entao o seu numero
 	int i, r=-1;
 
@@ -279,6 +331,14 @@ int isEnemy (ESTADO e, int x, int y){ // funcao que retorna -1 se a casa nao tem
 }
 
 
+/** \brief Função que verifica qual o índice do item numa casa.
+
+	A função retorna o índice do item deixado por um monstro após a sua morte na posição (x,y) do tabuleiro. 
+	Caso não esteja nenhum item a função retorna -1.
+	@param e
+	@param px posição
+	@param py posição
+*/
 int isItem (ESTADO e, int px, int py){ // funcao que retorna -1 se a casa nao tem item, ou entao o inimigo que tem o item
 	int i,r=(-1);
 
@@ -288,6 +348,11 @@ int isItem (ESTADO e, int px, int py){ // funcao que retorna -1 se a casa nao te
 }
 
 
+/** \brief Função que atribui o ataque do inimigo.
+
+	A função atribui, conforme o tipo do inimigo, o seu ataque.
+	@param tipo
+*/
 int atk_Inimigo(int tipo){
 	int atk;
 
@@ -298,6 +363,11 @@ int atk_Inimigo(int tipo){
 }
 
 
+/** \brief Função que atribui a vida do inimigo.
+
+	A função atribui, conforme o tipo do inimigo, a sua vida.
+	@param tipo
+*/
 int vida_Inimigo(int tipo){
 	int vida;
 
@@ -308,6 +378,14 @@ int vida_Inimigo(int tipo){
 }
 
 
+/** \brief Função que atribui o item do tesouro.
+
+	A função atribui, conforme um número pseudo-aleatório, o item que o tesouro contem.
+	@param e
+	@param x
+	@param y
+
+*/
 ESTADO itemTesouro (ESTADO e, int x, int y){
 	srand(time(NULL));
 	int z=rand()%24;
@@ -328,6 +406,15 @@ ESTADO itemTesouro (ESTADO e, int x, int y){
 	return e;
 }
 
+
+/** \brief Função que apanha um item.
+
+	A função altera o estado do jogador (vida, mana, ataque, crítico ou o inventário) conforme o item na posição (x,y).
+	@param e
+	@param x
+	@param y
+
+*/
 ESTADO catchItem(int item, ESTADO e){
 	if (item==0) e.score+=5;
 	else if (item==1) e.score+=10;
@@ -343,6 +430,12 @@ ESTADO catchItem(int item, ESTADO e){
 }
 
 
+/** \brief Função que atribui o tipo de um inimigo.
+
+	A função atribui, conforme um número pseudo-aleatório, o tipo do inimigo.
+	@param nivel
+	@param x
+*/
 int tipoInimigo(int nivel, int x){
 	if (nivel==1) x=1;
 	else if(nivel==2){
@@ -354,9 +447,26 @@ int tipoInimigo(int nivel, int x){
 		else if (x%5==2 || x%5==3) x=2;
 		else x=3;
 	}
+	else if (nivel==6) x=5;
+	else if(nivel==7 || nivel==8){
+		if(x%2==0) x=6;
+		else x=7;
+	}
+	else if (nivel==8 || nivel==9 || nivel==10){ 
+		if (x%5==0 || x%5==1) x=1;
+		else if (x%5==2 || x%5==3) x=2;
+		else x=3;
+	}
 	return x;
 }
 
+
+/** \brief Função que atribui o item deixado por um inimigo.
+
+	A função atribui, conforme um número pseudo-aleatório, o item deixado por um inimigo. 
+	A probabilidade de um inimigo deixar um item é de 30%.
+	@param rand
+*/
 int itemInimigo(int rand){
 	int item=rand%240;
 	
@@ -373,6 +483,10 @@ int itemInimigo(int rand){
 }
 
 
+/** \brief Função que funciona como interruptor para a ajuda de mostrar a vida dos inimigos.
+ 
+	@param *nomef
+*/
 void opcaoVida(char *nomef){ // funcao que define se o range de ataque dos inimigos é ou nao impresso 
 	int acao=17;
 
@@ -381,6 +495,12 @@ void opcaoVida(char *nomef){ // funcao que define se o range de ataque dos inimi
 	printf("</a>\n");
 }
 
+
+/** \brief Função que mostra a vida dos inimigos.
+
+	A função imprime no jogo a vida de todos os inimigos. Caso o inimigo seja um Boss também imprime um símbolo para o sinalizar.
+	@param e
+*/
 void print_enemy_vida(ESTADO e){
 	int i, x, y, vida;
 
@@ -397,6 +517,11 @@ void print_enemy_vida(ESTADO e){
 	}
 }
 
+
+/** \brief Função que funciona como interruptor para a ajuda de mostrar o range dos inimigos.
+ 
+	@param *nomef
+*/
 void opcaoRange(char *nomef){ // funcao que define se o range de ataque dos inimigos é ou nao impresso 
 	int acao=11;
 
@@ -405,6 +530,13 @@ void opcaoRange(char *nomef){ // funcao que define se o range de ataque dos inim
 	printf("</a>\n");
 }
 
+
+/** \brief !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+	@param e
+	@param *nomef
+*/
 void selectRange(ESTADO e, char *nomef){ // funcao que permite selecionar um inimigo para mostrar o seu range
 	int i=0;
 	
@@ -422,6 +554,14 @@ void selectRange(ESTADO e, char *nomef){ // funcao que permite selecionar um ini
 }
 
 
+/** \brief Função determina a vida de um inimigo após o ataque do jogador.
+
+	A função determina a vida final do monstro atacado após calcular o ataque do jogador (que varia com a percentagem de crítico e o power up).
+	@param vida
+	@param crit
+	@param atk
+	@param sword
+*/
 int atk_Player(int vida, int crit, int atk, int sword){
 	srand(time(NULL));
 	int x=rand()%10;
@@ -434,6 +574,12 @@ int atk_Player(int vida, int crit, int atk, int sword){
 }
 
 
+/** \brief Função do ataque especial "Bola de Fogo".
+
+	A função faz com que todos os monstros possam ser atacados, independentemente da posição do jogador. Este ataque tem um custo de mana.
+	@param e
+	@param *nomef
+*/
 void bola_Fogo(ESTADO e, char *nomef){
 	int acao=20, i=0;
 
@@ -450,10 +596,17 @@ void bola_Fogo(ESTADO e, char *nomef){
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
 			printf("<image x=753 y=416 xlink:href=\"%s\"/>\n", SQUARE_LINK);
 	printf("</a>\n");
-	printf("<text x=%d y=453 font-family=Verdana font-size=9 fill=white> %d </text> \n", 600+29+80+3+42, 3);
+	printf("<text x=754 y=453 font-family=Verdana font-size=9 fill=white> %d </text> \n", 3);
 
 }
 
+
+/** \brief Função do movimento especial "Flash".
+
+	A função permite ao jogador movimentar-se mais casas do que o normal. Este movimento tem um custo de mana.
+	@param e
+	@param *nomef
+*/
 void mov_Flash(ESTADO e, char *nomef){
 	int acao=22;
 
@@ -480,11 +633,15 @@ void mov_Flash(ESTADO e, char *nomef){
 } 
 
 
+/** \brief Função do ataque especial "Espada Giratória".  (!!!!!!!!!!!!!!!!!!!!!!!!!!!!! nao é isto que ela faz)
 
+	A função faz com que todos os monstro dentro do range sejam atacados.
+	@param *nomef
+*/
 void espada_giratoria(char *nomef){
 	int acao=18;
 
-	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n",nomef,acao);
+	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
 			printf("<image x=711 y=416 xlink:href=\"%s\"/>\n", SQUARE_LINK);
 	printf("</a>\n");
 	printf("<text x=%d y=453 font-family=Verdana font-size=9 fill=white> %d </text> \n", 600+29+80+3, 2);
@@ -492,25 +649,45 @@ void espada_giratoria(char *nomef){
 }
 
 
+/** \brief Função que imprime todas as imagens inanimadas dentro do jogo.
+
+	@param px
+	@param py
+	@param *imagem
+*/
 void print_image(int px, int py, char *imagem){
-	if(px%2==0) printf("<image x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70 + 35,imagem); 
-	else printf("<image x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70,imagem);
+	if(px%2==0) printf("<image x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70 + 35, imagem); 
+	else printf("<image x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70, imagem);
 } 
 
+
+/** \brief Função que imprime todas as imagens animadas dentro do jogo.
+
+	@param px
+	@param py
+	@param *imagem
+	@param jog
+*/
 void print_imageID(int px, int py, char *imagem, int jog){
 	if(jog==-1)
 		if(px%2==0) {
-			printf("<image id=jog x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70 + 35,imagem);
+			printf("<image id=jog x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70 + 35, imagem);
 		}
-		else printf("<image id=jog x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70,imagem);
+		else printf("<image id=jog x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70, imagem);
 	else 
 		if(px%2==0) {
-			printf("<image id=%d x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n",jog, px*60, py*70 + 35,imagem);
+			printf("<image id=%d x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", jog, px*60, py*70 + 35, imagem);
 		}
-		else printf("<image id=%d x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n",jog, px*60, py*70,imagem);
+		else printf("<image id=%d x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", jog, px*60, py*70, imagem);
 } 
 
 
+/** \brief Função que o jogador e os seus possíveis movimentos.
+
+	@param e
+	@param acao
+	@param *nomef
+*/
 void print_player(ESTADO e, int acao, char *nomef){
 	print_imageID(e.jog.x, e.jog.y, PLAYER,-1);
 	if(e.jog.x%2==0){
@@ -532,17 +709,25 @@ void print_player(ESTADO e, int acao, char *nomef){
 } 
 
 
+/** \brief Função que imprime todos os inimigos.
+
+	@param e
+*/
 void print_enemy(ESTADO e){
 	int i;
 
 	for(i = 0; i < e.num_inimigos; i++){
-		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==1) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY,i);
-		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==2) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY2,i);
-		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==3) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY3,i);
-		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==4) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY3,i);
+		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==1) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY, i);
+		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==2) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY2, i);
+		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==3) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY3, i);
+		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==4) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY3, i);
 	}
 }
 
+
+/** \brief NÃO É USADA?!?!?!?!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+*/
 void print_enemy_specific(int x, int y, int tipo){
 	if (tipo==1) print_image(x, y, ENEMY);
 	else if (tipo==2) print_image(x, y, ENEMY2);
@@ -550,6 +735,11 @@ void print_enemy_specific(int x, int y, int tipo){
 	else print_image(x, y, ENEMY3);
 }
 
+
+/** \brief Função que imprime o range de todos os inimigos.
+
+	@param e
+*/
 void print_rangeEnemy(ESTADO e){
 	int i, x, y,px,py;
 
@@ -557,32 +747,32 @@ void print_rangeEnemy(ESTADO e){
 		if(e.inimigo[i].range == 1 && e.inimigo[i].vida >0){
 			x = e.inimigo[i].x; px=e.jog.x;
 			y = e.inimigo[i].y; py=e.jog.y;
-			if(casaLivre(e,x+1,y)==1 ||(x+1==px && y==py)) print_image(x+1,y,RANGEATTACK);
-			if(casaLivre(e,x-1,y)==1 ||(x-1==px && y==py)) print_image(x-1,y,RANGEATTACK);
-			if(casaLivre(e,x,y+1)==1 ||(x==px && (y+1)==py)) print_image(x,y+1,RANGEATTACK);
-			if(casaLivre(e,x,y-1)==1 ||(x==px && (y-1)==py)) print_image(x,y-1,RANGEATTACK);
+			if(casaLivre(e, x+1, y)==1 ||(x+1==px && y==py)) print_image(x+1, y, RANGEATTACK);
+			if(casaLivre(e, x-1, y)==1 ||(x-1==px && y==py)) print_image(x-1, y, RANGEATTACK);
+			if(casaLivre(e, x, y+1)==1 ||(x==px && (y+1)==py)) print_image(x, y+1, RANGEATTACK);
+			if(casaLivre(e, x, y-1)==1 ||(x==px && (y-1)==py)) print_image(x, y-1, RANGEATTACK);
 			if(x%2==0){
-				if(casaLivre(e,x+1,y+1)==1 ||(x+1==px && y+1==py)) print_image(x+1,y+1,RANGEATTACK);
-				if(casaLivre(e,x-1,y+1)==1 ||(x-1==px && y+1==py)) print_image(x-1,y+1,RANGEATTACK);
+				if(casaLivre(e, x+1, y+1)==1 ||(x+1==px && y+1==py)) print_image(x+1, y+1, RANGEATTACK);
+				if(casaLivre(e, x-1, y+1)==1 ||(x-1==px && y+1==py)) print_image(x-1, y+1, RANGEATTACK);
 			}
 			if(x%2==1){
-				if(casaLivre(e,x-1,y-1)==1 ||(x-1==px && y-1==py)) print_image(x-1,y-1,RANGEATTACK);
-				if(casaLivre(e,x+1,y-1)==1 ||(x+1==px && y-1==py)) print_image(x+1,y-1,RANGEATTACK);
+				if(casaLivre(e, x-1, y-1)==1 ||(x-1==px && y-1==py)) print_image(x-1, y-1, RANGEATTACK);
+				if(casaLivre(e, x+1, y-1)==1 ||(x+1==px && y-1==py)) print_image(x+1, y-1, RANGEATTACK);
 			}
 			if(e.inimigo[i].tipo==3){
-				if(casaLivre(e,x-2,y)==1 ||(x-2==px && y==py)) print_image(x-2,y,RANGEATTACK);
-				if(casaLivre(e,x+2,y)==1 ||(x+2==px && y==py)) print_image(x+2,y,RANGEATTACK);
+				if(casaLivre(e, x-2, y)==1 ||(x-2==px && y==py)) print_image(x-2, y, RANGEATTACK);
+				if(casaLivre(e, x+2, y)==1 ||(x+2==px && y==py)) print_image(x+2, y, RANGEATTACK);
 				if(x%2==0){
-					if(casaLivre(e,x-1,y-1)==1 ||(x-1==px && y-1==py)) print_image(x-1,y-1,RANGEATTACK);
-					if(casaLivre(e,x+1,y-1)==1 ||(x+1==px && y-1==py)) print_image(x+1,y-1,RANGEATTACK);
-					if(casaLivre(e,x+1,y+2)==1 ||(x+1==px && y+2==py)) print_image(x+1,y+2,RANGEATTACK);
-					if(casaLivre(e,x-1,y+2)==1 ||(x-1==px && y+2==py)) print_image(x-1,y+2,RANGEATTACK);
+					if(casaLivre(e, x-1, y-1)==1 ||(x-1==px && y-1==py)) print_image(x-1, y-1, RANGEATTACK);
+					if(casaLivre(e, x+1, y-1)==1 ||(x+1==px && y-1==py)) print_image(x+1, y-1, RANGEATTACK);
+					if(casaLivre(e, x+1, y+2)==1 ||(x+1==px && y+2==py)) print_image(x+1, y+2, RANGEATTACK);
+					if(casaLivre(e, x-1, y+2)==1 ||(x-1==px && y+2==py)) print_image(x-1, y+2, RANGEATTACK);
 				}
 				else{
-					if(casaLivre(e,x-1,y-2)==1 ||(x-1==px && y-2==py)) print_image(x-1,y-2,RANGEATTACK);
-					if(casaLivre(e,x+1,y-2)==1 ||(x+1==px && y-2==py)) print_image(x+1,y-2,RANGEATTACK);
-					if(casaLivre(e,x+1,y+1)==1 ||(x+1==px && y+1==py)) print_image(x+1,y+1,RANGEATTACK);
-					if(casaLivre(e,x-1,y+1)==1 ||(x-1==px && y+1==py)) print_image(x-1,y+1,RANGEATTACK);
+					if(casaLivre(e, x-1, y-2)==1 ||(x-1==px && y-2==py)) print_image(x-1, y-2, RANGEATTACK);
+					if(casaLivre(e, x+1, y-2)==1 ||(x+1==px && y-2==py)) print_image(x+1, y-2, RANGEATTACK);
+					if(casaLivre(e, x+1, y+1)==1 ||(x+1==px && y+1==py)) print_image(x+1, y+1, RANGEATTACK);
+					if(casaLivre(e, x-1, y+1)==1 ||(x-1==px && y+1==py)) print_image(x-1, y+1, RANGEATTACK);
 
 				}
 			}
@@ -590,6 +780,10 @@ void print_rangeEnemy(ESTADO e){
 }
 
 
+/** \brief Função que imprime todos os obstáculos do jogo.
+
+	@param e
+*/
 void print_wall(ESTADO e){
 	int i;
 
@@ -598,10 +792,20 @@ void print_wall(ESTADO e){
 }
 
 
+/** \brief Função que imprime a porta para o próximo nível.
+
+	@param e
+*/
 void print_door(ESTADO e){ 
 	print_image(e.door.x, e.door.y, DOOR);
 }
 
+
+/** \brief ???????????????????????
+
+	@param i
+	@param e
+*/
 void print_specific_item(int i, ESTADO e){ 
 	if (e.inimigo[i].visivel==1){
 		if (e.inimigo[i].item==0) print_image(e.inimigo[i].x, e.inimigo[i].y, SCORE_5);
@@ -617,6 +821,11 @@ void print_specific_item(int i, ESTADO e){
 	}
 } 
 
+
+/** \brief ???????????????????????
+
+	@param e
+*/
 void print_item(ESTADO e){
 	int i;
 
@@ -624,11 +833,22 @@ void print_item(ESTADO e){
 		print_specific_item(i, e);
 }
 
+
+/** \brief Função que imprime o tesouro.
+
+	@param e
+*/
 void print_treasure(ESTADO e){
 	if (e.treasure.visivel==1) print_image(e.treasure.x, e.treasure.y, TREASURE);
 }
 
-void print_treasure_item(ESTADO e){
+
+/** \brief ???????????????????????
+
+	@param e
+
+*/
+void print_treasure_item(ESTADO e){ // e se pusessemos esta dentro da print_item ?!?!?!?!?!?!
 	if(e.item.visivel==1){
 		if (e.item.tipo==0) print_image(e.item.x, e.item.y, SCORE_5);
 		if (e.item.tipo==1) print_image(e.item.x, e.item.y, SCORE_10);
@@ -643,17 +863,22 @@ void print_treasure_item(ESTADO e){
 }
 
 
+/** \brief Função que o menu de jogo. (talvez mudar nome??????????????????????) */   
 void print_menu(){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", MENU);
 }
 
+
+/** \brief Função que imprime o menu quando o jogador morre. */
 void print_dead_screen(){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", DEAD);
 }
 
 
+/** \brief Função que imprime o menu de Top Scores.
 
-
+	@param *nomef
+*/
 void print_score_screen(char *nomef){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", TITLE);
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, 42);
@@ -662,6 +887,10 @@ void print_score_screen(char *nomef){
 }
 
 
+/** \brief Função que imprime as Stats (vida, mana, nível, ataque, crítico e score) do jogador.
+
+	@param e
+*/
 void print_stats(ESTADO e){
 	int i;
 
@@ -678,6 +907,11 @@ void print_stats(ESTADO e){
 	printf("<text x=877 y=242 font-family=Verdana font-size=22 fill=white> %d </text> \n", e.score); // Score
 }
 
+
+/** \brief Função que imprimi o ecrã inicial do jogo.
+
+	@param *nomef
+*/
 void print_start(char *nomef){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", TITLE);
 
@@ -691,21 +925,33 @@ void print_start(char *nomef){
 }
 
 
- 
+/** \brief Função que imprime as casas livres para onde o jogador se pode mover.
+
+	@param e
+	@param px
+	@param py
+*/ 
 void print_rangeMov(ESTADO e, int px, int py){
 	if(casaLivre(e, px, py)==1) print_image(px, py, RANGEMOV);
 } 
 
-/** Função que imprime o possivel movimento do jogador
-	@param px posição
-	@param px posição
-*/
 
+/** \brief Função que imprime as casas com monstro que o jogador pode atacar.
+
+	@param e
+	@param px
+	@param py
+*/ 
 void print_rangeAttack (ESTADO e, int px, int py){
 	if(isEnemy(e, px, py)!=(-1)) print_image(px, py, RANGEATTACK);
 }
 
 
+/** \brief Função que imprime o inventário do jogador.
+
+	@param e
+	@param *nomef
+*/ 
 void print_inventory(ESTADO e, char *nomef){
 	int i=0, acao;
 
@@ -744,6 +990,14 @@ void print_inventory(ESTADO e, char *nomef){
 }
 
 
+/** \brief Função que imprime as animações do movimento do jogador ou dos inimigos.
+
+	@param x
+	@param y
+	@param px
+	@param py
+	@param id
+*/ 
 void print_animation(int x,int y, int px, int py, int id){
 	if(id==-1)
 		if((x==0&&y==-1)||(x==0&&y==1))
@@ -777,19 +1031,30 @@ void print_animation(int x,int y, int px, int py, int id){
 			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, -(60*x), 35);
 }
 
+
+/** \brief Função que imprime o tabuleiro de jogo.
+
+	@param e
+	@param px
+	@param py
+*/ 
 void print_board(){ 
 	int x, y;
 	for (x=0;x<11;x++)
 		for (y=0;y<8;y++) 
-			if(x%2==0) printf("<image x=%d y=%d width=%d height=%d xlink:href=\"%s\"/>\n", x*60, y*70 + 35,80,70,HEX_FLOOR); 
-			else printf("<image x=%d y=%d width=%d height=%d xlink:href=\"%s\"/>\n", x*60, y*70,80,70,HEX_FLOOR);
+			if(x%2==0) printf("<image x=%d y=%d width=%d height=%d xlink:href=\"%s\"/>\n", x*60, y*70+35, 80, 70,HEX_FLOOR); 
+			else printf("<image x=%d y=%d width=%d height=%d xlink:href=\"%s\"/>\n", x*60, y*70, 80, 70, HEX_FLOOR);
 }
 
 
+/** \brief Função que imprime hexagonos como hiperligações.
 
+	@param x
+	@param y
+*/ 
 void print_hex(int x, int y){
 	if(x%2==1) {
-			printf("<polygon points='%d,%d %d,%d %d,%d %d,%d %d,%d %d,%d' fill=%s stroke=%s opacity='0'/> \n", 20+60*x,70*y,60+60*x,70*y,80+60*x,35+70*y,60+60*x,70+70*y,20+60*x,70+70*y,60*x,35+70*y,"green","purple");	
+		printf("<polygon points='%d,%d %d,%d %d,%d %d,%d %d,%d %d,%d' fill=%s stroke=%s opacity='0'/> \n", 20+60*x,70*y,60+60*x,70*y,80+60*x,35+70*y,60+60*x,70+70*y,20+60*x,70+70*y,60*x,35+70*y,"green","purple");	
 	}
 	else{
 		printf("<polygon points='%d,%d %d,%d %d,%d %d,%d %d,%d %d,%d' fill=%s stroke=%s opacity='0'/> \n", 20+60*x,70*y+35,60+60*x,70*y+35,80+60*x,35+70*y+35,60+60*x,70+70*y+35,20+60*x,70+70*y+35,60*x,35+70*y+35,"green","purple");
@@ -797,8 +1062,11 @@ void print_hex(int x, int y){
 }
 
 
+/** \brief Função que guarda o estado num ficheiro.
 
-
+	@param e
+	@param *nomef
+*/ 
 void guardar_estado(ESTADO e, char *nomef){ // no fim do parser guardar_estado(e, nomef)
 	char path[200];
 	FILE *fp;
@@ -814,6 +1082,11 @@ void guardar_estado(ESTADO e, char *nomef){ // no fim do parser guardar_estado(e
 	}
 }
 
+
+/** \brief Função que lê o estado a partir de um ficheiro.
+
+	@param *nomef
+*/ 
 ESTADO ler_estado(char *nomef){
 	ESTADO e;
 	char path[200];
@@ -834,10 +1107,26 @@ ESTADO ler_estado(char *nomef){
 	return e; 
 }
 
+
+
+void print_noMana(){
+
+	printf("<image id=noMana x=788 y=107 xlink:href=\"%s\"/>\n", NO_MANA);
+	printf("<animate id=noMana attributeName=opacity from=1 to=0 dur=1s begin=0s />");
+}
+
+
+/** \brief Função que processa as várias ações do jogo.
+
+	@param e
+	@param acao
+	@param *nomef
+	@param numI
+*/ 
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,1);
+	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,0);
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
@@ -937,6 +1226,7 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 				else e.inimigo[numI].vida=0;
 				e.jog.mana-=3;
 			}
+			else e.noMana=1;
 			e.bolaFogo=0;
 		}
 		else if(acao==22){
@@ -1008,6 +1298,13 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	return e;
 }	
 
+
+/** \brief Função que processa o movimento do jogador
+
+	@param e
+	@param px
+	@param py
+*/ 
 ESTADO processar_mov(ESTADO e, int px, int py){
 	int i,x,y;
 
@@ -1045,7 +1342,7 @@ ESTADO processar_mov(ESTADO e, int px, int py){
 	return e;
 }
 
-
+/** \brief ???????????????????????????????? */ 
 void parser(){
 	ESTADO e={0};
     int num,acao, i=0, j;
@@ -1053,20 +1350,17 @@ void parser(){
     char *args = getenv("QUERY_STRING");
 
     if(strlen(args) == 0){ //aqui detecta-se que não foi passado nenhum parametro, neste caso precisas de escolher um nome para o ficheiro e que acao queres fazer
-                        acao=0;
-            strcpy(nomef,"Default");
-
+        acao=0;
+        strcpy(nomef,"Default");
     }
-    else { //aqui vou fazer um scan dos parametros ficando em num a quantidade de parametros lidos
-            num=sscanf(args,"%[^,],%d,%d", nomef, &acao, &i);
-            if (num==1)acao = 10;  //se só for 1 quer dizer que só coloquei o nome do jogador(ficheiro) pelo que escolho uma acao para mostrar esse estado
-          }                                     // se for maior que 1 então estou a receber nos parametros o nome do ficheiro e a acao pelo que devo
+    else{ //aqui vou fazer um scan dos parametros ficando em num a quantidade de parametros lidos
+        num=sscanf(args,"%[^,],%d,%d", nomef, &acao, &i);
+        if (num==1)acao = 10;  //se só for 1 quer dizer que só coloquei o nome do jogador(ficheiro) pelo que escolho uma acao para mostrar esse estado
+    }                                     // se for maior que 1 então estou a receber nos parametros o nome do ficheiro e a acao pelo que devo
 
                                                 //avançar para o processamento da acao especificada no link
 	
 	e=processar_acao(e, acao, nomef, i); //equivalente a print_move
-
-
 
 	if(e.screen==0) print_start(nomef);
 	else if(e.screen==2){
@@ -1098,8 +1392,8 @@ void parser(){
 		espada_giratoria(nomef);
 		bola_Fogo(e, nomef);
 		mov_Flash(e, nomef);
-				print_stats(e);
-
+		print_stats(e);
+		if (e.noMana==1) print_noMana();
 	}
 	else{
 		guardar_Score(nomef, e.score);
@@ -1107,51 +1401,3 @@ void parser(){
 	}
 	guardar_estado(e, nomef);	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* void parser(){
-	ESTADO e;
-	char *args=getenv("QUERY_STRING");
-
-	if(strlen(args) == 0) 
-		e = inicializar(1,0,0,0,10,10,1,0,1,1,1,1);
-	else 
-		e = str2estado(args);
-	if(e.acao==1)
-		e = inicializar(++e.nivel, e.door.x, e.door.y, e.score+10, e.jog.vida, e.jog.mana, e.jog.atk, e.jog.crit, e.jog.item_vida, e.jog.item_mana, e.jog.item_sword, e.jog.item_shield);
-	print_menu();
-	print_board();
-	print_item(e);
-	print_enemy(e); 
-	print_treasure(e);
-	print_treasure_item(e);
-	print_door(e);
-	if(e.jog.vida != 0) print_player(e);
-	print_wall(e);
-	print_inventory(e);
-	print_stats(e);
-	opcaoRange(e);
-	print_rangeEnemy(e);
-	selectRange(e);
-	opcaoVida(e);
-	print_enemy_vida(e);
-} */

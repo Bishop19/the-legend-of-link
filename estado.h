@@ -106,6 +106,8 @@ typedef struct estado {
 	char range;
 	/** Opção de mostrar a vida dos inimigos */
 	char vidas;
+	/** Opção de mostrar a vida dos inimigos */
+	char noMana;
 
 } ESTADO;
 

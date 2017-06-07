@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['obstaculo',['obstaculo',['../structestado.html#a970dc20c6687acb17c3f08c06edbed4f',1,'estado']]]
+  ['jog',['jog',['../structestado.html#aba384d85c8fd0406b06aa2f478874bc1',1,'estado']]]
 ];

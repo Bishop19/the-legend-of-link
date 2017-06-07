@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['print_5frangeattack',['print_rangeAttack',['../parser_8c.html#a03945f3596fdf9d208e72b0be2ed4b31',1,'parser.c']]]
+  ['bola_5ffogo',['bola_Fogo',['../parser_8c.html#a7a7fb39430869342c19a184b4b24f9eb',1,'parser.c']]]
 ];

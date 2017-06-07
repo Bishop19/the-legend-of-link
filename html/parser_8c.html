@@ -103,156 +103,1306 @@ Include dependency graph for parser.c:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:adb20e96394cfb578329303b238e2bb9d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb20e96394cfb578329303b238e2bb9d"></a>
-<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td><td class="memItemRight" valign="bottom"><b>inicializar</b> (int nivel, int px, int py, int score, int vida, int mana, int atk, int crit, int vida_potion, int mana_potion, int sword, int shield, int screen)</td></tr>
+<tr class="memitem:adb20e96394cfb578329303b238e2bb9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#adb20e96394cfb578329303b238e2bb9d">inicializar</a> (int nivel, int px, int py, int score, int vida, int mana, int atk, int crit, int vida_potion, int mana_potion, int sword, int shield, int screen)</td></tr>
+<tr class="memdesc:adb20e96394cfb578329303b238e2bb9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">????????????????????????????????????????????  <a href="#adb20e96394cfb578329303b238e2bb9d">More...</a><br /></td></tr>
 <tr class="separator:adb20e96394cfb578329303b238e2bb9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5abfcddb9c802c8f2b1205f4d2e910e8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5abfcddb9c802c8f2b1205f4d2e910e8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_move</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int difx, int dify, char *nomef, int acao)</td></tr>
+<tr class="memitem:a5abfcddb9c802c8f2b1205f4d2e910e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a5abfcddb9c802c8f2b1205f4d2e910e8">print_move</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int difx, int dify, char *nomef, int acao)</td></tr>
+<tr class="memdesc:a5abfcddb9c802c8f2b1205f4d2e910e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que movimenta o jogador.  <a href="#a5abfcddb9c802c8f2b1205f4d2e910e8">More...</a><br /></td></tr>
 <tr class="separator:a5abfcddb9c802c8f2b1205f4d2e910e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa4eaff660e6e19151c1f88ebf4e95bd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa4eaff660e6e19151c1f88ebf4e95bd"></a>
-<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td><td class="memItemRight" valign="bottom"><b>enemyMove</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> newE)</td></tr>
+<tr class="memitem:afa4eaff660e6e19151c1f88ebf4e95bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#afa4eaff660e6e19151c1f88ebf4e95bd">enemyMove</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> newE)</td></tr>
+<tr class="memdesc:afa4eaff660e6e19151c1f88ebf4e95bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que move os inimigos.  <a href="#afa4eaff660e6e19151c1f88ebf4e95bd">More...</a><br /></td></tr>
 <tr class="separator:afa4eaff660e6e19151c1f88ebf4e95bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9563943f0f8766a8a3a0d41812d7b4e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9563943f0f8766a8a3a0d41812d7b4e6"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>inRange</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int i)</td></tr>
+<tr class="memitem:a9563943f0f8766a8a3a0d41812d7b4e6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a9563943f0f8766a8a3a0d41812d7b4e6">inRange</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int i)</td></tr>
+<tr class="memdesc:a9563943f0f8766a8a3a0d41812d7b4e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que determina se o jogador está em range do ataque do inimigo.  <a href="#a9563943f0f8766a8a3a0d41812d7b4e6">More...</a><br /></td></tr>
 <tr class="separator:a9563943f0f8766a8a3a0d41812d7b4e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af56fb4b66707102e2da4becee70ff115"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af56fb4b66707102e2da4becee70ff115"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>casaLivre</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int x, int y)</td></tr>
+<tr class="memitem:af56fb4b66707102e2da4becee70ff115"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#af56fb4b66707102e2da4becee70ff115">casaLivre</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int x, int y)</td></tr>
+<tr class="memdesc:af56fb4b66707102e2da4becee70ff115"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que determina se uma casa do tabuleiro de jogo está livre.  <a href="#af56fb4b66707102e2da4becee70ff115">More...</a><br /></td></tr>
 <tr class="separator:af56fb4b66707102e2da4becee70ff115"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ff694f4163cb211056dcfb95c8fdc8d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ff694f4163cb211056dcfb95c8fdc8d"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>isEnemy</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int x, int y)</td></tr>
+<tr class="memitem:a3ff694f4163cb211056dcfb95c8fdc8d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a3ff694f4163cb211056dcfb95c8fdc8d">isEnemy</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int x, int y)</td></tr>
+<tr class="memdesc:a3ff694f4163cb211056dcfb95c8fdc8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que verifica qual o índice do monstro numa casa.  <a href="#a3ff694f4163cb211056dcfb95c8fdc8d">More...</a><br /></td></tr>
 <tr class="separator:a3ff694f4163cb211056dcfb95c8fdc8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1428e3d17992b5a1c250be9e1e8a1e1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1428e3d17992b5a1c250be9e1e8a1e1"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>isItem</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int px, int py)</td></tr>
+<tr class="memitem:ab1428e3d17992b5a1c250be9e1e8a1e1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#ab1428e3d17992b5a1c250be9e1e8a1e1">isItem</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int px, int py)</td></tr>
+<tr class="memdesc:ab1428e3d17992b5a1c250be9e1e8a1e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que verifica qual o índice do item numa casa.  <a href="#ab1428e3d17992b5a1c250be9e1e8a1e1">More...</a><br /></td></tr>
 <tr class="separator:ab1428e3d17992b5a1c250be9e1e8a1e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b0433a24235b06f764a19caeba899a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b0433a24235b06f764a19caeba899a9"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>atk_Inimigo</b> (int tipo)</td></tr>
+<tr class="memitem:a2b0433a24235b06f764a19caeba899a9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a2b0433a24235b06f764a19caeba899a9">atk_Inimigo</a> (int tipo)</td></tr>
+<tr class="memdesc:a2b0433a24235b06f764a19caeba899a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que atribui o ataque do inimigo.  <a href="#a2b0433a24235b06f764a19caeba899a9">More...</a><br /></td></tr>
 <tr class="separator:a2b0433a24235b06f764a19caeba899a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6d04e6c6048655caa1b112f91ce52d6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab6d04e6c6048655caa1b112f91ce52d6"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>vida_Inimigo</b> (int tipo)</td></tr>
+<tr class="memitem:ab6d04e6c6048655caa1b112f91ce52d6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#ab6d04e6c6048655caa1b112f91ce52d6">vida_Inimigo</a> (int tipo)</td></tr>
+<tr class="memdesc:ab6d04e6c6048655caa1b112f91ce52d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que atribui a vida do inimigo.  <a href="#ab6d04e6c6048655caa1b112f91ce52d6">More...</a><br /></td></tr>
 <tr class="separator:ab6d04e6c6048655caa1b112f91ce52d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac4bc1cefd8ccacc00689ad9b2cbc3dda"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4bc1cefd8ccacc00689ad9b2cbc3dda"></a>
-<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td><td class="memItemRight" valign="bottom"><b>itemTesouro</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int x, int y)</td></tr>
+<tr class="memitem:ac4bc1cefd8ccacc00689ad9b2cbc3dda"><td class="memItemLeft" align="right" valign="top"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#ac4bc1cefd8ccacc00689ad9b2cbc3dda">itemTesouro</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int x, int y)</td></tr>
+<tr class="memdesc:ac4bc1cefd8ccacc00689ad9b2cbc3dda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que atribui o item do tesouro.  <a href="#ac4bc1cefd8ccacc00689ad9b2cbc3dda">More...</a><br /></td></tr>
 <tr class="separator:ac4bc1cefd8ccacc00689ad9b2cbc3dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add110f9af69e08e58f004fc41e1f4eaf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add110f9af69e08e58f004fc41e1f4eaf"></a>
-<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td><td class="memItemRight" valign="bottom"><b>catchItem</b> (int item, <a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memitem:add110f9af69e08e58f004fc41e1f4eaf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#add110f9af69e08e58f004fc41e1f4eaf">catchItem</a> (int item, <a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memdesc:add110f9af69e08e58f004fc41e1f4eaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que apanha um item.  <a href="#add110f9af69e08e58f004fc41e1f4eaf">More...</a><br /></td></tr>
 <tr class="separator:add110f9af69e08e58f004fc41e1f4eaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86cbabca8902020305cbf846a93cebad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a86cbabca8902020305cbf846a93cebad"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>tipoInimigo</b> (int nivel, int x)</td></tr>
+<tr class="memitem:a86cbabca8902020305cbf846a93cebad"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a86cbabca8902020305cbf846a93cebad">tipoInimigo</a> (int nivel, int x)</td></tr>
+<tr class="memdesc:a86cbabca8902020305cbf846a93cebad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que atribui o tipo de um inimigo.  <a href="#a86cbabca8902020305cbf846a93cebad">More...</a><br /></td></tr>
 <tr class="separator:a86cbabca8902020305cbf846a93cebad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b3e6ec23f9e379f482fe5a2fbaf6cfc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1b3e6ec23f9e379f482fe5a2fbaf6cfc"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>itemInimigo</b> (int rand)</td></tr>
+<tr class="memitem:a1b3e6ec23f9e379f482fe5a2fbaf6cfc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a1b3e6ec23f9e379f482fe5a2fbaf6cfc">itemInimigo</a> (int rand)</td></tr>
+<tr class="memdesc:a1b3e6ec23f9e379f482fe5a2fbaf6cfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que atribui o item deixado por um inimigo.  <a href="#a1b3e6ec23f9e379f482fe5a2fbaf6cfc">More...</a><br /></td></tr>
 <tr class="separator:a1b3e6ec23f9e379f482fe5a2fbaf6cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6153a731922f81b563f8072f3bd76698"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6153a731922f81b563f8072f3bd76698"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>opcaoVida</b> (char *nomef)</td></tr>
+<tr class="memitem:a6153a731922f81b563f8072f3bd76698"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a6153a731922f81b563f8072f3bd76698">opcaoVida</a> (char *nomef)</td></tr>
+<tr class="memdesc:a6153a731922f81b563f8072f3bd76698"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que funciona como interruptor para a ajuda de mostrar a vida dos inimigos.  <a href="#a6153a731922f81b563f8072f3bd76698">More...</a><br /></td></tr>
 <tr class="separator:a6153a731922f81b563f8072f3bd76698"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a410f05004adbecb610b40c06b0a7d5ed"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a410f05004adbecb610b40c06b0a7d5ed"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_enemy_vida</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memitem:a410f05004adbecb610b40c06b0a7d5ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a410f05004adbecb610b40c06b0a7d5ed">print_enemy_vida</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memdesc:a410f05004adbecb610b40c06b0a7d5ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que mostra a vida dos inimigos.  <a href="#a410f05004adbecb610b40c06b0a7d5ed">More...</a><br /></td></tr>
 <tr class="separator:a410f05004adbecb610b40c06b0a7d5ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36ce60b70d04913d0d351603c8d1a226"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a36ce60b70d04913d0d351603c8d1a226"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>opcaoRange</b> (char *nomef)</td></tr>
+<tr class="memitem:a36ce60b70d04913d0d351603c8d1a226"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a36ce60b70d04913d0d351603c8d1a226">opcaoRange</a> (char *nomef)</td></tr>
+<tr class="memdesc:a36ce60b70d04913d0d351603c8d1a226"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que funciona como interruptor para a ajuda de mostrar o range dos inimigos.  <a href="#a36ce60b70d04913d0d351603c8d1a226">More...</a><br /></td></tr>
 <tr class="separator:a36ce60b70d04913d0d351603c8d1a226"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae48ce6582e06a738e7fcaf06321a0f24"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae48ce6582e06a738e7fcaf06321a0f24"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>selectRange</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, char *nomef)</td></tr>
+<tr class="memitem:ae48ce6582e06a738e7fcaf06321a0f24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#ae48ce6582e06a738e7fcaf06321a0f24">selectRange</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, char *nomef)</td></tr>
+<tr class="memdesc:ae48ce6582e06a738e7fcaf06321a0f24"><td class="mdescLeft">&#160;</td><td class="mdescRight">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  <a href="#ae48ce6582e06a738e7fcaf06321a0f24">More...</a><br /></td></tr>
 <tr class="separator:ae48ce6582e06a738e7fcaf06321a0f24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac060002c5eda311b3f36338e4aecafb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aac060002c5eda311b3f36338e4aecafb"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>atk_Player</b> (int vida, int crit, int atk, int sword)</td></tr>
+<tr class="memitem:aac060002c5eda311b3f36338e4aecafb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#aac060002c5eda311b3f36338e4aecafb">atk_Player</a> (int vida, int crit, int atk, int sword)</td></tr>
+<tr class="memdesc:aac060002c5eda311b3f36338e4aecafb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função determina a vida de um inimigo após o ataque do jogador.  <a href="#aac060002c5eda311b3f36338e4aecafb">More...</a><br /></td></tr>
 <tr class="separator:aac060002c5eda311b3f36338e4aecafb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a7fb39430869342c19a184b4b24f9eb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7a7fb39430869342c19a184b4b24f9eb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>bola_Fogo</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, char *nomef)</td></tr>
+<tr class="memitem:a7a7fb39430869342c19a184b4b24f9eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a7a7fb39430869342c19a184b4b24f9eb">bola_Fogo</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, char *nomef)</td></tr>
+<tr class="memdesc:a7a7fb39430869342c19a184b4b24f9eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função do ataque especial "Bola de Fogo".  <a href="#a7a7fb39430869342c19a184b4b24f9eb">More...</a><br /></td></tr>
 <tr class="separator:a7a7fb39430869342c19a184b4b24f9eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a292f629d3f0e5d6b78e47f87c0300f33"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a292f629d3f0e5d6b78e47f87c0300f33"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>mov_Flash</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, char *nomef)</td></tr>
+<tr class="memitem:a292f629d3f0e5d6b78e47f87c0300f33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a292f629d3f0e5d6b78e47f87c0300f33">mov_Flash</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, char *nomef)</td></tr>
+<tr class="memdesc:a292f629d3f0e5d6b78e47f87c0300f33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função do movimento especial "Flash".  <a href="#a292f629d3f0e5d6b78e47f87c0300f33">More...</a><br /></td></tr>
 <tr class="separator:a292f629d3f0e5d6b78e47f87c0300f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c42aa2c70720feb8494c1df05f00929"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c42aa2c70720feb8494c1df05f00929"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>espada_giratoria</b> (char *nomef)</td></tr>
+<tr class="memitem:a4c42aa2c70720feb8494c1df05f00929"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a4c42aa2c70720feb8494c1df05f00929">espada_giratoria</a> (char *nomef)</td></tr>
+<tr class="memdesc:a4c42aa2c70720feb8494c1df05f00929"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função do ataque especial "Espada Giratória". (!!!!!!!!!!!!!!!!!!!!!!!!!!!!! nao é isto que ela faz)  <a href="#a4c42aa2c70720feb8494c1df05f00929">More...</a><br /></td></tr>
 <tr class="separator:a4c42aa2c70720feb8494c1df05f00929"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c82011f18d7084781962e79c84a8919"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7c82011f18d7084781962e79c84a8919"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_image</b> (int px, int py, char *imagem)</td></tr>
+<tr class="memitem:a7c82011f18d7084781962e79c84a8919"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a7c82011f18d7084781962e79c84a8919">print_image</a> (int px, int py, char *imagem)</td></tr>
+<tr class="memdesc:a7c82011f18d7084781962e79c84a8919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime todas as imagens inanimadas dentro do jogo.  <a href="#a7c82011f18d7084781962e79c84a8919">More...</a><br /></td></tr>
 <tr class="separator:a7c82011f18d7084781962e79c84a8919"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af05d97c7be241ea13866b1f111de68be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af05d97c7be241ea13866b1f111de68be"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_imageID</b> (int px, int py, char *imagem, int jog)</td></tr>
+<tr class="memitem:af05d97c7be241ea13866b1f111de68be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#af05d97c7be241ea13866b1f111de68be">print_imageID</a> (int px, int py, char *imagem, int jog)</td></tr>
+<tr class="memdesc:af05d97c7be241ea13866b1f111de68be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime todas as imagens animadas dentro do jogo.  <a href="#af05d97c7be241ea13866b1f111de68be">More...</a><br /></td></tr>
 <tr class="separator:af05d97c7be241ea13866b1f111de68be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a967c357c05520949cd39d0871e3b98a6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a967c357c05520949cd39d0871e3b98a6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_player</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int acao, char *nomef)</td></tr>
+<tr class="memitem:a967c357c05520949cd39d0871e3b98a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a967c357c05520949cd39d0871e3b98a6">print_player</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int acao, char *nomef)</td></tr>
+<tr class="memdesc:a967c357c05520949cd39d0871e3b98a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que o jogador e os seus possíveis movimentos.  <a href="#a967c357c05520949cd39d0871e3b98a6">More...</a><br /></td></tr>
 <tr class="separator:a967c357c05520949cd39d0871e3b98a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a482faedcfd27ca6dedf94f05571dc504"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a482faedcfd27ca6dedf94f05571dc504"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_enemy</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memitem:a482faedcfd27ca6dedf94f05571dc504"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a482faedcfd27ca6dedf94f05571dc504">print_enemy</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memdesc:a482faedcfd27ca6dedf94f05571dc504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime todos os inimigos.  <a href="#a482faedcfd27ca6dedf94f05571dc504">More...</a><br /></td></tr>
 <tr class="separator:a482faedcfd27ca6dedf94f05571dc504"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aada3cc639daf915d049962e682225201"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aada3cc639daf915d049962e682225201"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_enemy_specific</b> (int x, int y, int tipo)</td></tr>
+<tr class="memitem:aada3cc639daf915d049962e682225201"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#aada3cc639daf915d049962e682225201">print_enemy_specific</a> (int x, int y, int tipo)</td></tr>
+<tr class="memdesc:aada3cc639daf915d049962e682225201"><td class="mdescLeft">&#160;</td><td class="mdescRight">NÃO É USADA?!?!?!?!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  <a href="#aada3cc639daf915d049962e682225201">More...</a><br /></td></tr>
 <tr class="separator:aada3cc639daf915d049962e682225201"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfd6c89abdaef64b9fd534af1330c322"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adfd6c89abdaef64b9fd534af1330c322"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_rangeEnemy</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memitem:adfd6c89abdaef64b9fd534af1330c322"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#adfd6c89abdaef64b9fd534af1330c322">print_rangeEnemy</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memdesc:adfd6c89abdaef64b9fd534af1330c322"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime o range de todos os inimigos.  <a href="#adfd6c89abdaef64b9fd534af1330c322">More...</a><br /></td></tr>
 <tr class="separator:adfd6c89abdaef64b9fd534af1330c322"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc640e37a4f63e9d4542f1af28a3fa2f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afc640e37a4f63e9d4542f1af28a3fa2f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_wall</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memitem:afc640e37a4f63e9d4542f1af28a3fa2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#afc640e37a4f63e9d4542f1af28a3fa2f">print_wall</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memdesc:afc640e37a4f63e9d4542f1af28a3fa2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime todos os obstáculos do jogo.  <a href="#afc640e37a4f63e9d4542f1af28a3fa2f">More...</a><br /></td></tr>
 <tr class="separator:afc640e37a4f63e9d4542f1af28a3fa2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abda8f17fa0e298c6fb3f20ae361d83c4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abda8f17fa0e298c6fb3f20ae361d83c4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_door</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memitem:abda8f17fa0e298c6fb3f20ae361d83c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#abda8f17fa0e298c6fb3f20ae361d83c4">print_door</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memdesc:abda8f17fa0e298c6fb3f20ae361d83c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime a porta para o próximo nível.  <a href="#abda8f17fa0e298c6fb3f20ae361d83c4">More...</a><br /></td></tr>
 <tr class="separator:abda8f17fa0e298c6fb3f20ae361d83c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd06e12df270e5fec972cd234dfc7281"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acd06e12df270e5fec972cd234dfc7281"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_specific_item</b> (int i, <a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memitem:acd06e12df270e5fec972cd234dfc7281"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#acd06e12df270e5fec972cd234dfc7281">print_specific_item</a> (int i, <a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memdesc:acd06e12df270e5fec972cd234dfc7281"><td class="mdescLeft">&#160;</td><td class="mdescRight">???????????????????????  <a href="#acd06e12df270e5fec972cd234dfc7281">More...</a><br /></td></tr>
 <tr class="separator:acd06e12df270e5fec972cd234dfc7281"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a408a92ca7166062436d062f30c3504f5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a408a92ca7166062436d062f30c3504f5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_item</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memitem:a408a92ca7166062436d062f30c3504f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a408a92ca7166062436d062f30c3504f5">print_item</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memdesc:a408a92ca7166062436d062f30c3504f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">???????????????????????  <a href="#a408a92ca7166062436d062f30c3504f5">More...</a><br /></td></tr>
 <tr class="separator:a408a92ca7166062436d062f30c3504f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba1351ab25c83ab4dad1e0fbf9a670ce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aba1351ab25c83ab4dad1e0fbf9a670ce"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_treasure</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memitem:aba1351ab25c83ab4dad1e0fbf9a670ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#aba1351ab25c83ab4dad1e0fbf9a670ce">print_treasure</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memdesc:aba1351ab25c83ab4dad1e0fbf9a670ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime o tesouro.  <a href="#aba1351ab25c83ab4dad1e0fbf9a670ce">More...</a><br /></td></tr>
 <tr class="separator:aba1351ab25c83ab4dad1e0fbf9a670ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82c469f869c2ebd3abfdcceeff782b8a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82c469f869c2ebd3abfdcceeff782b8a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_treasure_item</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memitem:a82c469f869c2ebd3abfdcceeff782b8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a82c469f869c2ebd3abfdcceeff782b8a">print_treasure_item</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memdesc:a82c469f869c2ebd3abfdcceeff782b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">???????????????????????  <a href="#a82c469f869c2ebd3abfdcceeff782b8a">More...</a><br /></td></tr>
 <tr class="separator:a82c469f869c2ebd3abfdcceeff782b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae91d4cbee2dab64187187499dd0eecd4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae91d4cbee2dab64187187499dd0eecd4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_menu</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#ae91d4cbee2dab64187187499dd0eecd4">print_menu</a> ()</td></tr>
+<tr class="memdesc:ae91d4cbee2dab64187187499dd0eecd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que o menu de jogo. (talvez mudar nome??????????????????????) <br /></td></tr>
 <tr class="separator:ae91d4cbee2dab64187187499dd0eecd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02cbda697c0fdf27c86cb9e5954747e5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02cbda697c0fdf27c86cb9e5954747e5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_dead_screen</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a02cbda697c0fdf27c86cb9e5954747e5">print_dead_screen</a> ()</td></tr>
+<tr class="memdesc:a02cbda697c0fdf27c86cb9e5954747e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime o menu quando o jogador morre. <br /></td></tr>
 <tr class="separator:a02cbda697c0fdf27c86cb9e5954747e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56cdfba4c705a2cd816adde415aa4723"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a56cdfba4c705a2cd816adde415aa4723"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_start</b> (char *nomef)</td></tr>
-<tr class="separator:a56cdfba4c705a2cd816adde415aa4723"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf5de78c71536d349f44f79a8ad3ec51"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf5de78c71536d349f44f79a8ad3ec51"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_score_screen</b> (char *nomef)</td></tr>
+<tr class="memitem:abf5de78c71536d349f44f79a8ad3ec51"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#abf5de78c71536d349f44f79a8ad3ec51">print_score_screen</a> (char *nomef)</td></tr>
+<tr class="memdesc:abf5de78c71536d349f44f79a8ad3ec51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime o menu de Top Scores.  <a href="#abf5de78c71536d349f44f79a8ad3ec51">More...</a><br /></td></tr>
 <tr class="separator:abf5de78c71536d349f44f79a8ad3ec51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad80284da7644601852ffea9fecff1a63"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad80284da7644601852ffea9fecff1a63"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_stats</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memitem:ad80284da7644601852ffea9fecff1a63"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#ad80284da7644601852ffea9fecff1a63">print_stats</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e)</td></tr>
+<tr class="memdesc:ad80284da7644601852ffea9fecff1a63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime as Stats (vida, mana, nível, ataque, crítico e score) do jogador.  <a href="#ad80284da7644601852ffea9fecff1a63">More...</a><br /></td></tr>
 <tr class="separator:ad80284da7644601852ffea9fecff1a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27b85c944cbcb9414c0d89da3c480d25"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27b85c944cbcb9414c0d89da3c480d25"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_rangeMov</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int px, int py)</td></tr>
+<tr class="memitem:a56cdfba4c705a2cd816adde415aa4723"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a56cdfba4c705a2cd816adde415aa4723">print_start</a> (char *nomef)</td></tr>
+<tr class="memdesc:a56cdfba4c705a2cd816adde415aa4723"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprimi o ecrã inicial do jogo.  <a href="#a56cdfba4c705a2cd816adde415aa4723">More...</a><br /></td></tr>
+<tr class="separator:a56cdfba4c705a2cd816adde415aa4723"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27b85c944cbcb9414c0d89da3c480d25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a27b85c944cbcb9414c0d89da3c480d25">print_rangeMov</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int px, int py)</td></tr>
+<tr class="memdesc:a27b85c944cbcb9414c0d89da3c480d25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime as casas livres para onde o jogador se pode mover.  <a href="#a27b85c944cbcb9414c0d89da3c480d25">More...</a><br /></td></tr>
 <tr class="separator:a27b85c944cbcb9414c0d89da3c480d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03945f3596fdf9d208e72b0be2ed4b31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a03945f3596fdf9d208e72b0be2ed4b31">print_rangeAttack</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int px, int py)</td></tr>
+<tr class="memdesc:a03945f3596fdf9d208e72b0be2ed4b31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime as casas com monstro que o jogador pode atacar.  <a href="#a03945f3596fdf9d208e72b0be2ed4b31">More...</a><br /></td></tr>
 <tr class="separator:a03945f3596fdf9d208e72b0be2ed4b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad49ffda4460e65c4a84ff9f0468f4feb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad49ffda4460e65c4a84ff9f0468f4feb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_inventory</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, char *nomef)</td></tr>
+<tr class="memitem:ad49ffda4460e65c4a84ff9f0468f4feb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#ad49ffda4460e65c4a84ff9f0468f4feb">print_inventory</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, char *nomef)</td></tr>
+<tr class="memdesc:ad49ffda4460e65c4a84ff9f0468f4feb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime o inventário do jogador.  <a href="#ad49ffda4460e65c4a84ff9f0468f4feb">More...</a><br /></td></tr>
 <tr class="separator:ad49ffda4460e65c4a84ff9f0468f4feb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a92c746f2b4519a625a56d2582bd4a7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a92c746f2b4519a625a56d2582bd4a7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_animation</b> (int x, int y, int px, int py, int id)</td></tr>
+<tr class="memitem:a9a92c746f2b4519a625a56d2582bd4a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a9a92c746f2b4519a625a56d2582bd4a7">print_animation</a> (int x, int y, int px, int py, int id)</td></tr>
+<tr class="memdesc:a9a92c746f2b4519a625a56d2582bd4a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime as animações do movimento do jogador ou dos inimigos.  <a href="#a9a92c746f2b4519a625a56d2582bd4a7">More...</a><br /></td></tr>
 <tr class="separator:a9a92c746f2b4519a625a56d2582bd4a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f31a24fe416c9ce9259ce11ea23a1f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f31a24fe416c9ce9259ce11ea23a1f1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_board</b> ()</td></tr>
+<tr class="memitem:a6f31a24fe416c9ce9259ce11ea23a1f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a6f31a24fe416c9ce9259ce11ea23a1f1">print_board</a> ()</td></tr>
+<tr class="memdesc:a6f31a24fe416c9ce9259ce11ea23a1f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime o tabuleiro de jogo.  <a href="#a6f31a24fe416c9ce9259ce11ea23a1f1">More...</a><br /></td></tr>
 <tr class="separator:a6f31a24fe416c9ce9259ce11ea23a1f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7afc2552217f3a6478a9572e2d08cdf8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7afc2552217f3a6478a9572e2d08cdf8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print_hex</b> (int x, int y)</td></tr>
+<tr class="memitem:a7afc2552217f3a6478a9572e2d08cdf8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a7afc2552217f3a6478a9572e2d08cdf8">print_hex</a> (int x, int y)</td></tr>
+<tr class="memdesc:a7afc2552217f3a6478a9572e2d08cdf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que imprime hexagonos como hiperligações.  <a href="#a7afc2552217f3a6478a9572e2d08cdf8">More...</a><br /></td></tr>
 <tr class="separator:a7afc2552217f3a6478a9572e2d08cdf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc107ef338d7a5ae93c6d47b13f8cd04"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acc107ef338d7a5ae93c6d47b13f8cd04"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>guardar_estado</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, char *nomef)</td></tr>
+<tr class="memitem:acc107ef338d7a5ae93c6d47b13f8cd04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#acc107ef338d7a5ae93c6d47b13f8cd04">guardar_estado</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, char *nomef)</td></tr>
+<tr class="memdesc:acc107ef338d7a5ae93c6d47b13f8cd04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que guarda o estado num ficheiro.  <a href="#acc107ef338d7a5ae93c6d47b13f8cd04">More...</a><br /></td></tr>
 <tr class="separator:acc107ef338d7a5ae93c6d47b13f8cd04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21dfcbccfc63d805294b5c6b7d95ccf8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a21dfcbccfc63d805294b5c6b7d95ccf8"></a>
-<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ler_estado</b> (char *nomef)</td></tr>
+<tr class="memitem:a21dfcbccfc63d805294b5c6b7d95ccf8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a21dfcbccfc63d805294b5c6b7d95ccf8">ler_estado</a> (char *nomef)</td></tr>
+<tr class="memdesc:a21dfcbccfc63d805294b5c6b7d95ccf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que lê o estado a partir de um ficheiro.  <a href="#a21dfcbccfc63d805294b5c6b7d95ccf8">More...</a><br /></td></tr>
 <tr class="separator:a21dfcbccfc63d805294b5c6b7d95ccf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b00ed31001048c67ef274c5c88bec74"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b00ed31001048c67ef274c5c88bec74"></a>
-<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td><td class="memItemRight" valign="bottom"><b>processar_acao</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int acao, char *nomef, int numI)</td></tr>
+<tr class="memitem:a2188be5a6df3ec7d51b147089b05e373"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2188be5a6df3ec7d51b147089b05e373"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>print_noMana</b> ()</td></tr>
+<tr class="separator:a2188be5a6df3ec7d51b147089b05e373"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b00ed31001048c67ef274c5c88bec74"><td class="memItemLeft" align="right" valign="top"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a3b00ed31001048c67ef274c5c88bec74">processar_acao</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int acao, char *nomef, int numI)</td></tr>
+<tr class="memdesc:a3b00ed31001048c67ef274c5c88bec74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que processa as várias ações do jogo.  <a href="#a3b00ed31001048c67ef274c5c88bec74">More...</a><br /></td></tr>
 <tr class="separator:a3b00ed31001048c67ef274c5c88bec74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a604b0d521e62aedb20c962ac62f25860"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a604b0d521e62aedb20c962ac62f25860"></a>
-<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td><td class="memItemRight" valign="bottom"><b>processar_mov</b> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int px, int py)</td></tr>
+<tr class="memitem:a604b0d521e62aedb20c962ac62f25860"><td class="memItemLeft" align="right" valign="top"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#a604b0d521e62aedb20c962ac62f25860">processar_mov</a> (<a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> e, int px, int py)</td></tr>
+<tr class="memdesc:a604b0d521e62aedb20c962ac62f25860"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que processa o movimento do jogador.  <a href="#a604b0d521e62aedb20c962ac62f25860">More...</a><br /></td></tr>
 <tr class="separator:a604b0d521e62aedb20c962ac62f25860"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac15f7c36f6055edec43d0f0f611c4dc0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac15f7c36f6055edec43d0f0f611c4dc0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>parser</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="parser_8c.html#ac15f7c36f6055edec43d0f0f611c4dc0">parser</a> ()</td></tr>
+<tr class="memdesc:ac15f7c36f6055edec43d0f0f611c4dc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">???????????????????????????????? <br /></td></tr>
 <tr class="separator:ac15f7c36f6055edec43d0f0f611c4dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Definição do estado e das funções que convertem estados em strings e vice-versa </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a2b0433a24235b06f764a19caeba899a9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int atk_Inimigo </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tipo</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que atribui o ataque do inimigo. </p>
+<p>A função atribui, conforme o tipo do inimigo, o seu ataque. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tipo</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aac060002c5eda311b3f36338e4aecafb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int atk_Player </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>vida</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>crit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>atk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sword</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função determina a vida de um inimigo após o ataque do jogador. </p>
+<p>A função determina a vida final do monstro atacado após calcular o ataque do jogador (que varia com a percentagem de crítico e o power up). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vida</td><td></td></tr>
+    <tr><td class="paramname">crit</td><td></td></tr>
+    <tr><td class="paramname">atk</td><td></td></tr>
+    <tr><td class="paramname">sword</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a7a7fb39430869342c19a184b4b24f9eb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bola_Fogo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomef</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função do ataque especial "Bola de Fogo". </p>
+<p>A função faz com que todos os monstros possam ser atacados, independentemente da posição do jogador. Este ataque tem um custo de mana. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">*nomef</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="af56fb4b66707102e2da4becee70ff115"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int casaLivre </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que determina se uma casa do tabuleiro de jogo está livre. </p>
+<p>A função retorna 0 caso esteja ocupada, ou seja, caso contenha um monstro, um obstáculo, um item, o tesouro, a porta ou o próprio jogador. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">x</td><td>posição </td></tr>
+    <tr><td class="paramname">y</td><td>posição </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="add110f9af69e08e58f004fc41e1f4eaf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> catchItem </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>item</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que apanha um item. </p>
+<p>A função altera o estado do jogador (vida, mana, ataque, crítico ou o inventário) conforme o item na posição (x,y). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">x</td><td></td></tr>
+    <tr><td class="paramname">y</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="afa4eaff660e6e19151c1f88ebf4e95bd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> enemyMove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>newE</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que move os inimigos. </p>
+<p>O movimento dos inimigos é feito conforme a posição do jogador e o estado do tabuleiro (onde se situa a porta e o tesouro). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newE</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a4c42aa2c70720feb8494c1df05f00929"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void espada_giratoria </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomef</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função do ataque especial "Espada Giratória". (!!!!!!!!!!!!!!!!!!!!!!!!!!!!! nao é isto que ela faz) </p>
+<p>A função faz com que todos os monstro dentro do range sejam atacados. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">*nomef</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="acc107ef338d7a5ae93c6d47b13f8cd04"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void guardar_estado </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomef</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que guarda o estado num ficheiro. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">*nomef</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="adb20e96394cfb578329303b238e2bb9d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> inicializar </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nivel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>px</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>py</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>score</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>vida</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mana</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>atk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>crit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>vida_potion</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mana_potion</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sword</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>shield</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>screen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>???????????????????????????????????????????? </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nivel</td><td></td></tr>
+    <tr><td class="paramname">px</td><td></td></tr>
+    <tr><td class="paramname">py</td><td></td></tr>
+    <tr><td class="paramname">score</td><td></td></tr>
+    <tr><td class="paramname">vida</td><td></td></tr>
+    <tr><td class="paramname">mana</td><td></td></tr>
+    <tr><td class="paramname">atk</td><td></td></tr>
+    <tr><td class="paramname">crit</td><td></td></tr>
+    <tr><td class="paramname">vida_potion</td><td></td></tr>
+    <tr><td class="paramname">mana_potion</td><td></td></tr>
+    <tr><td class="paramname">sword</td><td></td></tr>
+    <tr><td class="paramname">shield</td><td></td></tr>
+    <tr><td class="paramname">screen</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9563943f0f8766a8a3a0d41812d7b4e6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int inRange </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que determina se o jogador está em range do ataque do inimigo. </p>
+<p>Conforme o tipo do inimigo (meelee ou ranged) é determinado se o jogador está no range para ser atacado. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>Estado do jogo. </td></tr>
+    <tr><td class="paramname">i</td><td>Índice do inimigo. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a3ff694f4163cb211056dcfb95c8fdc8d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int isEnemy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que verifica qual o índice do monstro numa casa. </p>
+<p>A função retorna o índice do monstro na posição (x,y) do tabuleiro. Caso não esteja nenhum monstro a função retorna -1. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">x</td><td>posição </td></tr>
+    <tr><td class="paramname">y</td><td>posição </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ab1428e3d17992b5a1c250be9e1e8a1e1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int isItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>px</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>py</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que verifica qual o índice do item numa casa. </p>
+<p>A função retorna o índice do item deixado por um monstro após a sua morte na posição (x,y) do tabuleiro. Caso não esteja nenhum item a função retorna -1. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">px</td><td>posição </td></tr>
+    <tr><td class="paramname">py</td><td>posição </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a1b3e6ec23f9e379f482fe5a2fbaf6cfc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int itemInimigo </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>rand</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que atribui o item deixado por um inimigo. </p>
+<p>A função atribui, conforme um número pseudo-aleatório, o item deixado por um inimigo. A probabilidade de um inimigo deixar um item é de 30%. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rand</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ac4bc1cefd8ccacc00689ad9b2cbc3dda"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> itemTesouro </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que atribui o item do tesouro. </p>
+<p>A função atribui, conforme um número pseudo-aleatório, o item que o tesouro contem. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">x</td><td></td></tr>
+    <tr><td class="paramname">y</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a21dfcbccfc63d805294b5c6b7d95ccf8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> ler_estado </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomef</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que lê o estado a partir de um ficheiro. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">*nomef</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a292f629d3f0e5d6b78e47f87c0300f33"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mov_Flash </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomef</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função do movimento especial "Flash". </p>
+<p>A função permite ao jogador movimentar-se mais casas do que o normal. Este movimento tem um custo de mana. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">*nomef</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a36ce60b70d04913d0d351603c8d1a226"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcaoRange </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomef</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que funciona como interruptor para a ajuda de mostrar o range dos inimigos. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">*nomef</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a6153a731922f81b563f8072f3bd76698"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcaoVida </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomef</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que funciona como interruptor para a ajuda de mostrar a vida dos inimigos. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">*nomef</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9a92c746f2b4519a625a56d2582bd4a7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_animation </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>px</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>py</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que imprime as animações do movimento do jogador ou dos inimigos. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td></td></tr>
+    <tr><td class="paramname">y</td><td></td></tr>
+    <tr><td class="paramname">px</td><td></td></tr>
+    <tr><td class="paramname">py</td><td></td></tr>
+    <tr><td class="paramname">id</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a6f31a24fe416c9ce9259ce11ea23a1f1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_board </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que imprime o tabuleiro de jogo. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">px</td><td></td></tr>
+    <tr><td class="paramname">py</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="abda8f17fa0e298c6fb3f20ae361d83c4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_door </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que imprime a porta para o próximo nível. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a482faedcfd27ca6dedf94f05571dc504"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_enemy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que imprime todos os inimigos. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aada3cc639daf915d049962e682225201"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_enemy_specific </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tipo</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>NÃO É USADA?!?!?!?!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! </p>
+
+</div>
+</div>
+<a class="anchor" id="a410f05004adbecb610b40c06b0a7d5ed"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_enemy_vida </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que mostra a vida dos inimigos. </p>
+<p>A função imprime no jogo a vida de todos os inimigos. Caso o inimigo seja um Boss também imprime um símbolo para o sinalizar. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a7afc2552217f3a6478a9572e2d08cdf8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_hex </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que imprime hexagonos como hiperligações. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td></td></tr>
+    <tr><td class="paramname">y</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a7c82011f18d7084781962e79c84a8919"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_image </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>px</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>py</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>imagem</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que imprime todas as imagens inanimadas dentro do jogo. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">px</td><td></td></tr>
+    <tr><td class="paramname">py</td><td></td></tr>
+    <tr><td class="paramname">*imagem</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="af05d97c7be241ea13866b1f111de68be"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_imageID </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>px</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>py</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>imagem</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>jog</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que imprime todas as imagens animadas dentro do jogo. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">px</td><td></td></tr>
+    <tr><td class="paramname">py</td><td></td></tr>
+    <tr><td class="paramname">*imagem</td><td></td></tr>
+    <tr><td class="paramname">jog</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ad49ffda4460e65c4a84ff9f0468f4feb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_inventory </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomef</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que imprime o inventário do jogador. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">*nomef</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a408a92ca7166062436d062f30c3504f5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_item </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>??????????????????????? </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a5abfcddb9c802c8f2b1205f4d2e910e8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_move </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>difx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dify</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomef</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>acao</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que movimenta o jogador. </p>
+<p>Os vários tipos de movimento do jogador são mover-se para uma casa livre, atacar um inimigo que esteja no range, apanhar um item ou avançar de nível. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">difx</td><td>posição </td></tr>
+    <tr><td class="paramname">dify</td><td>posição </td></tr>
+    <tr><td class="paramname">*nomef</td><td></td></tr>
+    <tr><td class="paramname">acao</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a967c357c05520949cd39d0871e3b98a6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_player </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>acao</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomef</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que o jogador e os seus possíveis movimentos. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">acao</td><td></td></tr>
+    <tr><td class="paramname">*nomef</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a03945f3596fdf9d208e72b0be2ed4b31"></a>
 <div class="memitem">
 <div class="memproto">
@@ -282,10 +1432,443 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>parser</b> ()</td></t
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Função que imprime o possivel movimento do jogador </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Função que imprime as casas com monstro que o jogador pode atacar. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">px</td><td>posição </td></tr>
-    <tr><td class="paramname">px</td><td>posição </td></tr>
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">px</td><td></td></tr>
+    <tr><td class="paramname">py</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="adfd6c89abdaef64b9fd534af1330c322"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_rangeEnemy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que imprime o range de todos os inimigos. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a27b85c944cbcb9414c0d89da3c480d25"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_rangeMov </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>px</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>py</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que imprime as casas livres para onde o jogador se pode mover. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">px</td><td></td></tr>
+    <tr><td class="paramname">py</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="abf5de78c71536d349f44f79a8ad3ec51"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_score_screen </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomef</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que imprime o menu de Top Scores. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">*nomef</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="acd06e12df270e5fec972cd234dfc7281"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_specific_item </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>??????????????????????? </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td></td></tr>
+    <tr><td class="paramname">e</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a56cdfba4c705a2cd816adde415aa4723"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_start </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomef</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que imprimi o ecrã inicial do jogo. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">*nomef</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ad80284da7644601852ffea9fecff1a63"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_stats </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que imprime as Stats (vida, mana, nível, ataque, crítico e score) do jogador. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aba1351ab25c83ab4dad1e0fbf9a670ce"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_treasure </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que imprime o tesouro. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a82c469f869c2ebd3abfdcceeff782b8a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_treasure_item </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>??????????????????????? </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="afc640e37a4f63e9d4542f1af28a3fa2f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_wall </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que imprime todos os obstáculos do jogo. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a3b00ed31001048c67ef274c5c88bec74"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> processar_acao </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>acao</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomef</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numI</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que processa as várias ações do jogo. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">acao</td><td></td></tr>
+    <tr><td class="paramname">*nomef</td><td></td></tr>
+    <tr><td class="paramname">numI</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a604b0d521e62aedb20c962ac62f25860"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a> processar_mov </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>px</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>py</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que processa o movimento do jogador. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">px</td><td></td></tr>
+    <tr><td class="paramname">py</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae48ce6582e06a738e7fcaf06321a0f24"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void selectRange </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="estado_8h.html#a857f2529d823a22e6f4a81cf21fb810f">ESTADO</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomef</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+    <tr><td class="paramname">*nomef</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a86cbabca8902020305cbf846a93cebad"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tipoInimigo </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nivel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que atribui o tipo de um inimigo. </p>
+<p>A função atribui, conforme um número pseudo-aleatório, o tipo do inimigo. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nivel</td><td></td></tr>
+    <tr><td class="paramname">x</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ab6d04e6c6048655caa1b112f91ce52d6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int vida_Inimigo </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tipo</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que atribui a vida do inimigo. </p>
+<p>A função atribui, conforme o tipo do inimigo, a sua vida. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tipo</td><td></td></tr>
   </table>
   </dd>
 </dl>

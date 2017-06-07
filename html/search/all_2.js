@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['inimigo',['inimigo',['../structestado.html#a85c620d8bd760efde2d2681df831dcb2',1,'estado']]],
-  ['item',['item',['../structestado.html#a2c147e6348aeaa62b05ff2109f0f2bf4',1,'estado']]],
-  ['itemstate',['itemState',['../structitemState.html',1,'']]]
+  ['casalivre',['casaLivre',['../parser_8c.html#af56fb4b66707102e2da4becee70ff115',1,'parser.c']]],
+  ['catchitem',['catchItem',['../parser_8c.html#add110f9af69e08e58f004fc41e1f4eaf',1,'parser.c']]]
 ];
