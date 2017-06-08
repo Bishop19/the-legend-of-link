@@ -1408,7 +1408,9 @@ void parser(){
 	e=processar_acao(e, acao, nomef, i); //equivalente a print_move
 
 	if(e.screen==0) print_start(nomef);
-	else if(e.nivel==11) print_end_game(e.score);
+	else if(e.nivel==11){
+		guardar_Score(nomef, e.score);
+		print_end_game(e.score);
 	else if(e.screen==2){
 		print_score_screen(nomef); 
 		print_score();

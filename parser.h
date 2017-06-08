@@ -56,9 +56,6 @@
 
 
 
-
-
-
 void print_door(ESTADO e);
 void print_rangeMov(ESTADO e, int px, int py);
 int casaLivre (ESTADO e, int x, int y);
