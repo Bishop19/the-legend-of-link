@@ -52,6 +52,7 @@
 #define BOSS_SYMBOL "http://127.0.0.1/imagens/boss_symbol.png"
 #define DEAD "http://127.0.0.1/imagens/dead_screen.png"
 #define NO_MANA "http://127.0.0.1/imagens/no_mana.png"
+#define END_SCREEN "http://127.0.0.1/imagens/end_screen.png"
 
 
 

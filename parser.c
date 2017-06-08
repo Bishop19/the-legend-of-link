@@ -1132,12 +1132,18 @@ ESTADO ler_estado(char *nomef){
 ESTADO print_noMana(ESTADO e){
 
 	printf("<image id=noMana x=788 y=107 xlink:href=\"%s\"/>\n", NO_MANA);
-	//printf("<animate id=noMana attributeName=opacity from=1 to=0 dur=1s begin=0s />");
+	printf("<animate xlink:href=#noMana attributeName='opacity' to='0' dur='1.2s' begin='0s' fill='freeze' /> \n");	
+	// printf("<animate xlink:href=#noMana attributeName='Transform' type='scale' to='1.5' dur='1.2s' begin='0s' fill='freeze' /> \n");	
 	e.noMana=0;
 
 	return e;
 }
 
+
+void print_end_game(int score){
+	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", END_SCREEN);
+	printf("<text x=500 y=500 font-family=Verdana font-size=64 fill=white> %d </text> \n",score);
+}
 
 /** \brief Função que processa as várias ações do jogo.
 
@@ -1398,6 +1404,7 @@ void parser(){
 	e=processar_acao(e, acao, nomef, i); //equivalente a print_move
 
 	if(e.screen==0) print_start(nomef);
+	else if(e.nivel==11) print_end_game(e.score);
 	else if(e.screen==2){
 		print_score_screen(nomef); 
 		print_score();

@@ -51,7 +51,7 @@ $(EXEC):	$(OBJS)
 			sudo cp topScore_button.png /var/www/html/imagens
 			sudo cp boss_symbol.png /var/www/html/imagens
 			sudo cp dead_screen.png /var/www/html/imagens
-			sudo cp no_mana.png /var/www/html/imagens
+			sudo cp end_screen.png /var/www/html/imagens
 
 			sudo mkdir -p /var/www/html/estado
 			sudo chmod a+rw /var/www/html/estado
