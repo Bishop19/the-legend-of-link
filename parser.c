@@ -1140,9 +1140,13 @@ ESTADO print_noMana(ESTADO e){
 }
 
 
+/** \brief Função que mostra ao jogador que não tem mana para realizar a ação.
+
+	@param score
+*/ 
 void print_end_game(int score){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", END_SCREEN);
-	printf("<text x=500 y=500 font-family=Verdana font-size=64 fill=white> %d </text> \n",score);
+	printf("<text x=500 y=500 font-family=Verdana font-size=64 stroke= black fill=white> %d </text> \n",score);
 }
 
 /** \brief Função que processa as várias ações do jogo.
