@@ -11,10 +11,17 @@ $(EXEC):	$(OBJS)
 			sudo cp enemy1.png /var/www/html/imagens
 			sudo cp enemy2.png /var/www/html/imagens
 			sudo cp enemy3.png /var/www/html/imagens
+			sudo cp enemy5.png /var/www/html/imagens
+			sudo cp enemy6.png /var/www/html/imagens
+			sudo cp enemy7.png /var/www/html/imagens
+			sudo cp boss1.png /var/www/html/imagens
+			sudo cp boss2.png /var/www/html/imagens
 			sudo cp menu1.png /var/www/html/imagens
+			sudo cp menu2.png /var/www/html/imagens
 			sudo cp door.png /var/www/html/imagens
 			sudo cp rangeMove.png /var/www/html/imagens
 			sudo cp wall.png /var/www/html/imagens
+			sudo cp wall2.png /var/www/html/imagens
 			sudo cp rangeAttack.png /var/www/html/imagens
 			sudo cp tesouro.png /var/www/html/imagens
 			sudo cp vida.png /var/www/html/imagens
@@ -28,6 +35,7 @@ $(EXEC):	$(OBJS)
 			sudo cp score25.png /var/www/html/imagens
 			sudo cp vida_inimigo.png /var/www/html/imagens
 			sudo cp floor_hex.png /var/www/html/imagens
+			sudo cp floor_hex_grass.png /var/www/html/imagens
 			sudo cp shield.png /var/www/html/imagens
 			sudo cp sword_PU.png /var/www/html/imagens
 			sudo cp sword_PU_inv.png /var/www/html/imagens
