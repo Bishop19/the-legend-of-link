@@ -91,7 +91,7 @@ ESTADO processar_mov(ESTADO e, int px, int py);
 ESTADO processar_acao(ESTADO e,int acao, char *nomef, int numI);
 void guardar_estado(ESTADO e, char *nomef);
 ESTADO ler_estado(char *nomef);
-void print_animation(int x,int y, int px, int py, int id);
+void print_animation(int x,int y, int px, int id);
 
 
 #endif

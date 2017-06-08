@@ -15,7 +15,7 @@ Definição do estado e das funções que convertem estados em strings e vice-ve
 
 /** \brief ????????????????????????????????????????????
 
-	@param nivel
+	@param nivel 
 	@param px
 	@param py
 	@param score
@@ -207,14 +207,14 @@ ESTADO enemyMove(ESTADO newE){
 				x=newE.inimigo[i].x + 1;
 				if(casaLivre(newE, x, newE.inimigo[i].y)==1){ 
 						newE.inimigo[i].x = x;
-						print_animation(1,0,x,newE.inimigo[i].y,i);
+						print_animation(1,0,x,i);
 				}
 			}
 			else if (newE.jog.y > newE.inimigo[i].y){
 				y=newE.inimigo[i].y + 1;
 				if(casaLivre(newE, newE.inimigo[i].x, y)==1){ 
 						newE.inimigo[i].y = y;
-						print_animation(0,1,newE.inimigo[i].x,y,i);
+						print_animation(0,1,newE.inimigo[i].x,i);
 
 				}
 			}
@@ -222,7 +222,7 @@ ESTADO enemyMove(ESTADO newE){
 				x=newE.inimigo[i].x - 1;
 				if(casaLivre(newE, x, newE.inimigo[i].y)==1){ 
 						newE.inimigo[i].x = x;
-						print_animation(-1,0,x,newE.inimigo[i].y,i);
+						print_animation(-1,0,x,i);
 
 				}
 			}
@@ -230,7 +230,7 @@ ESTADO enemyMove(ESTADO newE){
 					y=newE.inimigo[i].y - 1;
 				if(casaLivre(newE, newE.inimigo[i].x, y)==1){ 
 						newE.inimigo[i].y = y;
-						print_animation(0,-1,newE.inimigo[i].x,y,i);
+						print_animation(0,-1,newE.inimigo[i].x,i);
 
 				}
 			}
@@ -1007,7 +1007,7 @@ void print_inventory(ESTADO e, char *nomef){
 	@param py
 	@param id
 */ 
-void print_animation(int x,int y, int px, int py, int id){
+void print_animation(int x,int y, int px, int id){
 	if(id==-1)
 		if((x==0&&y==-1)||(x==0&&y==1))
 			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", 0, -(70*y));
@@ -1109,6 +1109,7 @@ ESTADO ler_estado(char *nomef){
 	char path[200];
 	FILE *fp;
 	char st[5000];
+	int x;
 
 	strcpy(path, "/var/www/html/estado/");
 	strcat(path, nomef);
@@ -1116,25 +1117,11 @@ ESTADO ler_estado(char *nomef){
 	fp=fopen(path, "r");
 	if (fp==NULL) printf ("Erro");
 	else{ 
-		fscanf(fp, "%s\n", st);
+		x=fscanf(fp, "%s\n", st);
 		fclose(fp);
 	}
 	e=str2estado(st);
-
-	return e; 
-}
-
-
-/** \brief Função que mostra ao jogador que não tem mana para realizar a ação.
-
-	@param e
-*/ 
-ESTADO print_noMana(ESTADO e){
-
-	printf("<image id=noMana x=788 y=107 xlink:href=\"%s\"/>\n", NO_MANA);
-	printf("<animate xlink:href=#noMana attributeName='opacity' to='0' dur='1.2s' begin='0s' fill='freeze' /> \n");	
-	// printf("<animate xlink:href=#noMana attributeName='Transform' type='scale' to='1.5' dur='1.2s' begin='0s' fill='freeze' /> \n");	
-	e.noMana=0;
+	x++;
 
 	return e;
 }
@@ -1142,7 +1129,19 @@ ESTADO print_noMana(ESTADO e){
 
 /** \brief Função que mostra ao jogador que não tem mana para realizar a ação.
 
-	@param score
+	@param e
+*/ 
+void print_noMana(){
+
+	printf("<image id=noMana x=788 y=107 xlink:href=\"%s\"/>\n", NO_MANA);
+	printf("<animate xlink:href=#noMana attributeName='opacity' to='0' dur='1.2s' begin='0s' fill='freeze' /> \n");	
+	// printf("<animate xlink:href=#noMana attributeName='Transform' type='scale' to='1.5' dur='1.2s' begin='0s' fill='freeze' /> \n");	
+}
+
+
+/** \brief Função que desenha o menu após o jogador ter acabado o jogo.
+
+	@param score - Pontuação final do jogador
 */ 
 void print_end_game(int score){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", END_SCREEN);
@@ -1159,7 +1158,7 @@ void print_end_game(int score){
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-	if (acao==0 || acao==10) e=inicializar(10,0,0,0,10,10,1,0,1,1,1,1,0);
+	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,0);
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
@@ -1357,7 +1356,7 @@ ESTADO processar_mov(ESTADO e, int px, int py){
 		x=px-e.jog.x,y=py-e.jog.y;
 		e.jog.x=px;
 		e.jog.y=py;
-		print_animation(x,y,px,py,-1);
+		print_animation(x,y,px,-1);
 	}
 	else if(isItem(e, px, py)!=(-1)){
 		i=isItem(e, px, py);
@@ -1369,6 +1368,7 @@ ESTADO processar_mov(ESTADO e, int px, int py){
 		e.inimigo[i].vida=atk_Player(e.inimigo[i].vida, e.jog.crit, e.jog.atk, e.jog.powerUp_sword);
 		if(e.inimigo[i].vida==0){
 			e.score+=5;
+			if(e.inimigo[i].tipo==(4*(e.nivel/5))) e.score+=50;
 
 			if (e.inimigo[i].item<24) e.inimigo[i].visivel=1;
 		}
@@ -1408,9 +1408,11 @@ void parser(){
 	e=processar_acao(e, acao, nomef, i); //equivalente a print_move
 
 	if(e.screen==0) print_start(nomef);
-	else if(e.nivel==11){
+	/*else if(e.nivel==11){
 		guardar_Score(nomef, e.score);
 		print_end_game(e.score);
+	}*/
+
 	else if(e.screen==2){
 		print_score_screen(nomef); 
 		print_score();
@@ -1441,7 +1443,10 @@ void parser(){
 		bola_Fogo(e, nomef);
 		mov_Flash(e, nomef);
 		print_stats(e);
-		if (e.noMana==1) e=print_noMana(e);
+		if (e.noMana==1){
+			print_noMana();
+			e.noMana=0;
+		}
 	}
 	else{
 		guardar_Score(nomef, e.score);
