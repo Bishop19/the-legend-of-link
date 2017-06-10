@@ -92,6 +92,6 @@ ESTADO processar_acao(ESTADO e,int acao, char *nomef, int numI);
 void guardar_estado(ESTADO e, char *nomef);
 ESTADO ler_estado(char *nomef);
 void print_animation(int x,int y, int px, int id);
-
+int isWall (ESTADO e, int x, int y);
 
 #endif
