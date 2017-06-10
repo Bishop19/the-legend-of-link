@@ -3,7 +3,7 @@
 #include <string.h>
 #include "parser.h"
 #include "estado.h"
-#include <time.h>
+#include <time.h>  
 #include "highScore.h"
 
 
@@ -30,7 +30,7 @@ Definição do estado e das funções que convertem estados em strings e vice-ve
 	@param screen
 */ 
 ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int atk, int crit, int vida_potion, int mana_potion, int sword, int shield, int screen){
-	int i, x, y, z; 
+	int i, x, y, randNum; 
 	ESTADO e = {0};
 	srand(time(NULL));
 
@@ -63,8 +63,8 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 	}
 
 	i=0;
-	z=rand()%SIZE;
-	if (z<8){
+	randNum=rand()%SIZE;
+	if (randNum<8){
 		while(i==0){ // gerar tesouro com 80% de possibilidade
 			x=rand()%11;
 			y=rand()%8;
@@ -93,7 +93,7 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 	    		e.inimigo[0].tipo=4*(e.nivel/5);
 	    		e.inimigo[0].vida=4+2*(e.nivel/5);
 	    		e.inimigo[0].atk=1+(e.nivel/5);
-	    		e.inimigo[0].item=itemInimigo(z);
+	    		e.inimigo[0].item=itemInimigo(randNum);
 	    		e.inimigo[0].visivel=0;
 	    		e.num_inimigos++;
 	    		i=4; //   !!! ver erro  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 	
@@ -103,14 +103,14 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 	while(i<NUM_INIMIGOS){
 		x=rand()%11; 
 		y=rand()%8;
-		z=rand();
+		randNum=rand();
     		if(casaLivre(e,x,y)==1){
     			e.inimigo[i].x=x;
     			e.inimigo[i].y=y;
     			e.inimigo[i].tipo=tipoInimigo(e.nivel, rand());
     			e.inimigo[i].vida=vida_Inimigo(e.inimigo[i].tipo);
     			e.inimigo[i].atk=atk_Inimigo(e.inimigo[i].tipo);
-    			e.inimigo[i].item=itemInimigo(z);
+    			e.inimigo[i].item=itemInimigo(randNum);
     			e.inimigo[i].visivel=0;
     			i++;
     			e.num_inimigos++;
@@ -142,7 +142,7 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 	@param difx posição
 	@param dify posição
 	@param *nomef
-	@param acao
+	@param acao 
 */
 void print_move(ESTADO e, int difx, int dify, char *nomef, int acao){ // será preciso o param acao???
 	int px = e.jog.x + difx;
@@ -169,7 +169,7 @@ void print_move(ESTADO e, int difx, int dify, char *nomef, int acao){ // será p
 	else if (difx==(-1) && dify==0 && px>=0 && px<11){
 		acao=4; 
 	}
-	else if (difx==1 && dify==0 && px>=0 && px<=11){
+	else if (difx==1 && dify==0 && px>=0 && px<=11){ 
 		acao=5;  
 	}
 	else if (e.jog.x%2==0 && difx==1 && dify==1 && py>=0 && py<8 && px>=0 && px<11){
@@ -200,12 +200,12 @@ void print_move(ESTADO e, int difx, int dify, char *nomef, int acao){ // será p
 	@param newE
 */
 ESTADO enemyMove(ESTADO newE){
-	int i, x, y, z=0;
+	int i, x, y, danoSofrido=0;
 
 	for(i=0; i<newE.num_inimigos; i++){
 		if(newE.inimigo[i].vida>0){
 			if (inRange(newE,i)==1){
-				z+=newE.inimigo[i].atk;
+				danoSofrido+=newE.inimigo[i].atk;
 				i++;
 			}
 			if (newE.jog.x > newE.inimigo[i].x){
@@ -241,19 +241,14 @@ ESTADO enemyMove(ESTADO newE){
 			}
 		}
 	}
-	if (newE.jog.powerUp_shield==1) z=(z+1)/2;
-	newE.jog.vida -= z;
+	if (newE.jog.powerUp_shield==1) danoSofrido=(danoSofrido+1)/2;
+	newE.jog.vida -= danoSofrido;
 
 	return newE;
 }
 
 
-/** \brief Função que determina se o jogador está em range do ataque do inimigo.
 
-	Conforme o tipo do inimigo (meelee ou ranged) é determinado se o jogador está no range para ser atacado.
-	@param e Estado do jogo.
-	@param i Índice do inimigo.
-*/
 int inRange(ESTADO e, int i){
 	int r=0;
 	int x=e.inimigo[i].x, y=e.inimigo[i].y;
@@ -294,40 +289,26 @@ int inRange(ESTADO e, int i){
 }
 
 
-/** \brief Função que determina se uma casa do tabuleiro de jogo está livre.
-
-	A função retorna 0 caso esteja ocupada, ou seja, caso contenha um monstro, um obstáculo, um item, o tesouro, a porta ou o próprio jogador.
-	@param e
-	@param x posição
-	@param y posição
-*/
 int casaLivre (ESTADO e, int x, int y){
 	int i=0, r=1;
 
-	if(x<0 || y<0 || x>10 || y>7) r=0; // verificar se está fora do tabuleiro
-	if(e.jog.x==x && e.jog.y==y) r=0; // verificar se está jogador
-	if(e.door.x==x && e.door.y==y) r=0; // verificar se está por cima da porta
-	if(isItem(e,x,y)!=(-1)) r=0; // verificar se está item
+	if(x<0 || y<0 || x>10 || y>7) r=0; 
+	if(e.jog.x==x && e.jog.y==y) r=0; 
+	if(e.door.x==x && e.door.y==y) r=0; 
+	if(isItem(e,x,y)!=(-1)) r=0; 
 	if(e.item.x==x && e.item.y==y && e.item.visivel ==1)r=0;
-	if(e.treasure.x==x && e.treasure.y==y && e.treasure.visivel==1) r=0; // verificar se está tesouro		 
-	for(i=0; i < e.num_inimigos && r!=0; i++){ // verificar se está inimigo
+	if(e.treasure.x==x && e.treasure.y==y && e.treasure.visivel==1) r=0; 		 
+	for(i=0; i < e.num_inimigos && r!=0; i++){ 
 		if(e.inimigo[i].x==x && e.inimigo[i].y==y && e.inimigo[i].vida>0) r=0;
 	}
-	for(i=0; i < e.num_obstaculos && r!=0; i++){ // verificar se está obstáculo
+	for(i=0; i < e.num_obstaculos && r!=0; i++){ 
 		if(e.obstaculo[i].x==x && e.obstaculo[i].y==y) r=0;
 	}
 	return r;
 }
 
 
-/** \brief Função que verifica qual o índice do monstro numa casa.
-
-	A função retorna o índice do monstro na posição (x,y) do tabuleiro. Caso não esteja nenhum monstro a função retorna -1.
-	@param e
-	@param x posição
-	@param y posição
-*/
-int isEnemy (ESTADO e, int x, int y){ // funcao que retorna -1 se a casa nao tem inimigo, ou entao o seu numero
+int isEnemy (ESTADO e, int x, int y){
 	int i, r=-1;
 
 	for (i=0; i<e.num_inimigos && r==(-1); i++)
@@ -335,14 +316,7 @@ int isEnemy (ESTADO e, int x, int y){ // funcao que retorna -1 se a casa nao tem
 	return r;
 }
 
-/** \brief Função que verifica qual o índice da parede numa casa.
-
-	A função retorna o índice da parede na posição (x,y) do tabuleiro. Caso não esteja nenhuma parede a função retorna -1.
-	@param e
-	@param x posição
-	@param y posição
-*/
-int isWall (ESTADO e, int x, int y){ // funcao que retorna -1 se a casa nao tem inimigo, ou entao o seu numero
+int isWall (ESTADO e, int x, int y){ 
 	int i, r=-1;
 
 	for (i=0; i<e.num_obstaculos && r==(-1); i++)
@@ -350,28 +324,14 @@ int isWall (ESTADO e, int x, int y){ // funcao que retorna -1 se a casa nao tem 
 	return r;
 }
 
-/** \brief Função que verifica qual o índice do item numa casa.
+int isItem (ESTADO e, int px, int py){ 
+	int i,result=(-1);
 
-	A função retorna o índice do item deixado por um monstro após a sua morte na posição (x,y) do tabuleiro. 
-	Caso não esteja nenhum item a função retorna -1.
-	@param e
-	@param px posição
-	@param py posição
-*/
-int isItem (ESTADO e, int px, int py){ // funcao que retorna -1 se a casa nao tem item, ou entao o inimigo que tem o item
-	int i,r=(-1);
-
-	for(i=0;i<e.num_inimigos && r==(-1) ;i++)
-		if(e.inimigo[i].x==px &&  e.inimigo[i].y == py && e.inimigo[i].visivel==1 && e.inimigo[i].item<24) r=i;
-	return r;
+	for(i=0;i<e.num_inimigos && result==(-1) ;i++)
+		if(e.inimigo[i].x==px &&  e.inimigo[i].y == py && e.inimigo[i].visivel==1 && e.inimigo[i].item<24) result=i;
+	return result;
 }
 
-
-/** \brief Função que atribui o ataque do inimigo.
-
-	A função atribui, conforme o tipo do inimigo, o seu ataque.
-	@param tipo
-*/
 int atk_Inimigo(int tipo){
 	int atk;
 
@@ -381,12 +341,6 @@ int atk_Inimigo(int tipo){
 	return atk;
 }
 
-
-/** \brief Função que atribui a vida do inimigo.
-
-	A função atribui, conforme o tipo do inimigo, a sua vida.
-	@param tipo
-*/
 int vida_Inimigo(int tipo){
 	int vida;
 
@@ -398,43 +352,27 @@ int vida_Inimigo(int tipo){
 }
 
 
-/** \brief Função que atribui o item do tesouro.
-
-	A função atribui, conforme um número pseudo-aleatório, o item que o tesouro contem.
-	@param e
-	@param x
-	@param y
-
-*/
 ESTADO itemTesouro (ESTADO e, int x, int y){
 	srand(time(NULL));
-	int z=rand()%24;
+	int randNum=rand()%24;
 
 	e.item.x=x;
 	e.item.y=y;
 
-	if (z<=3) e.item.tipo=0;	
-	else if (z>=4 && z<=6) e.item.tipo=1;
-	else if (z==7 || z==8) e.item.tipo=2;
-	else if (z>=9 && z<=11) e.item.tipo=3;
-	else if (z>=12 && z<=14) e.item.tipo=4;
-	else if (z>=15 && z<=17) e.item.tipo=5;
-	else if (z==18 || z==19) e.item.tipo=6;	
-	else if (z==20 || z==21) e.item.tipo=7;
-	else if (z==22 || z==23) e.item.tipo=8;
+	if (randNum<=3) e.item.tipo=0;	
+	else if (randNum>=4 && randNum<=6) e.item.tipo=1;
+	else if (randNum==7 || randNum==8) e.item.tipo=2;
+	else if (randNum>=9 && randNum<=11) e.item.tipo=3;
+	else if (randNum>=12 && randNum<=14) e.item.tipo=4;
+	else if (randNum>=15 && randNum<=17) e.item.tipo=5;
+	else if (randNum==18 || randNum==19) e.item.tipo=6;	
+	else if (randNum==20 || randNum==21) e.item.tipo=7;
+	else if (randNum==22 || randNum==23) e.item.tipo=8;
 
 	return e;
 }
 
 
-/** \brief Função que apanha um item.
-
-	A função altera o estado do jogador (vida, mana, ataque, crítico ou o inventário) conforme o item na posição (x,y).
-	@param e
-	@param x
-	@param y
-
-*/
 ESTADO catchItem(int item, ESTADO e){
 	if (item==0) e.score+=5;
 	else if (item==1) e.score+=10;
@@ -450,45 +388,34 @@ ESTADO catchItem(int item, ESTADO e){
 }
 
 
-/** \brief Função que atribui o tipo de um inimigo.
+int tipoInimigo(int nivel, int randNum){
+	int tipo=0;
 
-	A função atribui, conforme um número pseudo-aleatório, o tipo do inimigo.
-	@param nivel
-	@param x
-*/
-int tipoInimigo(int nivel, int x){
-	if (nivel==1) x=1;
+	if (nivel==1) tipo=1;
 	else if(nivel==2){
-		if(x%2==0) x=1;
-		else x=2;
+		if(randNum%2==0) tipo=1;
+		else tipo=2;
 	}
 	else if (nivel==3 || nivel==4 || nivel==5){ 
-		if (x%5==0 || x%5==1) x=1;
-		else if (x%5==2 || x%5==3) x=2;
-		else x=3;
+		if (randNum%5==0 || randNum%5==1) tipo=1;
+		else if (randNum%5==2 || randNum%5==3) tipo=2;
+		else tipo=3;
 	}
-	else if (nivel==6) x=5;
+	else if (nivel==6) tipo=5;
 	else if(nivel==7 || nivel==8){
-		if(x%2==0) x=6;
-		else x=7;
+		if(randNum%2==0) tipo=6;
+		else tipo=7;
 	}
 	else if (nivel==9 || nivel==10){ 
-		if (x%5==0 || x%5==1) x=1;
-		else if (x%5==2 || x%5==3) x=2;
-		else x=3;
+		if (randNum%5==0 || randNum%5==1) tipo=1;
+		else if (randNum%5==2 || randNum%5==3) tipo=2;
+		else tipo=3;
 	}
-	return x;
+	return tipo;
 }
 
-
-/** \brief Função que atribui o item deixado por um inimigo.
-
-	A função atribui, conforme um número pseudo-aleatório, o item deixado por um inimigo. 
-	A probabilidade de um inimigo deixar um item é de 30%.
-	@param rand
-*/
-int itemInimigo(int rand){
-	int item=rand%240;
+int itemInimigo(int randNum){
+	int item=randNum%240;
 	
 	if (item<=3) item=0;								// 5 score 		4
 	else if (item>=4 && item<=6) item=1;				// 10 Score 	3
@@ -502,12 +429,7 @@ int itemInimigo(int rand){
 	return item;
 }
 
-
-/** \brief Função que funciona como interruptor para a ajuda de mostrar a vida dos inimigos.
- 
-	@param *nomef
-*/
-void opcaoVida(char *nomef){ // funcao que define se o range de ataque dos inimigos é ou nao impresso 
+void opcaoVida(char *nomef){ 
 	int acao=17;
 
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n",nomef,acao);
@@ -516,11 +438,6 @@ void opcaoVida(char *nomef){ // funcao que define se o range de ataque dos inimi
 }
 
 
-/** \brief Função que mostra a vida dos inimigos.
-
-	A função imprime no jogo a vida de todos os inimigos. Caso o inimigo seja um Boss também imprime um símbolo para o sinalizar.
-	@param e
-*/
 void print_enemy_vida(ESTADO e){
 	int i, x, y, vida;
 
@@ -529,6 +446,7 @@ void print_enemy_vida(ESTADO e){
 			x=e.inimigo[i].x*60+48;
 			y=e.inimigo[i].y*70+15;
 			vida=e.inimigo[i].vida;
+
 			print_image(e.inimigo[i].x, e.inimigo[i].y, VIDA_INIMIGO);
 			if(e.inimigo[i].tipo==4*(e.nivel/5)) print_image(e.inimigo[i].x, e.inimigo[i].y, BOSS_SYMBOL);
 			if(e.inimigo[i].x%2==1)	printf("<text x=%d y=%d font-family=Verdana font-size=12 fill=white> %d </text> \n", x, y, vida);			
@@ -538,11 +456,7 @@ void print_enemy_vida(ESTADO e){
 }
 
 
-/** \brief Função que funciona como interruptor para a ajuda de mostrar o range dos inimigos.
- 
-	@param *nomef
-*/
-void opcaoRange(char *nomef){ // funcao que define se o range de ataque dos inimigos é ou nao impresso 
+void opcaoRange(char *nomef){ 
 	int acao=11;
 
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n",nomef,acao);
@@ -551,12 +465,6 @@ void opcaoRange(char *nomef){ // funcao que define se o range de ataque dos inim
 }
 
 
-/** \brief !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-	@param e
-	@param *nomef
-*/
 void selectRange(ESTADO e, char *nomef){ // funcao que permite selecionar um inimigo para mostrar o seu range
 	int i=0;
 	
@@ -574,14 +482,6 @@ void selectRange(ESTADO e, char *nomef){ // funcao que permite selecionar um ini
 }
 
 
-/** \brief Função determina a vida de um inimigo após o ataque do jogador.
-
-	A função determina a vida final do monstro atacado após calcular o ataque do jogador (que varia com a percentagem de crítico e o power up).
-	@param vida
-	@param crit
-	@param atk
-	@param sword
-*/
 int atk_Player(int vida, int crit, int atk, int sword){
 	srand(time(NULL));
 	int x=rand()%10;
@@ -594,12 +494,6 @@ int atk_Player(int vida, int crit, int atk, int sword){
 }
 
 
-/** \brief Função do ataque especial "Bola de Fogo".
-
-	A função faz com que todos os monstros possam ser atacados, independentemente da posição do jogador. Este ataque tem um custo de mana.
-	@param e
-	@param *nomef
-*/
 void bola_Fogo(ESTADO e, char *nomef){
 	int acao=20, i=0;
 
@@ -621,12 +515,6 @@ void bola_Fogo(ESTADO e, char *nomef){
 }
 
 
-/** \brief Função do movimento especial "Flash".
-
-	A função permite ao jogador movimentar-se mais casas do que o normal. Este movimento tem um custo de mana.
-	@param e
-	@param *nomef
-*/
 void mov_Flash(ESTADO e, char *nomef){
 	int acao=22;
 
@@ -653,11 +541,6 @@ void mov_Flash(ESTADO e, char *nomef){
 } 
 
 
-/** \brief Função do ataque especial "Espada Giratória".  (!!!!!!!!!!!!!!!!!!!!!!!!!!!!! nao é isto que ela faz)
-
-	A função faz com que todos os monstro dentro do range sejam atacados.
-	@param *nomef
-*/
 void espada_giratoria(char *nomef){
 	int acao=18;
 
@@ -669,11 +552,7 @@ void espada_giratoria(char *nomef){
 }
 
 
-/** \brief Função do movimento especial "Dormir".  (!!!!!!!!!!!!!!!!!!!!!!!!!!!!! nao é isto que ela faz)
 
-	A função faz com que o jogador durma e restaure vida e mana.
-	@param *nomef
-*/
 void dormir (char *nomef){
 	int acao=45;
 
@@ -684,45 +563,27 @@ void dormir (char *nomef){
 }
 
 
-/** \brief Função que imprime todas as imagens inanimadas dentro do jogo.
-
-	@param px
-	@param py
-	@param *imagem
-*/
 void print_image(int px, int py, char *imagem){
 	if(px%2==0) printf("<image x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70+35, imagem); 
 	else printf("<image x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70, imagem);
 } 
 
 
-/** \brief Função que imprime todas as imagens animadas dentro do jogo.
 
-	@param px
-	@param py
-	@param *imagem
-	@param jog
-*/
-void print_imageID(int px, int py, char *imagem, int jog){
-	if(jog==-1)
+void print_imageID(int px, int py, char *imagem, int jogador){
+	if(jogador==-1)
 		if(px%2==0) {
 			printf("<image id=jog x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70+35, imagem);
 		}
 		else printf("<image id=jog x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", px*60, py*70, imagem);
 	else 
 		if(px%2==0) {
-			printf("<image id=%d x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", jog, px*60, py*70+35, imagem);
+			printf("<image id=%d x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", jogador, px*60, py*70+35, imagem);
 		}
-		else printf("<image id=%d x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", jog, px*60, py*70, imagem);
+		else printf("<image id=%d x=%d y=%d width=80 height=70 xlink:href=\"%s\"/>\n", jogador, px*60, py*70, imagem);
 } 
 
 
-/** \brief Função que o jogador e os seus possíveis movimentos.
-
-	@param e
-	@param acao
-	@param *nomef
-*/
 void print_player(ESTADO e, int acao, char *nomef){
 	print_imageID(e.jog.x, e.jog.y, PLAYER,-1);
 	if(e.jog.x%2==0){
@@ -763,22 +624,6 @@ void print_enemy(ESTADO e){
 	}
 }
 
-
-/** \brief NÃO É USADA?!?!?!?!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-*/
-void print_enemy_specific(int x, int y, int tipo){
-	if (tipo==1) print_image(x, y, ENEMY);
-	else if (tipo==2) print_image(x, y, ENEMY2);
-	else if (tipo==3) print_image(x, y, ENEMY3);
-	else print_image(x, y, ENEMY3);
-}
-
-
-/** \brief Função que imprime o range de todos os inimigos.
-
-	@param e
-*/
 void print_rangeEnemy(ESTADO e){
 	int i, x, y,px,py;
 
@@ -819,10 +664,6 @@ void print_rangeEnemy(ESTADO e){
 }
 
 
-/** \brief Função que imprime todos os obstáculos do jogo.
-
-	@param e
-*/
 void print_wall(ESTADO e){
 	int i;
 
@@ -834,40 +675,38 @@ void print_wall(ESTADO e){
 }
 
 
-/** \brief Função que imprime a porta para o próximo nível.
-
-	@param e
-*/
 void print_door(ESTADO e){ 
 	print_image(e.door.x, e.door.y, DOOR);
 }
 
 
-/** \brief ???????????????????????
-
-	@param i
-	@param e
-*/
 void print_specific_item(int i, ESTADO e){ 
-	if (e.inimigo[i].visivel==1){
-		if (e.inimigo[i].item==0) print_image(e.inimigo[i].x, e.inimigo[i].y, SCORE_5);
-		if (e.inimigo[i].item==1) print_image(e.inimigo[i].x, e.inimigo[i].y, SCORE_10);
-		if (e.inimigo[i].item==2) print_image(e.inimigo[i].x, e.inimigo[i].y, SCORE_25);
-		if (e.inimigo[i].item==3) print_image(e.inimigo[i].x, e.inimigo[i].y, VIDADROP);
-		if (e.inimigo[i].item==4) print_image(e.inimigo[i].x, e.inimigo[i].y, MANADROP);
-		if (e.inimigo[i].item==5) print_image(e.inimigo[i].x, e.inimigo[i].y, SWORD);
-		if (e.inimigo[i].item==6) print_image(e.inimigo[i].x, e.inimigo[i].y, CRIT);
-		if (e.inimigo[i].item==7) print_image(e.inimigo[i].x, e.inimigo[i].y, SWORD_PU);
-		if (e.inimigo[i].item==8) print_image(e.inimigo[i].x, e.inimigo[i].y, SHIELD_PU);
-
+	int posx, posy, item=-1;
+	if (i==(-1)){
+		posx=e.treasure.x;
+		posy=e.treasure.y;
+		item=e.item.tipo;
 	}
-} 
+	else if(e.inimigo[i].visivel==1){
+		posx=e.inimigo[i].x;
+		posy=e.inimigo[i].y;
+		item=e.inimigo[i].item;
+	}
+
+	if (item==0) print_image(posx, posy, SCORE_5);
+	if (item==1) print_image(posx, posy, SCORE_10);
+	if (item==2) print_image(posx, posy, SCORE_25);
+	if (item==3) print_image(posx, posy, VIDADROP);
+	if (item==4) print_image(posx, posy, MANADROP);
+	if (item==5) print_image(posx, posy, SWORD);
+	if (item==6) print_image(posx, posy, CRIT);
+	if (item==7) print_image(posx, posy, SWORD_PU);
+	if (item==8) print_image(posx, posy, SHIELD_PU);
+
+}
+ 
 
 
-/** \brief ???????????????????????
-
-	@param e
-*/
 void print_item(ESTADO e){
 	int i;
 
@@ -876,43 +715,19 @@ void print_item(ESTADO e){
 }
 
 
-/** \brief Função que imprime o tesouro.
-
-	@param e
-*/
 void print_treasure(ESTADO e){
 	if (e.treasure.visivel==1) print_image(e.treasure.x, e.treasure.y, TREASURE);
+	else if(e.item.visivel==1) print_specific_item(-1,e);
 }
 
 
-/** \brief ???????????????????????
 
-	@param e
-
-*/
-void print_treasure_item(ESTADO e){ // e se pusessemos esta dentro da print_item ?!?!?!?!?!?!
-	if(e.item.visivel==1){
-		if (e.item.tipo==0) print_image(e.item.x, e.item.y, SCORE_5);
-		if (e.item.tipo==1) print_image(e.item.x, e.item.y, SCORE_10);
-		if (e.item.tipo==2) print_image(e.item.x, e.item.y, SCORE_25);
-		if (e.item.tipo==3) print_image(e.item.x, e.item.y, VIDADROP);
-		if (e.item.tipo==4) print_image(e.item.x, e.item.y, MANADROP);
-		if (e.item.tipo==5) print_image(e.item.x, e.item.y, SWORD);
-		if (e.item.tipo==6) print_image(e.item.x, e.item.y, CRIT);
-		if (e.item.tipo==7) print_image(e.item.x, e.item.y, SWORD_PU);
-		if (e.item.tipo==8) print_image(e.item.x, e.item.y, SHIELD_PU);
-	}
-}
-
-
-/** \brief Função que o menu de jogo. (talvez mudar nome??????????????????????) */   
-void print_menu(ESTADO e){
+void print_menu_lateral(ESTADO e){
 	if (e.nivel<=5) printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", MENU);
 	else printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", MENU2);
 }
 
 
-/** \brief Função que imprime o menu quando o jogador morre. */
 void print_dead_screen(char *nomef){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", DEAD);
 
@@ -922,10 +737,6 @@ void print_dead_screen(char *nomef){
 }
 
 
-/** \brief Função que imprime o menu de Top Scores.
-
-	@param *nomef
-*/
 void print_score_screen(char *nomef){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", TITLE);
 
@@ -935,10 +746,6 @@ void print_score_screen(char *nomef){
 }
 
 
-/** \brief Função que imprime as Stats (vida, mana, nível, ataque, crítico e score) do jogador.
-
-	@param e
-*/
 void print_stats(ESTADO e){
 	int i;
 
@@ -955,11 +762,6 @@ void print_stats(ESTADO e){
 	printf("<text x=877 y=242 font-family=Verdana font-size=22 fill=white> %d </text> \n", e.score); // Score
 }
 
-
-/** \brief Função que imprimi o ecrã inicial do jogo.
-
-	@param *nomef
-*/
 void print_start(char *nomef){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", TITLE);
 
@@ -973,33 +775,17 @@ void print_start(char *nomef){
 }
 
 
-/** \brief Função que imprime as casas livres para onde o jogador se pode mover.
-
-	@param e
-	@param px
-	@param py
-*/ 
 void print_rangeMov(ESTADO e, int px, int py){
 	if(casaLivre(e, px, py)==1) print_image(px, py, RANGEMOV);
 } 
 
 
-/** \brief Função que imprime as casas com monstro que o jogador pode atacar.
 
-	@param e
-	@param px
-	@param py
-*/ 
 void print_rangeAttack (ESTADO e, int px, int py){
 	if(isEnemy(e, px, py)!=(-1)) print_image(px, py, RANGEATTACK);
 }
 
 
-/** \brief Função que imprime o inventário do jogador.
-
-	@param e
-	@param *nomef
-*/ 
 void print_inventory(ESTADO e, char *nomef){
 	int i=0, acao;
 
@@ -1037,55 +823,42 @@ void print_inventory(ESTADO e, char *nomef){
 	}
 }
 
-
-/** \brief Função que imprime as animações do movimento do jogador ou dos inimigos.
-
-	@param x
-	@param y
-	@param px
-	@param py
-	@param id
-*/ 
-void print_animation(int x,int y, int px, int id){
+ 
+void print_animation(int difx,int dify, int posx, int id){
 	if(id==-1)
-		if((x==0&&y==-1)||(x==0&&y==1))
-			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", 0, -(70*y));
-		else if(x==1&&y==1)
+		if((difx==0&&dify==-1)||(difx==0&&dify==1))
+			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", 0, -(70*dify));
+		else if(difx==1&&dify==1)
 			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", -60, -35);
-		else if(x==-1&&y==-1)
+		else if(difx==-1&&dify==-1)
 			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", 60, 35);
-		else if(x==-1&&y==1)
+		else if(difx==-1&&dify==1)
 			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", 60, -35);
-		else if(x==1&&y==-1)
+		else if(difx==1&&dify==-1)
 			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", -60, 35);
-		else if(px%2==0)
-			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", -(60*x), -35);
+		else if(posx%2==0)
+			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", -(60*difx), -35);
 		else 
-			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", -(60*x), 35);
+			printf("<animateMotion xlink:href=#jog dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", -(60*difx), 35);
 	else
-		if((x==0&&y==-1)||(x==0&&y==1))
-			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, 0, -(70*y));
-		else if(x==1&&y==1)
+		if((difx==0&&dify==-1)||(difx==0&&dify==1))
+			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, 0, -(70*dify));
+		else if(difx==1&&dify==1)
 			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, -60, -35);
-		else if(x==-1&&y==-1)
+		else if(difx==-1&&dify==-1)
 			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, 60, 35);
-		else if(x==-1&&y==1)
+		else if(difx==-1&&dify==1)
 			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, 60, -35);
-		else if(x==1&&y==-1)
+		else if(difx==1&&dify==-1)
 			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, -60, 35);
-		else if(px%2==0)
-			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, -(60*x), -35);
+		else if(posx%2==0)
+			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, -(60*difx), -35);
 		else 
-			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, -(60*x), 35);
+			printf("<animateMotion xlink:href=#%d dur=0.5s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, -(60*difx), 35);
 }
 
 
-/** \brief Função que imprime o tabuleiro de jogo.
 
-	@param e
-	@param px
-	@param py
-*/ 
 void print_board(ESTADO e){ 
 	int x, y;
 	if(e.nivel<=5){
@@ -1102,12 +875,7 @@ void print_board(ESTADO e){
 	}
 }
 
-
-/** \brief Função que imprime hexagonos como hiperligações.
-
-	@param x
-	@param y
-*/ 
+ 
 void print_hex(int x, int y){
 	if(x%2==1) {
 		printf("<polygon points='%d,%d %d,%d %d,%d %d,%d %d,%d %d,%d' fill=%s stroke=%s opacity='0'/> \n", 20+60*x,70*y,60+60*x,70*y,80+60*x,35+70*y,60+60*x,70+70*y,20+60*x,70+70*y,60*x,35+70*y,"green","purple");	
@@ -1118,11 +886,6 @@ void print_hex(int x, int y){
 }
 
 
-/** \brief Função que guarda o estado num ficheiro.
-
-	@param e
-	@param *nomef
-*/ 
 void guardar_estado(ESTADO e, char *nomef){ // no fim do parser guardar_estado(e, nomef)
 	char path[200];
 	FILE *fp;
@@ -1138,11 +901,6 @@ void guardar_estado(ESTADO e, char *nomef){ // no fim do parser guardar_estado(e
 	}
 }
 
-
-/** \brief Função que lê o estado a partir de um ficheiro.
-
-	@param *nomef
-*/ 
 ESTADO ler_estado(char *nomef){
 	ESTADO e;
 	char path[200];
@@ -1166,21 +924,12 @@ ESTADO ler_estado(char *nomef){
 }
 
 
-/** \brief Função que mostra ao jogador que não tem mana para realizar a ação.
-
-	@param e
-*/ 
 void print_noMana(){
 
 	printf("<image id=noMana x=788 y=107 xlink:href=\"%s\"/>\n", NO_MANA);
 	printf("<animate xlink:href=#noMana attributeName='opacity' to='0' dur='1.2s' begin='0s' fill='freeze' /> \n");	
 }
 
-
-/** \brief Função que desenha o menu após o jogador ter acabado o jogo.
-
-	@param score - Pontuação final do jogador
-*/ 
 void print_end_game(int score, char *nomef){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", END_SCREEN);
 	printf("<text x=500 y=500 font-family=Verdana font-size=64 stroke= black fill=white> %d </text> \n",score);
@@ -1190,17 +939,15 @@ void print_end_game(int score, char *nomef){
 	printf("</a>\n");
 }
 
-/** \brief Função que processa as várias ações do jogo.
-
-	@param e
-	@param acao
-	@param *nomef
-	@param numI
-*/ 
+ 
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
+<<<<<<< HEAD
 	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,0);
+=======
+	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,1);
+>>>>>>> 31bc567c89e98a7a9ca5ac697879bbc7c872e008
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
@@ -1401,28 +1148,22 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 }	
 
 
-/** \brief Função que processa o movimento do jogador
+ESTADO processar_mov(ESTADO e, int posx, int posy){
+	int i,difx,dify;
 
-	@param e
-	@param px
-	@param py
-*/ 
-ESTADO processar_mov(ESTADO e, int px, int py){
-	int i,x,y;
-
-	if (casaLivre(e, px, py)==1){
-		x=px-e.jog.x,y=py-e.jog.y;
-		e.jog.x=px;
-		e.jog.y=py;
-		print_animation(x,y,px,-1);
+	if (casaLivre(e, posx, posy)==1){
+		difx=posx-e.jog.x,dify=posy-e.jog.y;
+		e.jog.x=posx;
+		e.jog.y=posy;
+		print_animation(difx,dify,posx,-1);
 	}
-	else if(isItem(e, px, py)!=(-1)){
-		i=isItem(e, px, py);
+	else if(isItem(e, posx, posy)!=(-1)){
+		i=isItem(e, posx, posy);
 		e=catchItem(e.inimigo[i].item, e);
 		e.inimigo[i].visivel=0;
 	}
-	else if(isEnemy(e, px, py)!=(-1)){ 
-		i=isEnemy(e, px, py);
+	else if(isEnemy(e, posx, posy)!=(-1)){ 
+		i=isEnemy(e, posx, posy);
 		e.inimigo[i].vida=atk_Player(e.inimigo[i].vida, e.jog.crit, e.jog.atk, e.jog.powerUp_sword);
 		if(e.inimigo[i].vida==0){
 			e.score+=5;
@@ -1431,12 +1172,12 @@ ESTADO processar_mov(ESTADO e, int px, int py){
 			if (e.inimigo[i].item<24) e.inimigo[i].visivel=1;
 		}
 	}
-	else if(px==e.treasure.x && py==e.treasure.y && e.treasure.visivel==1){
-		e=itemTesouro(e, px, py);
+	else if(posx==e.treasure.x && posy==e.treasure.y && e.treasure.visivel==1){
+		e=itemTesouro(e, posx, posy);
 		e.treasure.visivel=0;
 		e.item.visivel=1;
 	}
-	else if(px==e.item.x && py==e.item.y && e.item.visivel==1){
+	else if(posx==e.item.x && posy==e.item.y && e.item.visivel==1){
 		e.item.visivel=0;
 		e=catchItem(e.item.tipo, e);
 	}
@@ -1444,8 +1185,7 @@ ESTADO processar_mov(ESTADO e, int px, int py){
 
 	return e;
 }
-
-/** \brief ???????????????????????????????? */ 
+ 
 void parser(){
 	ESTADO e={0};
     int num,acao, i=0, j;
@@ -1478,7 +1218,7 @@ void parser(){
 		print_score();
 	}
 	else if(e.jog.vida>0){ // e.screen==1
-		print_menu(e); 
+		print_menu_lateral(e); 
 		print_board(e);
 		print_wall(e);
 		print_item(e);
@@ -1492,7 +1232,6 @@ void parser(){
 		opcaoRange(nomef);
 		selectRange(e,nomef);
 		print_treasure(e);
-		print_treasure_item(e);
 		print_door(e);
 		print_player(e, acao, nomef);
 		print_inventory(e, nomef);

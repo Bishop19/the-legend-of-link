@@ -57,42 +57,412 @@
 
 
 
-void print_door(ESTADO e);
-void print_rangeMov(ESTADO e, int px, int py);
-int casaLivre (ESTADO e, int x, int y);
-void parser();
+/**
+@file parser.c
+Definição do estado e das funções que convertem estados em strings e vice-versa
+*/
+
+
+/** \brief ????????????????????????????????????????????
+
+	@param nivel 
+	@param px
+	@param py
+	@param score
+	@param vida
+	@param mana
+	@param atk
+	@param crit
+	@param vida_potion
+	@param mana_potion
+	@param sword
+	@param shield
+	@param screen
+*/ 
+ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int atk, int crit, int vida_potion, int mana_potion, int sword, int shield, int screen);
+
+/** \brief Função que movimenta o jogador.
+
+	Os vários tipos de movimento do jogador são mover-se para uma casa livre, atacar um inimigo que esteja no range, apanhar um item ou avançar
+	de nível.
+	@param e
+	@param difx posição
+	@param dify posição
+	@param *nomef
+	@param acao 
+*/
 void print_move(ESTADO e, int difx, int dify, char *nomef, int acao);
-void print_rangeAttack(ESTADO e, int px, int py);
+
+/** \brief Função que move os inimigos.
+
+	O movimento dos inimigos é feito conforme a posição do jogador e o estado do tabuleiro (onde se situa a porta e o tesouro).
+	@param newE
+*/
 ESTADO enemyMove(ESTADO newE);
-int isEnemy (ESTADO e, int px, int py);
-void print_image(int px, int py, char *imagem);
-void print_treasure(ESTADO e);
-int scoreTesouro ();
-int tipoInimigo(int nivel, int x);
-void print_enemy(ESTADO e);
-void print_item(ESTADO e);
+
+/** \brief Função que determina se o jogador está em range do ataque do inimigo.
+
+	Conforme o tipo do inimigo (meelee ou ranged) é determinado se o jogador está no range para ser atacado.
+	@param e Estado do jogo.
+	@param i Índice do inimigo.
+*/
 int inRange(ESTADO e, int i);
-void print_enemy_specific(int x, int y, int tipo);
-void print_item(ESTADO e);
-int itemInimigo(int rand);
-ESTADO itemTesouro (ESTADO e, int x, int y);
-void print_treasure_item(ESTADO e);
-ESTADO catchItem(int item, ESTADO e);
+
+/** \brief Função que determina se uma casa do tabuleiro de jogo está livre.
+
+	A função retorna 0 caso esteja ocupada, ou seja, caso contenha um monstro, um obstáculo, um item, o tesouro, a porta ou o próprio jogador.
+	@param e
+	@param x posição
+	@param y posição
+*/
+int casaLivre (ESTADO e, int x, int y);
+
+/** \brief Função que verifica qual o índice do monstro numa casa.
+
+	A função retorna o índice do monstro na posição (x,y) do tabuleiro. Caso não esteja nenhum monstro a função retorna -1.
+	@param e
+	@param x posição
+	@param y posição
+*/
+int isEnemy (ESTADO e, int x, int y);
+
+/** \brief Função que verifica qual o índice da parede numa casa.
+
+	A função retorna o índice da parede na posição (x,y) do tabuleiro. Caso não esteja nenhuma parede a função retorna -1.
+	@param e
+	@param x posição
+	@param y posição
+*/
+int isWall (ESTADO e, int x, int y);
+
+/** \brief Função que verifica se uma casa tem item.
+
+	A função retorna o índice do monstro que deixou o item na posição (x,y) do tabuleiro. 
+	Caso não esteja nenhum item a função retorna -1.
+	@param e
+	@param px posição
+	@param py posição
+*/
 int isItem (ESTADO e, int px, int py);
-void print_specific_item(int i, ESTADO e);
-void print_rangeEnemy(ESTADO e);
-int atk_Player(int vida, int crit, int atk, int sword);
-void print_lama(ESTADO e);
-void opcaoVida(char *nomef);
-void print_enemy_vida(ESTADO e);
+
+/** \brief Função que atribui o ataque do inimigo.
+
+	A função atribui, conforme o tipo do inimigo, o seu ataque.
+	@param tipo
+*/
 int atk_Inimigo(int tipo);
+
+/** \brief Função que atribui a vida do inimigo.
+
+	A função atribui, conforme o tipo do inimigo, a sua vida.
+	@param tipo
+*/
 int vida_Inimigo(int tipo);
+
+/** \brief Função que atribui o item do tesouro.
+
+	A função, através de um número pseudo-aleatório, determina o item que o tesouro contem.
+	@param e
+	@param x
+	@param y
+
+*/
+ESTADO itemTesouro (ESTADO e, int x, int y);
+
+/** \brief Função que apanha um item.
+
+	A função altera o estado do jogador (vida, mana, ataque, crítico ou o inventário) conforme o item na posição (x,y).
+	@param e
+	@param x
+	@param y
+
+*/
+ESTADO catchItem(int item, ESTADO e);
+
+/** \brief Função que atribui o tipo de um inimigo.
+
+	A função atribui, conforme um número pseudo-aleatório, o tipo do inimigo.
+	@param nivel
+	@param randNum
+*/
+int tipoInimigo(int nivel, int randNum);
+
+/** \brief Função que atribui o item deixado por um inimigo.
+
+	A função atribui, conforme um número pseudo-aleatório, o item deixado por um inimigo. 
+	A probabilidade de um inimigo deixar um item é de 30%.
+	@param rand
+*/
+int itemInimigo(int randNum);
+
+/** \brief Função que funciona como interruptor para a ajuda de mostrar a vida dos inimigos.
+ 
+	@param *nomef
+*/
+void opcaoVida(char *nomef);
+
+/** \brief Função que mostra a vida dos inimigos.
+
+	A função imprime no jogo a vida de todos os inimigos. Caso o inimigo seja um Boss também imprime um símbolo para o sinalizar.
+	@param e
+*/
+void print_enemy_vida(ESTADO e);
+
+/** \brief Função que funciona como interruptor para a ajuda de mostrar o range dos inimigos.
+ 
+	@param *nomef
+*/
+void opcaoRange(char *nomef);
+
+/** \brief Função que permiter selecionar um inimigo fora de alcance de ataque e mostrar o seu range de ataque.
+
+	@param e
+	@param *nomef
+*/
+void selectRange(ESTADO e, char *nomef);
+
+/** \brief Função determina a vida de um inimigo após o ataque do jogador.
+
+	A função determina a vida final do monstro atacado após calcular o ataque do jogador (que varia com a percentagem de crítico e o power up).
+	@param vida
+	@param crit
+	@param atk
+	@param sword
+*/
+int atk_Player(int vida, int crit, int atk, int sword);
+
+/** \brief Função do ataque especial "Bola de Fogo".
+
+	A função faz com que todos os monstros possam ser atacados, independentemente da posição do jogador. Este ataque tem um custo de mana.
+	@param e
+	@param *nomef
+*/
+void bola_Fogo(ESTADO e, char *nomef);
+
+/** \brief Função do movimento especial "Flash".
+
+	A função permite ao jogador movimentar-se mais casas do que o normal. Este movimento tem um custo de mana.
+	@param e
+	@param *nomef
+*/
+void mov_Flash(ESTADO e, char *nomef);
+
+/** \brief Função do ataque especial "Espada Giratória".  (!!!!!!!!!!!!!!!!!!!!!!!!!!!!! nao é isto que ela faz)
+
+	A função faz com que todos os monstro dentro do range sejam atacados.
+	@param *nomef
+*/
+void espada_giratoria(char *nomef);
+
+/** \brief Função do movimento especial "Dormir".  (!!!!!!!!!!!!!!!!!!!!!!!!!!!!! nao é isto que ela faz)
+
+	A função faz com que o jogador durma e restaure vida e mana.
+	@param *nomef
+*/
+void dormir (char *nomef);
+
+/** \brief Função que imprime uma imagem dadas as suas coordenadas.
+
+	@param px
+	@param py
+	@param *imagem
+*/
+void print_image(int px, int py, char *imagem);
+
+/** \brief Função que imprime imagens atribuindo-lhes um ID.
+
+	@param px
+	@param py
+	@param *imagem
+	@param jog
+*/
+void print_imageID(int px, int py, char *imagem, int jogador);
+
+/** \brief Função que o jogador e os seus possíveis movimentos.
+
+	@param e
+	@param acao
+	@param *nomef
+*/
+void print_player(ESTADO e, int acao, char *nomef);
+
+/** \brief Função que imprime todos os inimigos.
+
+	@param e
+*/
+void print_enemy(ESTADO e);
+
+/** \brief Função que imprime o range de todos os inimigos.
+
+	@param e
+*/
+void print_rangeEnemy(ESTADO e);
+
+/** \brief Função que imprime todos os obstáculos do jogo.
+
+	@param e
+*/
+void print_wall(ESTADO e);
+
+/** \brief Função que imprime a porta para o próximo nível.
+
+	@param e
+*/
+void print_door(ESTADO e);
+
+/** \brief Função que imprime o item dropado por um inimigo.
+
+	@param i - índice do inimigo que continha o item.
+	@param e - Estado atual do jogo.
+*/
+void print_specific_item(int i, ESTADO e);
+
+/** \brief Função que imprime todos os items existentes num dado estado de jogo.
+
+	@param e - Estado atual do jogo.
+*/
+void print_item(ESTADO e);
+
+/** \brief Função que imprime o tesouro.
+
+	@param e
+*/
+void print_treasure(ESTADO e);
+
+/** \brief Função que o menu lateral de jogo.  */   
+void print_menu_lateral(ESTADO e);
+
+/** \brief Função que imprime o menu quando o jogador morre. */
+void print_dead_screen(char *nomef);
+
+/** \brief Função que imprime o menu de Top Scores.
+
+	@param *nomef
+*/
+void print_score_screen(char *nomef);
+
+/** \brief Função que imprime as Stats (vida, mana, nível, ataque, crítico e score) do jogador.
+
+	@param e
+*/
+void print_stats(ESTADO e);
+
+/** \brief Função que imprimi o ecrã inicial do jogo.
+
+	@param *nomef
+*/
+void print_start(char *nomef);
+
+/** \brief Função que imprime as casas livres para onde o jogador se pode mover.
+
+	@param e
+	@param px
+	@param py
+*/ 
+void print_rangeMov(ESTADO e, int px, int py);
+
+/** \brief Função que imprime as casas com monstro que o jogador pode atacar.
+
+	@param e
+	@param px
+	@param py
+*/ 
+void print_rangeAttack (ESTADO e, int px, int py);
+
+/** \brief Função que imprime o inventário do jogador.
+
+	@param e
+	@param *nomef
+*/ 
+void print_inventory(ESTADO e, char *nomef);
+
+/** \brief Função que imprime as animações do movimento do jogador ou dos inimigos.
+
+	@param x
+	@param y
+	@param px
+	@param py
+	@param id
+*/ 
+void print_animation(int difx,int dify, int posx, int id);
+
+/** \brief Função que imprime o tabuleiro de jogo.
+
+	@param e
+	@param px
+	@param py
+*/ 
+void print_board(ESTADO e);
+
+/** \brief Função que imprime hexagonos transparentes como hiperligações.
+
+	@param x
+	@param y
+*/ 
 void print_hex(int x, int y);
-ESTADO processar_mov(ESTADO e, int px, int py);
-ESTADO processar_acao(ESTADO e,int acao, char *nomef, int numI);
+
+/** \brief Função que guarda o estado num ficheiro.
+
+	@param e
+	@param *nomef
+*/ 
 void guardar_estado(ESTADO e, char *nomef);
+
+/** \brief Função que lê o estado a partir de um ficheiro.
+
+	@param *nomef
+*/ 
 ESTADO ler_estado(char *nomef);
+<<<<<<< HEAD
 void print_animation(int x,int y, int px, int id);
 int isWall (ESTADO e, int x, int y);
 void print_bolaFogo_animation(int x, int y);
+=======
+
+
+/** \brief Função que mostra ao jogador que não tem mana para realizar a ação.
+
+	@param e
+*/ 
+void print_noMana();
+
+/** \brief Função que desenha o menu após o jogador ter acabado o jogo.
+
+	@param score - Pontuação final do jogador
+*/ 
+void print_end_game(int score, char *nomef);
+
+
+/** \brief Função que processa as várias ações do jogo.
+
+	@param e
+	@param acao
+	@param *nomef
+	@param numI
+*/ 
+ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI);
+
+
+/** \brief Função que processa o movimento do jogador
+
+	@param e
+	@param px
+	@param py
+*/ 
+ESTADO processar_mov(ESTADO e, int posx, int posy);
+
+void parser();
+
+
+
+
+	
+
+
+
+
+
+
+
+>>>>>>> 31bc567c89e98a7a9ca5ac697879bbc7c872e008
 #endif
