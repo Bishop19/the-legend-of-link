@@ -53,6 +53,7 @@
 #define DEAD "http://127.0.0.1/imagens/dead_screen.png"
 #define NO_MANA "http://127.0.0.1/imagens/no_mana.png"
 #define END_SCREEN "http://127.0.0.1/imagens/end_screen.png"
+#define BOLA_FOGO "http://127.0.0.1/imagens/vida.png"
 
 
 
@@ -93,5 +94,5 @@ void guardar_estado(ESTADO e, char *nomef);
 ESTADO ler_estado(char *nomef);
 void print_animation(int x,int y, int px, int id);
 int isWall (ESTADO e, int x, int y);
-
+void print_bolaFogo_animation(int x, int y);
 #endif

@@ -1174,7 +1174,6 @@ void print_noMana(){
 
 	printf("<image id=noMana x=788 y=107 xlink:href=\"%s\"/>\n", NO_MANA);
 	printf("<animate xlink:href=#noMana attributeName='opacity' to='0' dur='1.2s' begin='0s' fill='freeze' /> \n");	
-	// printf("<animate xlink:href=#noMana attributeName='Transform' type='scale' to='1.5' dur='1.2s' begin='0s' fill='freeze' /> \n");	
 }
 
 
@@ -1201,7 +1200,7 @@ void print_end_game(int score, char *nomef){
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-	if (acao==0 || acao==10) e=inicializar(10,0,0,0,10,10,1,0,1,1,1,1,0);
+	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,0);
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
@@ -1311,7 +1310,7 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 			}
 			e.jog.mana-=3;
 			e=enemyMove(e);
-			e.bolaFogo=0;
+			e.bolaFogo=2;
 		}
 		else if(acao==22){
 			if(e.jog.mana>=2) e.flash=abs(e.flash-1);
@@ -1397,6 +1396,7 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 			else e.jog.mana=10;
 		}
 	}
+	e.ind_inimigo=numI;
 	return e;
 }	
 
@@ -1508,10 +1508,38 @@ void parser(){
 			print_noMana();
 			e.noMana=0;
 		}
+		if (e.bolaFogo==2){
+			print_bolaFogo_animation(e.inimigo[e.ind_inimigo].x, e.inimigo[e.ind_inimigo].y);
+			e.bolaFogo=0;
+		}
 	}
 	else{
 		guardar_Score(nomef, e.score);
 		print_dead_screen(nomef);
 	}
 	guardar_estado(e, nomef);	
+}
+
+
+
+void print_bolaFogo_animation(int x, int y){ // acho que falta centrar pois no html desenha a partir do (0,0)
+	/* int difx = xJog-xIni;
+	int dify = yJog-yIni;
+	float tempox = abs(difx*0.15);
+	float tempoy = abs(dify*0.15); */
+
+	print_imageID(x, y, BOLA_FOGO, 20);
+	printf("<animate xlink:href=#20 attributeName='opacity' to='0' dur='1.2s' begin='0s' fill='freeze' /> \n");	
+	//printf("<animateTransform xlink:href=#20 attributeName='transform' type='scale' from='20 20' to='1 1' begin='0s' dur='6s' repeatCount='0' fill='freeze'/> \n");
+/*
+	if(xJog%2==0 && xIni%2==0)
+		printf("<animateMotion xlink:href=#20 dur=%f begin=0s fill=freeze path='M%d,%d 0,0' /> \n", tempox+tempoy, difx*60, dify*70);
+	else if(xJog%2==0 && xIni%2==1)
+		printf("<animateMotion xlink:href=#20 dur=%f begin=0s fill=freeze path='M%d,%d 0,0' /> \n", tempox+tempoy, difx*60, dify*70-35);
+	else if(xJog%2==1 && xIni%2==0)
+		printf("<animateMotion xlink:href=#20 dur=%f begin=0s fill=freeze path='M%d,%d 0,0' /> \n", tempox+tempoy, difx*60, dify*70+35);
+	else if(xJog%2==1 && xIni%2==1)
+		printf("<animateMotion xlink:href=#20 dur=%f begin=0s fill=freeze path='M%d,%d 0,0' /> \n", tempox+tempoy, difx*60, dify*70);
+*/
+
 }
