@@ -413,11 +413,6 @@ void guardar_estado(ESTADO e, char *nomef);
 	@param *nomef
 */ 
 ESTADO ler_estado(char *nomef);
-<<<<<<< HEAD
-void print_animation(int x,int y, int px, int id);
-int isWall (ESTADO e, int x, int y);
-void print_bolaFogo_animation(int x, int y);
-=======
 
 
 /** \brief Função que mostra ao jogador que não tem mana para realizar a ação.
@@ -455,14 +450,9 @@ void parser();
 
 
 
-
-	
-
-
-
+void print_animation(int x,int y, int px, int id);
+int isWall (ESTADO e, int x, int y);
+void print_bolaFogo_animation(int x, int y);
 
 
-
-
->>>>>>> 31bc567c89e98a7a9ca5ac697879bbc7c872e008
 #endif

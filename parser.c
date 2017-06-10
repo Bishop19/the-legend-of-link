@@ -511,7 +511,13 @@ void bola_Fogo(ESTADO e, char *nomef){
 			printf("<image x=753 y=416 xlink:href=\"%s\"/>\n", SQUARE_LINK);
 	printf("</a>\n");
 	printf("<text x=754 y=453 font-family=Verdana font-size=9 fill=white> %d </text> \n", 3);
+}
 
+
+void print_bolaFogo_animation(int x, int y){
+
+	print_imageID(x, y, BOLA_FOGO, 20);
+	printf("<animate xlink:href=#20 attributeName='opacity' to='0' dur='1.2s' begin='0s' fill='freeze' /> \n");	
 }
 
 
@@ -548,12 +554,15 @@ void espada_giratoria(char *nomef){
 			printf("<image x=711 y=416 xlink:href=\"%s\"/>\n", SQUARE_LINK);
 	printf("</a>\n");
 	printf("<text x=712 y=453 font-family=Verdana font-size=9 fill=white> %d </text> \n", 2);
-
 }
 
 
+void print_espadaGiratoria_animation(){
+	printf("<animateTransform xlink:href=#jog attributeName='transform' begin='0s' dur='3s' type='rotate' to='360 0 0' repeatCount='0' fill='freeze'/> \n");
+}
 
-void dormir (char *nomef){
+
+void dormir(char *nomef){
 	int acao=45;
 
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
@@ -762,6 +771,7 @@ void print_stats(ESTADO e){
 	printf("<text x=877 y=242 font-family=Verdana font-size=22 fill=white> %d </text> \n", e.score); // Score
 }
 
+
 void print_start(char *nomef){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", TITLE);
 
@@ -943,11 +953,7 @@ void print_end_game(int score, char *nomef){
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-<<<<<<< HEAD
 	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,0);
-=======
-	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,1);
->>>>>>> 31bc567c89e98a7a9ca5ac697879bbc7c872e008
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
@@ -1251,34 +1257,12 @@ void parser(){
 			print_bolaFogo_animation(e.inimigo[e.ind_inimigo].x, e.inimigo[e.ind_inimigo].y);
 			e.bolaFogo=0;
 		}
+		if(acao==18) print_espadaGiratoria_animation();
+
 	}
 	else{
 		guardar_Score(nomef, e.score);
 		print_dead_screen(nomef);
 	}
 	guardar_estado(e, nomef);	
-}
-
-
-
-void print_bolaFogo_animation(int x, int y){ // acho que falta centrar pois no html desenha a partir do (0,0)
-	/* int difx = xJog-xIni;
-	int dify = yJog-yIni;
-	float tempox = abs(difx*0.15);
-	float tempoy = abs(dify*0.15); */
-
-	print_imageID(x, y, BOLA_FOGO, 20);
-	printf("<animate xlink:href=#20 attributeName='opacity' to='0' dur='1.2s' begin='0s' fill='freeze' /> \n");	
-	//printf("<animateTransform xlink:href=#20 attributeName='transform' type='scale' from='20 20' to='1 1' begin='0s' dur='6s' repeatCount='0' fill='freeze'/> \n");
-/*
-	if(xJog%2==0 && xIni%2==0)
-		printf("<animateMotion xlink:href=#20 dur=%f begin=0s fill=freeze path='M%d,%d 0,0' /> \n", tempox+tempoy, difx*60, dify*70);
-	else if(xJog%2==0 && xIni%2==1)
-		printf("<animateMotion xlink:href=#20 dur=%f begin=0s fill=freeze path='M%d,%d 0,0' /> \n", tempox+tempoy, difx*60, dify*70-35);
-	else if(xJog%2==1 && xIni%2==0)
-		printf("<animateMotion xlink:href=#20 dur=%f begin=0s fill=freeze path='M%d,%d 0,0' /> \n", tempox+tempoy, difx*60, dify*70+35);
-	else if(xJog%2==1 && xIni%2==1)
-		printf("<animateMotion xlink:href=#20 dur=%f begin=0s fill=freeze path='M%d,%d 0,0' /> \n", tempox+tempoy, difx*60, dify*70);
-*/
-
 }
