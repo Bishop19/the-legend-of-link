@@ -741,7 +741,7 @@ void print_dead_screen(char *nomef){
 
 
 void print_score_screen(char *nomef){
-	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", TITLE);
+	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", HIGHSCORE_SCREEN);
 
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, 42);
 		printf("<image x=830 y=535 xlink:href=\"%s\"/>\n", BACK_BUTTON);
@@ -935,7 +935,7 @@ void print_noMana(){
 
 void print_end_game(int score, char *nomef){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", END_SCREEN);
-	printf("<text x=500 y=500 font-family=Verdana font-size=64 stroke= black fill=white> %d </text> \n",score);
+	printf("<text x=420 y=350 font-family=Verdana font-size=80 stroke= black fill=white> %d </text> \n", score);
 
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, 44);
 		printf("<image x=830 y=535 xlink:href=\"%s\"/>\n", MENU_BUTTON1);
@@ -946,7 +946,7 @@ void print_end_game(int score, char *nomef){
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-	if (acao==0 || acao==10) e=inicializar(5,0,0,0,10,10,1,0,1,1,1,1,0);
+	if (acao==0 || acao==10) e=inicializar(10,0,0,0,10,10,1,0,1,1,1,1,0);
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;

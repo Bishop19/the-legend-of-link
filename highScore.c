@@ -69,11 +69,11 @@ void print_score(){
     fclose (high_score);
 
     // Imprime os scores
-    printf("<text x=200 y=%d font-family=Verdana font-size=50 fill=white stroke=black> %s </text> \n", 400, record[0].nome);
-    printf("<text x=400 y=%d font-family=Verdana font-size=50 fill=white stroke=black> %d </text> \n", 400, record[0].score);  
+    printf("<text x=200 y=%d font-family=Verdana font-size=60 fill=white stroke=black> %s </text> \n", 290, record[0].nome);
+    printf("<text x=600 y=%d font-family=Verdana font-size=60 fill=white stroke=black> %d </text> \n", 290, record[0].score);  
 
     for(i=1; i<5; i++){
-        printf("<text x=200 y=%d font-family=Verdana font-size=36 fill=white stroke=black> %s </text> \n", 400+38*i, record[i].nome);
-        printf("<text x=400 y=%d font-family=Verdana font-size=36 fill=white stroke=black> %d </text> \n", 400+38*i, record[i].score);
+        printf("<text x=220 y=%d font-family=Verdana font-size=45 fill=white stroke=black> %s </text> \n", 350+50*i, record[i].nome);
+        printf("<text x=580 y=%d font-family=Verdana font-size=45 fill=white stroke=black> %d </text> \n", 350+50*i, record[i].score);
     }
 }

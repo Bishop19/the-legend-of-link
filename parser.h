@@ -58,6 +58,7 @@ Funções responsaveis pelo funcionamento do jogo.
 #define DEAD "http://127.0.0.1/imagens/dead_screen.png"
 #define NO_MANA "http://127.0.0.1/imagens/no_mana.png"
 #define END_SCREEN "http://127.0.0.1/imagens/end_screen.png"
+#define HIGHSCORE_SCREEN "http://127.0.0.1/imagens/high_scores_screen.png"
 #define BOLA_FOGO "http://127.0.0.1/imagens/bolaFogo.png"
 #define MENU_BUTTON1 "http://127.0.0.1/imagens/menu_button1.png"
 #define MENU_BUTTON2 "http://127.0.0.1/imagens/menu_button2.png"
