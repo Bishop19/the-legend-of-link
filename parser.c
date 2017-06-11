@@ -65,6 +65,7 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 	aux=0;
 	if (e.nivel%5==0){ // cria boss
 		while(aux==0){
+			randNum=rand();
 			x=rand()%11; 
 			y=rand()%8;
 			if((casaLivre(e,x,y)==1) && (abs(e.door.x-x)+abs(e.door.y-y)>5) && (abs(e.jog.x-x)+abs(e.jog.y-y)>5)){
@@ -300,7 +301,7 @@ int isItem (ESTADO e, int px, int py){
 	int i,result=(-1);
 
 	for(i=0;i<e.num_inimigos && result==(-1) ;i++)
-		if(e.inimigo[i].x==px &&  e.inimigo[i].y == py && e.inimigo[i].visivel==1 && e.inimigo[i].item<24) result=i;
+		if(e.inimigo[i].x==px &&  e.inimigo[i].y == py && e.inimigo[i].visivel==1 && e.inimigo[i].item >=0 && e.inimigo[i].item<=8) result=i;
 	return result;
 }
 
@@ -949,7 +950,7 @@ void print_end_game(int score, char *nomef){
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-	if (acao==0 || acao==10) e=inicializar(10,0,0,0,20,10,1,0,1,1,1,1,1);
+	if (acao==0 || acao==10) e=inicializar(1,0,0,0,20,10,1,0,1,1,1,1,1);
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
@@ -1025,7 +1026,7 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 							e.inimigo[i].vida=0;
 							e.score+=5;
 							if(e.inimigo[numI].tipo==(4*(e.nivel/5))) e.score+=45;
-							e.inimigo[i].visivel=1;
+							if(e.inimigo[i].item<=8) e.inimigo[i].visivel=1;
 						}
 					else if( ((e.inimigo[i].vida>0) && (e.jog.x%2==0) && ( (e.jog.x==e.inimigo[i].x+1) || (e.jog.x==e.inimigo[i].x-1) ) && (e.jog.y==e.inimigo[i].y-1) && (abs(e.jog.x-e.inimigo[i].x)+abs(e.jog.y-e.inimigo[i].y)==2)) || 
 							 ((e.inimigo[i].vida>0) && (e.jog.x%2==1) && ( (e.jog.x==e.inimigo[i].x+1) || (e.jog.x==e.inimigo[i].x-1) ) && (e.jog.y==e.inimigo[i].y+1) && (abs(e.jog.x-e.inimigo[i].x)+abs(e.jog.y-e.inimigo[i].y)==2)) ){
@@ -1034,7 +1035,7 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 							e.inimigo[i].vida=0;
 							e.score+=5;
 							if(e.inimigo[numI].tipo==(4*(e.nivel/5))) e.score+=45;
-							e.inimigo[i].visivel=1;
+							if(e.inimigo[i].item<=8) e.inimigo[i].visivel=1;
 						}
 					}
 				}	
@@ -1055,7 +1056,7 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 				e.inimigo[numI].vida=0;
 				e.score+=5;
 				if(e.inimigo[numI].tipo==(4*(e.nivel/5))) e.score+=45;
-				e.inimigo[numI].visivel=1;
+				if(e.inimigo[i].item<=8) e.inimigo[numI].visivel=1;
 			}
 			e.jog.mana-=3;
 			e=enemyMove(e);
@@ -1171,7 +1172,7 @@ ESTADO processar_mov(ESTADO e, int posx, int posy){
 			e.score+=5;
 			if(e.inimigo[i].tipo==(4*(e.nivel/5))) e.score+=45;
 
-			if (e.inimigo[i].item<24) e.inimigo[i].visivel=1;
+			if (e.inimigo[i].item<=8) e.inimigo[i].visivel=1;
 		}
 	}
 	else if(posx==e.treasure.x && posy==e.treasure.y && e.treasure.visivel==1){
