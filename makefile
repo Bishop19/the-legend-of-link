@@ -13,5 +13,10 @@ $(EXEC):	$(OBJS)
 			sudo mkdir -p /var/www/html/estado
 			sudo chmod a+rw /var/www/html/estado
 
+doc:
+	doxygen -g
+	doxygen
+
+
 clean:		
-	rm	$(EXEC)	*.o
+	rm	-rf $(EXEC)	*.o Doxyfile latex html
