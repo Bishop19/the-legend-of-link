@@ -59,25 +59,26 @@
 
 /**
 @file parser.c
-Definição do estado e das funções que convertem estados em strings e vice-versa
+Funções responsaveis pelo funcionamento do jogo.
 */
 
 
-/** \brief ????????????????????????????????????????????
+/** \brief Função que cria um estado de jogo.
 
-	@param nivel 
-	@param px
-	@param py
-	@param score
-	@param vida
-	@param mana
-	@param atk
-	@param crit
-	@param vida_potion
-	@param mana_potion
-	@param sword
-	@param shield
-	@param screen
+	@param nivel - Nível a que o jogo se encontra.
+	@param px - Posição.
+	@param py - Posição.
+	@param score - Score atual do jogagor.
+	@param vida - Vida do jogador.
+	@param mana - Mana do jogador.
+	@param atk - Pontos de ataque do jogador.
+	@param crit - Percentagem de critical chance.
+	@param vida_potion - Número de poções de vida no inventário.
+	@param mana_potion - Número de poções de mana no inventário.
+	@param sword - Número de items do tipo "Sword" no inventário. 
+	@param shield - Número de items do tipo "Shield" no inventário.
+	@param screen - Momento em que o jogo se encontra.
+	@returns O novo estado de jogo.
 */ 
 ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int atk, int crit, int vida_potion, int mana_potion, int sword, int shield, int screen);
 
@@ -85,86 +86,90 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 
 	Os vários tipos de movimento do jogador são mover-se para uma casa livre, atacar um inimigo que esteja no range, apanhar um item ou avançar
 	de nível.
-	@param e
-	@param difx posição
-	@param dify posição
-	@param *nomef
-	@param acao 
+	@param e  Estado atual do jogo.
+	@param difx  Posição.
+	@param dify  Posição.
+	@param *nomef  Nome do Ficheiro.
 */
-void print_move(ESTADO e, int difx, int dify, char *nomef, int acao);
+void print_move(ESTADO e, int difx, int dify, char *nomef);
 
 /** \brief Função que move os inimigos.
 
 	O movimento dos inimigos é feito conforme a posição do jogador e o estado do tabuleiro (onde se situa a porta e o tesouro).
-	@param newE
+	@param e Estado atual de jogo
+	@returns 
 */
-ESTADO enemyMove(ESTADO newE);
+ESTADO enemyMove(ESTADO e);
 
 /** \brief Função que determina se o jogador está em range do ataque do inimigo.
 
 	Conforme o tipo do inimigo (meelee ou ranged) é determinado se o jogador está no range para ser atacado.
 	@param e Estado do jogo.
 	@param i Índice do inimigo.
+	@returns 1 se está no alcance, 0 caso contrário.
 */
 int inRange(ESTADO e, int i);
 
 /** \brief Função que determina se uma casa do tabuleiro de jogo está livre.
 
 	A função retorna 0 caso esteja ocupada, ou seja, caso contenha um monstro, um obstáculo, um item, o tesouro, a porta ou o próprio jogador.
-	@param e
-	@param x posição
-	@param y posição
+	@param e  Estado atual do jogo.
+	@param x  Posição.
+	@param y  Posição.
+	@returns 1 se a casa está livre, 0 caso contrário.
 */
 int casaLivre (ESTADO e, int x, int y);
 
 /** \brief Função que verifica qual o índice do monstro numa casa.
 
-	A função retorna o índice do monstro na posição (x,y) do tabuleiro. Caso não esteja nenhum monstro a função retorna -1.
-	@param e
-	@param x posição
-	@param y posição
+	@param e  Estado atual do jogo.
+	@param x  Posição.
+	@param y  Posição.
+	@returns O índice do monstro na posição (x,y) do tabuleiro. Caso não esteja nenhum monstro a função retorna -1.
 */
 int isEnemy (ESTADO e, int x, int y);
 
-/** \brief Função que verifica qual o índice da parede numa casa.
+/** \brief Função que verifica se uma certa posição é parede ou não.
 
-	A função retorna o índice da parede na posição (x,y) do tabuleiro. Caso não esteja nenhuma parede a função retorna -1.
-	@param e
-	@param x posição
-	@param y posição
+	@param e  Estado atual do jogo.
+	@param x  Posição
+	@param y  Posição
+	@returns 1 se for parede, 0 caso contrário.
 */
 int isWall (ESTADO e, int x, int y);
 
 /** \brief Função que verifica se uma casa tem item.
 
-	A função retorna o índice do monstro que deixou o item na posição (x,y) do tabuleiro. 
-	Caso não esteja nenhum item a função retorna -1.
-	@param e
-	@param px posição
-	@param py posição
+	@param e  Estado atual do jogo.
+	@param px  Posição
+	@param py  Posição
+	@returns  O índice do monstro que deixou o item na posição (x,y) do tabuleiro ou -1 caso nao exista item nessa posição.
 */
 int isItem (ESTADO e, int px, int py);
 
 /** \brief Função que atribui o ataque do inimigo.
 
 	A função atribui, conforme o tipo do inimigo, o seu ataque.
-	@param tipo
+	@param tipo  Tipo do inimigo para diferenciar os respetivos ataques.
+	@returns O número de pontos de ataque do inimigo.
 */
 int atk_Inimigo(int tipo);
 
 /** \brief Função que atribui a vida do inimigo.
 
 	A função atribui, conforme o tipo do inimigo, a sua vida.
-	@param tipo
+	@param tipo  Tipo do inimigo para diferenciar as respetivas vidas.
+	@returns A vida do inimigo. 
 */
 int vida_Inimigo(int tipo);
 
 /** \brief Função que atribui o item do tesouro.
 
 	A função, através de um número pseudo-aleatório, determina o item que o tesouro contem.
-	@param e
-	@param x
-	@param y
+	@param e  Estado atual do jogo.
+	@param x  Posição.
+	@param y  Posicao.
+	@returns O estado resultante de atribuir o item ao tesouro.
 
 */
 ESTADO itemTesouro (ESTADO e, int x, int y);
@@ -172,9 +177,9 @@ ESTADO itemTesouro (ESTADO e, int x, int y);
 /** \brief Função que apanha um item.
 
 	A função altera o estado do jogador (vida, mana, ataque, crítico ou o inventário) conforme o item na posição (x,y).
-	@param e
-	@param x
-	@param y
+	@param item Tipo de item.
+	@param e Estado de jogo.
+	@returns O estado resultante de apanhar o item.
 
 */
 ESTADO catchItem(int item, ESTADO e);
@@ -182,42 +187,44 @@ ESTADO catchItem(int item, ESTADO e);
 /** \brief Função que atribui o tipo de um inimigo.
 
 	A função atribui, conforme um número pseudo-aleatório, o tipo do inimigo.
-	@param nivel
-	@param randNum
+	@param nivel  Nível a que o jogo se encontra.
+	@param randNum  Número aleatório.
+	@returns O tipo de inimigo.
 */
 int tipoInimigo(int nivel, int randNum);
 
-/** \brief Função que atribui o item deixado por um inimigo.
+/** \brief Função que determina o item deixado por um inimigo.
 
-	A função atribui, conforme um número pseudo-aleatório, o item deixado por um inimigo. 
+	A função determina, conforme um número pseudo-aleatório, o item deixado por um inimigo. 
 	A probabilidade de um inimigo deixar um item é de 30%.
-	@param rand
+	@param randNum  Número aleatório.
+	@returns O tipo de item.
 */
 int itemInimigo(int randNum);
 
 /** \brief Função que funciona como interruptor para a ajuda de mostrar a vida dos inimigos.
  
-	@param *nomef
+	@param *nomef  Nome do ficheiro.
 */
 void opcaoVida(char *nomef);
 
 /** \brief Função que mostra a vida dos inimigos.
 
 	A função imprime no jogo a vida de todos os inimigos. Caso o inimigo seja um Boss também imprime um símbolo para o sinalizar.
-	@param e
+	@param e  Estado atual do jogo.
 */
 void print_enemy_vida(ESTADO e);
 
 /** \brief Função que funciona como interruptor para a ajuda de mostrar o range dos inimigos.
  
-	@param *nomef
+	@param *nomef  Nome do ficheiro.
 */
 void opcaoRange(char *nomef);
 
 /** \brief Função que permiter selecionar um inimigo fora de alcance de ataque e mostrar o seu range de ataque.
 
-	@param e
-	@param *nomef
+	@param e  Estado atual do jogo.
+	@param *nomef  Nome do ficheiro.
 */
 void selectRange(ESTADO e, char *nomef);
 
@@ -228,104 +235,104 @@ void selectRange(ESTADO e, char *nomef);
 	@param crit
 	@param atk
 	@param sword
+	@returns A vida restante do inimigo.
 */
 int atk_Player(int vida, int crit, int atk, int sword);
 
 /** \brief Função do ataque especial "Bola de Fogo".
 
 	A função faz com que todos os monstros possam ser atacados, independentemente da posição do jogador. Este ataque tem um custo de mana.
-	@param e
-	@param *nomef
+	@param e - Estado atual do jogo.
+	@param *nomef - Nome do ficheiro.
 */
 void bola_Fogo(ESTADO e, char *nomef);
 
 /** \brief Função do movimento especial "Flash".
 
 	A função permite ao jogador movimentar-se mais casas do que o normal. Este movimento tem um custo de mana.
-	@param e
-	@param *nomef
+	@param e - Estado atual do jogo.
+	@param *nomef - Nome do ficheiro.
 */
 void mov_Flash(ESTADO e, char *nomef);
 
-/** \brief Função do ataque especial "Espada Giratória".  (!!!!!!!!!!!!!!!!!!!!!!!!!!!!! nao é isto que ela faz)
+/** \brief Função do ataque especial "Espada Giratória".  
 
 	A função faz com que todos os monstro dentro do range sejam atacados.
 	@param *nomef
 */
 void espada_giratoria(char *nomef);
 
-/** \brief Função do movimento especial "Dormir".  (!!!!!!!!!!!!!!!!!!!!!!!!!!!!! nao é isto que ela faz)
+/** \brief Função do movimento especial "Dormir".  
 
 	A função faz com que o jogador durma e restaure vida e mana.
-	@param *nomef
+	@param *nomef  Nome do ficheiro.
 */
 void dormir (char *nomef);
 
 /** \brief Função que imprime uma imagem dadas as suas coordenadas.
 
-	@param px
-	@param py
-	@param *imagem
+	@param px  Posição.
+	@param py  Posição.
+	@param *imagem  Imagem a imprimir.
 */
 void print_image(int px, int py, char *imagem);
 
 /** \brief Função que imprime imagens atribuindo-lhes um ID.
 
-	@param px
-	@param py
-	@param *imagem
-	@param jog
+	@param px  Posição.
+	@param py  Posição.
+	@param *imagem  Imagem a imprimir.
+	@param jog  Indicação se é imagem do jogador ou de um inimigo.
 */
 void print_imageID(int px, int py, char *imagem, int jogador);
 
 /** \brief Função que o jogador e os seus possíveis movimentos.
 
-	@param e
-	@param acao
-	@param *nomef
+	@param e  Estado atual do jogo.
+	@param *nomef  Nome do ficheiro.
 */
-void print_player(ESTADO e, int acao, char *nomef);
+void print_player(ESTADO e, char *nomef);
 
 /** \brief Função que imprime todos os inimigos.
 
-	@param e
+	@param e  Estado atual do jogo.
 */
 void print_enemy(ESTADO e);
 
 /** \brief Função que imprime o range de todos os inimigos.
 
-	@param e
+	@param e  Estado atual do jogo.
 */
 void print_rangeEnemy(ESTADO e);
 
 /** \brief Função que imprime todos os obstáculos do jogo.
 
-	@param e
+	@param e  Estado atual do jogo.
 */
 void print_wall(ESTADO e);
 
 /** \brief Função que imprime a porta para o próximo nível.
 
-	@param e
+	@param e  Estado atual do jogo.
 */
 void print_door(ESTADO e);
 
 /** \brief Função que imprime o item dropado por um inimigo.
 
-	@param i - índice do inimigo que continha o item.
-	@param e - Estado atual do jogo.
+	@param i índice do inimigo que continha o item.
+	@param e  Estado atual do jogo.
 */
 void print_specific_item(int i, ESTADO e);
 
 /** \brief Função que imprime todos os items existentes num dado estado de jogo.
 
-	@param e - Estado atual do jogo.
+	@param e  Estado atual do jogo.
 */
 void print_item(ESTADO e);
 
 /** \brief Função que imprime o tesouro.
 
-	@param e
+	@param e  Estado atual do jogo.
 */
 void print_treasure(ESTADO e);
 
@@ -337,112 +344,111 @@ void print_dead_screen(char *nomef);
 
 /** \brief Função que imprime o menu de Top Scores.
 
-	@param *nomef
+	@param *nomef  Nome do ficheiro.
 */
 void print_score_screen(char *nomef);
 
 /** \brief Função que imprime as Stats (vida, mana, nível, ataque, crítico e score) do jogador.
 
-	@param e
+	@param e  Estado atual do jogo.
 */
 void print_stats(ESTADO e);
 
 /** \brief Função que imprimi o ecrã inicial do jogo.
 
-	@param *nomef
+	@param *nomef  Nome do ficheiro.
 */
 void print_start(char *nomef);
 
 /** \brief Função que imprime as casas livres para onde o jogador se pode mover.
 
-	@param e
-	@param px
-	@param py
-*/ 
+	@param e  Estado atual do jogo.
+	@param px  Posição.
+	@param py  Posição.
+*/
 void print_rangeMov(ESTADO e, int px, int py);
 
 /** \brief Função que imprime as casas com monstro que o jogador pode atacar.
 
-	@param e
-	@param px
-	@param py
+	@param e  Estado atual do jogo.
+	@param px  Posição.
+	@param py  Posição.
 */ 
 void print_rangeAttack (ESTADO e, int px, int py);
 
 /** \brief Função que imprime o inventário do jogador.
 
-	@param e
-	@param *nomef
+	@param e  Estado atual do jogo.
+	@param *nomef  Nome do ficheiro.
 */ 
 void print_inventory(ESTADO e, char *nomef);
 
 /** \brief Função que imprime as animações do movimento do jogador ou dos inimigos.
 
-	@param x
-	@param y
-	@param px
-	@param py
-	@param id
+	@param x  Posição.
+	@param y  Posição.
+	@param px  Posição.
+	@param py  Posição.
+	@param id  ID da imagem.
 */ 
 void print_animation(int difx,int dify, int posx, int id);
 
 /** \brief Função que imprime o tabuleiro de jogo.
 
-	@param e
-	@param px
-	@param py
+	@param e  Estado atual do jogo.
 */ 
 void print_board(ESTADO e);
 
 /** \brief Função que imprime hexagonos transparentes como hiperligações.
 
-	@param x
-	@param y
+	@param x  Posição.
+	@param y  Posição.
 */ 
 void print_hex(int x, int y);
 
 /** \brief Função que guarda o estado num ficheiro.
 
-	@param e
-	@param *nomef
+	@param e  Estado atual do jogo.
+	@param *nomef  Nome do ficheiro.
 */ 
 void guardar_estado(ESTADO e, char *nomef);
 
 /** \brief Função que lê o estado a partir de um ficheiro.
 
-	@param *nomef
+	@param *nomef  Nome do ficheiro.
+	@returns O estado presente no ficheiro.
 */ 
 ESTADO ler_estado(char *nomef);
 
 
-/** \brief Função que mostra ao jogador que não tem mana para realizar a ação.
-
-	@param e
-*/ 
+/** \brief Função que mostra ao jogador que não tem mana para realizar a ação.*/ 
 void print_noMana();
 
 /** \brief Função que desenha o menu após o jogador ter acabado o jogo.
 
-	@param score - Pontuação final do jogador
-*/ 
+	@param score  Pontuação final do jogador
+	@param *nomef Nome do ficheiro,
+*/
 void print_end_game(int score, char *nomef);
 
 
 /** \brief Função que processa as várias ações do jogo.
 
-	@param e
-	@param acao
-	@param *nomef
-	@param numI
+	@param e  Estado atual do jogo.
+	@param acao  Ação a ser processada.
+	@param *nomef  Nome do ficheiro.
+	@param numI Índice do inimigo. 
+	@returns O estado após a ação.
 */ 
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI);
 
 
 /** \brief Função que processa o movimento do jogador
 
-	@param e
-	@param px
-	@param py
+	@param e  Estado atual do jogo.
+	@param posx  Posição.
+	@param posy  Posição.
+	@returns O estado resultante do movimento do jogador.
 */ 
 ESTADO processar_mov(ESTADO e, int posx, int posy);
 

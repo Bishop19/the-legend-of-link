@@ -7,28 +7,7 @@
 #include "highScore.h"
 
 
-/**
-@file parser.c
-Definição do estado e das funções que convertem estados em strings e vice-versa
-*/
 
-
-/** \brief ????????????????????????????????????????????
-
-	@param nivel 
-	@param px
-	@param py
-	@param score
-	@param vida
-	@param mana
-	@param atk
-	@param crit
-	@param vida_potion
-	@param mana_potion
-	@param sword
-	@param shield
-	@param screen
-*/ 
 ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int atk, int crit, int vida_potion, int mana_potion, int sword, int shield, int screen){
 	int i, x, y, randNum; 
 	ESTADO e = {0};
@@ -134,19 +113,10 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 }
 
 
-/** \brief Função que movimenta o jogador.
-
-	Os vários tipos de movimento do jogador são mover-se para uma casa livre, atacar um inimigo que esteja no range, apanhar um item ou avançar
-	de nível.
-	@param e
-	@param difx posição
-	@param dify posição
-	@param *nomef
-	@param acao 
-*/
-void print_move(ESTADO e, int difx, int dify, char *nomef, int acao){ // será preciso o param acao???
+void print_move(ESTADO e, int difx, int dify, char *nomef){
 	int px = e.jog.x + difx;
 	int py = e.jog.y + dify;
+	int ação;
 
 
 	if (px==e.door.x && py==e.door.y){
@@ -199,52 +169,52 @@ void print_move(ESTADO e, int difx, int dify, char *nomef, int acao){ // será p
 	O movimento dos inimigos é feito conforme a posição do jogador e o estado do tabuleiro (onde se situa a porta e o tesouro).
 	@param newE
 */
-ESTADO enemyMove(ESTADO newE){
+ESTADO enemyMove(ESTADO e){
 	int i, x, y, danoSofrido=0;
 
-	for(i=0; i<newE.num_inimigos; i++){
-		if(newE.inimigo[i].vida>0){
-			if (inRange(newE,i)==1){
-				danoSofrido+=newE.inimigo[i].atk;
+	for(i=0; i<e.num_inimigos; i++){
+		if(e.inimigo[i].vida>0){
+			if (inRange(e,i)==1){
+				danoSofrido+=e.inimigo[i].atk;
 				i++;
 			}
-			if (newE.jog.x > newE.inimigo[i].x){
-				x=newE.inimigo[i].x + 1;
-				if(casaLivre(newE, x, newE.inimigo[i].y)==1){ 
-						newE.inimigo[i].x = x;
+			if (e.jog.x > e.inimigo[i].x){
+				x=e.inimigo[i].x + 1;
+				if(casaLivre(e, x, e.inimigo[i].y)==1){ 
+						e.inimigo[i].x = x;
 						print_animation(1,0,x,i);
 				}
 			}
-			else if (newE.jog.y > newE.inimigo[i].y){
-				y=newE.inimigo[i].y + 1;
-				if(casaLivre(newE, newE.inimigo[i].x, y)==1){ 
-						newE.inimigo[i].y = y;
-						print_animation(0,1,newE.inimigo[i].x,i);
+			else if (e.jog.y > e.inimigo[i].y){
+				y=e.inimigo[i].y + 1;
+				if(casaLivre(e, e.inimigo[i].x, y)==1){ 
+						e.inimigo[i].y = y;
+						print_animation(0,1,e.inimigo[i].x,i);
 
 				}
 			}
-			else if (newE.jog.x < newE.inimigo[i].x){
-				x=newE.inimigo[i].x - 1;
-				if(casaLivre(newE, x, newE.inimigo[i].y)==1){ 
-						newE.inimigo[i].x = x;
+			else if (e.jog.x < e.inimigo[i].x){
+				x=e.inimigo[i].x - 1;
+				if(casaLivre(e, x, e.inimigo[i].y)==1){ 
+						e.inimigo[i].x = x;
 						print_animation(-1,0,x,i);
 
 				}
 			}
-			else if (newE.jog.y < newE.inimigo[i].y){
-					y=newE.inimigo[i].y - 1;
-				if(casaLivre(newE, newE.inimigo[i].x, y)==1){ 
-						newE.inimigo[i].y = y;
-						print_animation(0,-1,newE.inimigo[i].x,i);
+			else if (e.jog.y < e.inimigo[i].y){
+					y=e.inimigo[i].y - 1;
+				if(casaLivre(e, e.inimigo[i].x, y)==1){ 
+						e.inimigo[i].y = y;
+						print_animation(0,-1,e.inimigo[i].x,i);
 
 				}
 			}
 		}
 	}
-	if (newE.jog.powerUp_shield==1) danoSofrido=(danoSofrido+1)/2;
-	newE.jog.vida -= danoSofrido;
+	if (e.jog.powerUp_shield==1) danoSofrido=(danoSofrido+1)/2;
+	e.jog.vida -= danoSofrido;
 
-	return newE;
+	return e;
 }
 
 
@@ -593,23 +563,23 @@ void print_imageID(int px, int py, char *imagem, int jogador){
 } 
 
 
-void print_player(ESTADO e, int acao, char *nomef){
+void print_player(ESTADO e, char *nomef){
 	print_imageID(e.jog.x, e.jog.y, PLAYER,-1);
 	if(e.jog.x%2==0){
-		print_move(e, +1, +0, nomef, acao);
-		print_move(e, +0, +1, nomef, acao);
-		print_move(e, +0, -1, nomef, acao);
-		print_move(e, -1, +0, nomef, acao);
-		print_move(e, +1, +1, nomef, acao);
-		print_move(e, -1, +1, nomef, acao);
+		print_move(e, +1, +0, nomef);
+		print_move(e, +0, +1, nomef);
+		print_move(e, +0, -1, nomef);
+		print_move(e, -1, +0, nomef);
+		print_move(e, +1, +1, nomef);
+		print_move(e, -1, +1, nomef);
 	}
 	else{
-		print_move(e, +1, +0, nomef, acao);
-		print_move(e, +0, +1, nomef, acao);
-		print_move(e, +0, -1, nomef, acao);
-		print_move(e, -1, +0, nomef, acao);
-		print_move(e, +1, -1, nomef, acao);
-		print_move(e, -1, -1, nomef, acao);
+		print_move(e, +1, +0, nomef);
+		print_move(e, +0, +1, nomef);
+		print_move(e, +0, -1, nomef);
+		print_move(e, -1, +0, nomef);
+		print_move(e, +1, -1, nomef);
+		print_move(e, -1, -1, nomef);
 	}
 } 
 

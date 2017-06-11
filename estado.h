@@ -20,7 +20,7 @@ typedef struct posicao {
 	char y;
 } POSICAO; 
 /**
-\brief Estrutura que armazena uma posição
+\brief Estrutura que armazena informação de um inimigo.
 */
 typedef struct enemyState {
 	char x;
@@ -37,7 +37,7 @@ typedef struct enemyState {
 
 
 /**
-\brief Estrutura que armazena uma posição
+\brief Estrutura que armazena informação do jogador.
 */
 typedef struct playerState {
 	char x;
@@ -55,7 +55,7 @@ typedef struct playerState {
 } PLAYER;
 
 /**
-\brief Estrutura que armazena uma posição
+\brief Estrutura que armazena informação sobre o tesouro.
 */
 typedef struct treasureState {
 	char x;
@@ -63,6 +63,9 @@ typedef struct treasureState {
 	char visivel;
 } TREASURE;
 
+/**
+\brief Estrutura que armazena informação sobre o item dropado pelo tesouros.
+*/
 typedef struct itemState {
 	char x;
 	char y;
@@ -76,11 +79,11 @@ typedef struct itemState {
 typedef struct estado {
 	/** Nivel de jogo*/
 	char nivel;
-	/**  */
+	/** Momento em que o jogo se encontra */
 	char screen;
-	/**  */
+	/** Indicador da utilização do Power Up "Bola de Fogo" */
 	char bolaFogo;
-	/**  */
+	/** Indicador da ultilização do Power Up "Flash*/
 	char flash;
 	/**Pontuação do jogador */
 	int score;
@@ -88,12 +91,10 @@ typedef struct estado {
 	PLAYER jog;
 	/** A posição da porta */
 	POSICAO door;
-	/** Tesouro que aumenta o score aleatoriamente */
+	/** Tesouro que contém um item*/
 	TREASURE treasure;
-	/** Item dropado */
+	/** Item dropado pelo tesouro */
 	ITEM item;
-	/** Lama que faz com que o player não jogo um turno*/
-	POSICAO lama;
 	/** O nº de inimigos */
 	char num_inimigos;
 	/** O nº de obstáculos */
@@ -106,7 +107,7 @@ typedef struct estado {
 	char range;
 	/** Opção de mostrar a vida dos inimigos */
 	char vidas;
-	/** Opção de mostrar a vida dos inimigos */
+	/** Indicativo que o jogador se encontra sem mana */
 	char noMana;
 	/** Opção de mostrar a vida dos inimigos */
 	int ind_inimigo;
