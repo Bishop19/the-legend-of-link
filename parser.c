@@ -113,10 +113,9 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 }
 
 
-void print_move(ESTADO e, int difx, int dify, char *nomef){
+void print_move(ESTADO e, int difx, int dify, char *nomef, int acao){
 	int px = e.jog.x + difx;
 	int py = e.jog.y + dify;
-	int ação;
 
 
 	if (px==e.door.x && py==e.door.y){
@@ -527,8 +526,19 @@ void espada_giratoria(char *nomef){
 }
 
 
-void print_espadaGiratoria_animation(){
-	printf("<animateTransform xlink:href=#jog attributeName='transform' begin='0s' dur='3s' type='rotate' to='360 0 0' repeatCount='0' fill='freeze'/> \n");
+void print_espadaGiratoria_animation(int x, int y){
+	if(x==10){
+		printf("<image id=espada x=%d y=%d xlink:href=\"%s\"/>\n", (x-1)*60, y*70+35, ESPADA_GIR2);
+		printf("<animate xlink:href=#espada attributeName='opacity' to='0' dur='1s' begin='0s' fill='freeze' /> \n");
+	}
+	else if (x%2==0){
+		printf("<image id=espada x=%d y=%d xlink:href=\"%s\"/>\n", (x-1)*60, y*70-30, ESPADA_GIR);
+		printf("<animate xlink:href=#espada attributeName='opacity' to='0' dur='1s' begin='0s' fill='freeze' /> \n");
+	}
+	else{
+		printf("<image id=espada x=%d y=%d xlink:href=\"%s\"/>\n", (x-1)*60, y*70-65, ESPADA_GIR);
+		printf("<animate xlink:href=#espada attributeName='opacity' to='0' dur='1s' begin='0s' fill='freeze' /> \n");
+	}
 }
 
 
@@ -539,6 +549,11 @@ void dormir(char *nomef){
 			printf("<image x=753 y=512 xlink:href=\"%s\"/>\n", SQUARE_LINK);
 	printf("</a>\n");
 	printf("<text x=754 y=550 font-family=Verdana font-size=9 fill=white> %d </text> \n", 0);
+}
+
+void print_dormir_animation(){
+	printf("<animate attributeName='opacity' to='0' dur='1s' begin='0s' fill='freeze' /> \n");
+	printf("<animate attributeName='opacity' to='1' dur='1s' begin='1s' fill='freeze' /> \n");
 }
 
 
@@ -566,20 +581,20 @@ void print_imageID(int px, int py, char *imagem, int jogador){
 void print_player(ESTADO e, char *nomef){
 	print_imageID(e.jog.x, e.jog.y, PLAYER,-1);
 	if(e.jog.x%2==0){
-		print_move(e, +1, +0, nomef);
-		print_move(e, +0, +1, nomef);
-		print_move(e, +0, -1, nomef);
-		print_move(e, -1, +0, nomef);
-		print_move(e, +1, +1, nomef);
-		print_move(e, -1, +1, nomef);
+		print_move(e, +1, +0, nomef, 0);
+		print_move(e, +0, +1, nomef, 0);
+		print_move(e, +0, -1, nomef, 0);
+		print_move(e, -1, +0, nomef, 0);
+		print_move(e, +1, +1, nomef, 0);
+		print_move(e, -1, +1, nomef, 0);
 	}
 	else{
-		print_move(e, +1, +0, nomef);
-		print_move(e, +0, +1, nomef);
-		print_move(e, +0, -1, nomef);
-		print_move(e, -1, +0, nomef);
-		print_move(e, +1, -1, nomef);
-		print_move(e, -1, -1, nomef);
+		print_move(e, +1, +0, nomef, 0);
+		print_move(e, +0, +1, nomef, 0);
+		print_move(e, +0, -1, nomef, 0);
+		print_move(e, -1, +0, nomef, 0);
+		print_move(e, +1, -1, nomef, 0);
+		print_move(e, -1, -1, nomef, 0);
 	}
 } 
 
@@ -711,7 +726,7 @@ void print_dead_screen(char *nomef){
 	printf("<image x=0 y=0 width=980 height=600 xlink:href=\"%s\"/>\n", DEAD);
 
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, 44);
-		printf("<image x=830 y=535 xlink:href=\"%s\"/>\n", BACK_BUTTON); // mudar botao!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		printf("<image x=830 y=535 xlink:href=\"%s\"/>\n", MENU_BUTTON2);
 	printf("</a>\n");
 }
 
@@ -905,7 +920,6 @@ ESTADO ler_estado(char *nomef){
 
 
 void print_noMana(){
-
 	printf("<image id=noMana x=788 y=107 xlink:href=\"%s\"/>\n", NO_MANA);
 	printf("<animate xlink:href=#noMana attributeName='opacity' to='0' dur='1.2s' begin='0s' fill='freeze' /> \n");	
 }
@@ -915,7 +929,7 @@ void print_end_game(int score, char *nomef){
 	printf("<text x=500 y=500 font-family=Verdana font-size=64 stroke= black fill=white> %d </text> \n",score);
 
 	printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, 44);
-		printf("<image x=830 y=535 xlink:href=\"%s\"/>\n", BACK_BUTTON); // mudar botao!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		printf("<image x=830 y=535 xlink:href=\"%s\"/>\n", MENU_BUTTON1);
 	printf("</a>\n");
 }
 
@@ -1117,9 +1131,9 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 			else e.jog.vida=10;
 			if(e.jog.mana<=8) e.jog.mana+=2;
 			else e.jog.mana=10;
+			e=enemyMove(e);
 		}
 	}
-	e.ind_inimigo=numI;
 	return e;
 }	
 
@@ -1209,7 +1223,12 @@ void parser(){
 		selectRange(e,nomef);
 		print_treasure(e);
 		print_door(e);
-		print_player(e, acao, nomef);
+		if (e.bolaFogo==2){
+			print_bolaFogo_animation(e.inimigo[i].x, e.inimigo[i].y);
+			e.bolaFogo=0;
+		}
+		if(acao==18) print_espadaGiratoria_animation(e.jog.x, e.jog.y);
+		print_player(e, nomef);
 		print_inventory(e, nomef);
 		opcaoVida(nomef);
 		print_enemy_vida(e);
@@ -1223,12 +1242,7 @@ void parser(){
 			print_noMana();
 			e.noMana=0;
 		}
-		if (e.bolaFogo==2){
-			print_bolaFogo_animation(e.inimigo[e.ind_inimigo].x, e.inimigo[e.ind_inimigo].y);
-			e.bolaFogo=0;
-		}
-		if(acao==18) print_espadaGiratoria_animation();
-
+		if(acao==45) print_dormir_animation();
 	}
 	else{
 		guardar_Score(nomef, e.score);

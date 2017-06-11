@@ -53,7 +53,12 @@
 #define DEAD "http://127.0.0.1/imagens/dead_screen.png"
 #define NO_MANA "http://127.0.0.1/imagens/no_mana.png"
 #define END_SCREEN "http://127.0.0.1/imagens/end_screen.png"
-#define BOLA_FOGO "http://127.0.0.1/imagens/vida.png"
+#define BOLA_FOGO "http://127.0.0.1/imagens/bolaFogo.png"
+#define MENU_BUTTON1 "http://127.0.0.1/imagens/menu_button1.png"
+#define MENU_BUTTON2 "http://127.0.0.1/imagens/menu_button2.png"
+#define ESPADA_GIR "http://127.0.0.1/imagens/espada_giratoria.png"
+#define ESPADA_GIR2 "http://127.0.0.1/imagens/espada_giratoria2.png"
+
 
 
 
@@ -91,7 +96,7 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 	@param dify  Posição.
 	@param *nomef  Nome do Ficheiro.
 */
-void print_move(ESTADO e, int difx, int dify, char *nomef);
+void print_move(ESTADO e, int difx, int dify, char *nomef, int acao);
 
 /** \brief Função que move os inimigos.
 
@@ -459,6 +464,8 @@ void parser();
 void print_animation(int x,int y, int px, int id);
 int isWall (ESTADO e, int x, int y);
 void print_bolaFogo_animation(int x, int y);
+void print_dormir_animation(){
+
 
 
 #endif

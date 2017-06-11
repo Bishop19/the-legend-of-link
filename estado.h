@@ -109,9 +109,6 @@ typedef struct estado {
 	char vidas;
 	/** Indicativo que o jogador se encontra sem mana */
 	char noMana;
-	/** Opção de mostrar a vida dos inimigos */
-	int ind_inimigo;
-
 
 } ESTADO;
 

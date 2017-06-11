@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -pedantic -O2 -std=c99
+CFLAGS = -Wall -Wextra -pedantic -O2
 OBJS = $(patsubst %.c ,%.o ,$(wildcard *.c))
 EXEC = Rogue
 $(EXEC):	$(OBJS)
