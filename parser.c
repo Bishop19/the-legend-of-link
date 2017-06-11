@@ -942,25 +942,37 @@ void print_animation(int difx,int dify, int posx, int id){
 
 
 void print_attack_animation(ESTADO e, int numI){
-	int difx, dify, id;
+	int difx, dify, id, deslx=0, desly=0;
 
 	difx=e.jog.x-e.inimigo[numI].x;
 	dify=e.jog.y-e.inimigo[numI].y;
 
-	if(e.inimigo[numI].tipo==3 || e.inimigo[numI].tipo==7){
+	if(difx==0){ deslx=0; desly=70*dify;}
+	else if(e.jog.x%2==0){
+			if(difx==1 && dify==0) {deslx=60; desly=35;}
+			else if(difx==(-1) && dify==0) {deslx=-60; desly=35;}
+				else if(difx==1 && dify==(-1)) {deslx=60; desly=-35;}
+					else if(difx==-1 && dify==1) {deslx=-60; desly=-35;}
+		}
+		else if(difx==1 && dify==1) {deslx=60; desly=35;}
+			else if(difx==-1 && dify==1) {deslx=-60; desly=35;}
+				else if(difx==-1 && dify==0) {deslx=-60; desly=-35;}
+					else if(difx==1 && dify==0) {deslx=60; desly=-35;}
+
+	if( deslx==0 && desly==0 && (e.inimigo[numI].tipo==3 || e.inimigo[numI].tipo==7)){
 		id=numI+30;
 
-		if(difx==2) printf("<animateMotion xlink:href=#%d dur=0.75s begin=0.3s fill=freeze path='M0,0 %d,%d ' /> \n", id, 120, 0);
-		else if (difx==(-2)) printf("<animateMotion xlink:href=#%d dur=0.75s begin=0.3s fill=freeze path='M0,0 %d,%d ' /> \n", id, -120, 0);
-		else if(dify>0) printf("<animateMotion xlink:href=#%d dur=0.75s begin=0.3s fill=freeze path='M0,0 %d,%d ' /> \n", id, 60*difx, 105);
-		else printf("<animateMotion xlink:href=#%d dur=0.75s begin=0.3s fill=freeze path='M0,0 %d,%d ' /> \n", id, 60*difx, -105);
-		
-		printf("<animate xlink:href=#%d attributeName='opacity' to='0' dur='0.2s' begin='1.05s' fill='freeze' /> \n", id);
+		if(abs(difx)==2) {deslx=60*difx; desly=0;}
+		else if(dify>0){deslx=60*difx; desly=105;}
+		else {deslx=60*difx; desly=-105;}
 	}
-		
-	else {
-		printf("<animateMotion xlink:href=#%d dur=0.5s begin=0.5s fill=freeze path='M0,0, %d,%d 0,0' /> \n", numI, 60*difx, 70*dify);
+				
+
+	if(e.inimigo[numI].tipo==3 || e.inimigo[numI].tipo==7){
+		printf("<animateMotion xlink:href=#%d dur=0.75s begin=0.3s fill=freeze path='M0,0 %d,%d ' /> \n", id, deslx, desly);
+		printf("<animate xlink:href=#%d attributeName='opacity' to='0' dur='0.2s' begin='1.05s' fill='freeze' /> \n", id);	
 	}
+	else printf("<animateMotion xlink:href=#%d dur=0.5s begin=0.5s fill=freeze path='M0,0, %d,%d 0,0' /> \n", numI, deslx, desly);		
 
 }
 
