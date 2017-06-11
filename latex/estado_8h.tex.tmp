@@ -8,13 +8,13 @@ This graph shows which files directly or indirectly include this file\+:
 struct \hyperlink{structposicao}{posicao}
 \begin{DoxyCompactList}\small\item\em Estrutura que armazena uma posição. \end{DoxyCompactList}\item 
 struct \hyperlink{structenemyState}{enemy\+State}
-\begin{DoxyCompactList}\small\item\em Estrutura que armazena uma posição. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Estrutura que armazena informação de um inimigo. \end{DoxyCompactList}\item 
 struct \hyperlink{structplayerState}{player\+State}
-\begin{DoxyCompactList}\small\item\em Estrutura que armazena uma posição. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Estrutura que armazena informação do jogador. \end{DoxyCompactList}\item 
 struct \hyperlink{structtreasureState}{treasure\+State}
-\begin{DoxyCompactList}\small\item\em Estrutura que armazena uma posição. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Estrutura que armazena informação sobre o tesouro. \end{DoxyCompactList}\item 
 struct \hyperlink{structitemState}{item\+State}
-\item 
+\begin{DoxyCompactList}\small\item\em Estrutura que armazena informação sobre o item dropado pelo tesouros. \end{DoxyCompactList}\item 
 struct \hyperlink{structestado}{estado}
 \begin{DoxyCompactList}\small\item\em Estrutura que armazena o estado do jogo. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Macros}
@@ -34,16 +34,16 @@ typedef struct \hyperlink{structposicao}{posicao} \hyperlink{estado_8h_a55b3f4b5
 \begin{DoxyCompactList}\small\item\em Estrutura que armazena uma posição. \end{DoxyCompactList}\item 
 typedef struct \hyperlink{structenemyState}{enemy\+State} \hyperlink{estado_8h_a9f02ab0e6d0d32d23cd5f9f81e8c69f9}{E\+N\+E\+MY}\hypertarget{estado_8h_a9f02ab0e6d0d32d23cd5f9f81e8c69f9}{}\label{estado_8h_a9f02ab0e6d0d32d23cd5f9f81e8c69f9}
 
-\begin{DoxyCompactList}\small\item\em Estrutura que armazena uma posição. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Estrutura que armazena informação de um inimigo. \end{DoxyCompactList}\item 
 typedef struct \hyperlink{structplayerState}{player\+State} \hyperlink{estado_8h_a1c5dfb515f896e023ef1ab976a7d9e55}{P\+L\+A\+Y\+ER}\hypertarget{estado_8h_a1c5dfb515f896e023ef1ab976a7d9e55}{}\label{estado_8h_a1c5dfb515f896e023ef1ab976a7d9e55}
 
-\begin{DoxyCompactList}\small\item\em Estrutura que armazena uma posição. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Estrutura que armazena informação do jogador. \end{DoxyCompactList}\item 
 typedef struct \hyperlink{structtreasureState}{treasure\+State} \hyperlink{estado_8h_a915d62cffb534f2a6557ce29c9c50624}{T\+R\+E\+A\+S\+U\+RE}\hypertarget{estado_8h_a915d62cffb534f2a6557ce29c9c50624}{}\label{estado_8h_a915d62cffb534f2a6557ce29c9c50624}
 
-\begin{DoxyCompactList}\small\item\em Estrutura que armazena uma posição. \end{DoxyCompactList}\item 
-typedef struct \hyperlink{structitemState}{item\+State} {\bfseries I\+T\+EM}\hypertarget{estado_8h_abb89e4e096567d9205a898bda0a14bfe}{}\label{estado_8h_abb89e4e096567d9205a898bda0a14bfe}
+\begin{DoxyCompactList}\small\item\em Estrutura que armazena informação sobre o tesouro. \end{DoxyCompactList}\item 
+typedef struct \hyperlink{structitemState}{item\+State} \hyperlink{estado_8h_abb89e4e096567d9205a898bda0a14bfe}{I\+T\+EM}\hypertarget{estado_8h_abb89e4e096567d9205a898bda0a14bfe}{}\label{estado_8h_abb89e4e096567d9205a898bda0a14bfe}
 
-\item 
+\begin{DoxyCompactList}\small\item\em Estrutura que armazena informação sobre o item dropado pelo tesouros. \end{DoxyCompactList}\item 
 typedef struct \hyperlink{structestado}{estado} \hyperlink{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{E\+S\+T\+A\+DO}\hypertarget{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}{}\label{estado_8h_a857f2529d823a22e6f4a81cf21fb810f}
 
 \begin{DoxyCompactList}\small\item\em Estrutura que armazena o estado do jogo. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['player',['PLAYER',['../estado_8h.html#a1c5dfb515f896e023ef1ab976a7d9e55',1,'estado.h']]],
-  ['posicao',['POSICAO',['../estado_8h.html#a55b3f4b56938eeb8fa5e8f9c07baf1b0',1,'estado.h']]]
+  ['item',['ITEM',['../estado_8h.html#abb89e4e096567d9205a898bda0a14bfe',1,'estado.h']]]
 ];

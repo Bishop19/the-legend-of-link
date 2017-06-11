@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vidas',['vidas',['../structestado.html#a1dcd7329b4a4cd561a7b72b2552f1d6c',1,'estado']]]
+  ['treasure',['treasure',['../structestado.html#ae4cc2103608d31c5a97732cc6411334a',1,'estado']]]
 ];

@@ -2,8 +2,13 @@
 #include "estado.h"
 #define ___PARSER_H___
 
+/**
+@file parser.h
+Funções responsaveis pelo funcionamento do jogo.
+*/
+
+
 #define SIZE 10
-#define TAM 60
 #define NUM_INIMIGOS 10
 #define NUM_OBSTACULOS 20
 
@@ -59,13 +64,6 @@
 #define ESPADA_GIR "http://127.0.0.1/imagens/espada_giratoria.png"
 #define ESPADA_GIR2 "http://127.0.0.1/imagens/espada_giratoria2.png"
 
-
-
-
-/**
-@file parser.c
-Funções responsaveis pelo funcionamento do jogo.
-*/
 
 
 /** \brief Função que cria um estado de jogo.
@@ -252,6 +250,15 @@ int atk_Player(int vida, int crit, int atk, int sword);
 */
 void bola_Fogo(ESTADO e, char *nomef);
 
+
+/** \brief Função faz a animação do ataque especial "Bola de Fogo".
+
+	@param x - Posição x do inimigo.
+	@param y - Posição y do inimigo.
+*/
+void print_bolaFogo_animation(int x, int y);
+
+
 /** \brief Função do movimento especial "Flash".
 
 	A função permite ao jogador movimentar-se mais casas do que o normal. Este movimento tem um custo de mana.
@@ -260,12 +267,21 @@ void bola_Fogo(ESTADO e, char *nomef);
 */
 void mov_Flash(ESTADO e, char *nomef);
 
+/** \brief Função que faz a animação do movimento especial "Flash".
+
+	Conforme a acao executada, a função faz uma animação do movimento.
+	@param acao - Última ação que o jogador realizou.
+*/
+void print_flash_animation(int acao);
+
+
 /** \brief Função do ataque especial "Espada Giratória".  
 
 	A função faz com que todos os monstro dentro do range sejam atacados.
-	@param *nomef
+	@param *nomef - Nome do ficheiro.
 */
 void espada_giratoria(char *nomef);
+
 
 /** \brief Função do movimento especial "Dormir".  
 
@@ -274,6 +290,15 @@ void espada_giratoria(char *nomef);
 */
 void dormir (char *nomef);
 
+
+/** \brief Função do movimento especial "Dormir".  
+
+	A função faz com que o jogador durma e restaure vida e mana.
+	@param *nomef  Nome do ficheiro.
+*/
+void print_dormir_animation();
+
+
 /** \brief Função que imprime uma imagem dadas as suas coordenadas.
 
 	@param px  Posição.
@@ -281,6 +306,7 @@ void dormir (char *nomef);
 	@param *imagem  Imagem a imprimir.
 */
 void print_image(int px, int py, char *imagem);
+
 
 /** \brief Função que imprime imagens atribuindo-lhes um ID.
 
@@ -291,6 +317,7 @@ void print_image(int px, int py, char *imagem);
 */
 void print_imageID(int px, int py, char *imagem, int jogador);
 
+
 /** \brief Função que o jogador e os seus possíveis movimentos.
 
 	@param e  Estado atual do jogo.
@@ -298,11 +325,13 @@ void print_imageID(int px, int py, char *imagem, int jogador);
 */
 void print_player(ESTADO e, char *nomef);
 
+
 /** \brief Função que imprime todos os inimigos.
 
 	@param e  Estado atual do jogo.
 */
 void print_enemy(ESTADO e);
+
 
 /** \brief Função que imprime o range de todos os inimigos.
 
@@ -310,10 +339,12 @@ void print_enemy(ESTADO e);
 */
 void print_rangeEnemy(ESTADO e);
 
+
 /** \brief Função que imprime todos os obstáculos do jogo.
 
 	@param e  Estado atual do jogo.
 */
+
 void print_wall(ESTADO e);
 
 /** \brief Função que imprime a porta para o próximo nível.
@@ -322,6 +353,7 @@ void print_wall(ESTADO e);
 */
 void print_door(ESTADO e);
 
+
 /** \brief Função que imprime o item dropado por um inimigo.
 
 	@param i índice do inimigo que continha o item.
@@ -329,11 +361,13 @@ void print_door(ESTADO e);
 */
 void print_specific_item(int i, ESTADO e);
 
+
 /** \brief Função que imprime todos os items existentes num dado estado de jogo.
 
 	@param e  Estado atual do jogo.
 */
 void print_item(ESTADO e);
+
 
 /** \brief Função que imprime o tesouro.
 
@@ -341,11 +375,14 @@ void print_item(ESTADO e);
 */
 void print_treasure(ESTADO e);
 
+
 /** \brief Função que o menu lateral de jogo.  */   
 void print_menu_lateral(ESTADO e);
 
+
 /** \brief Função que imprime o menu quando o jogador morre. */
 void print_dead_screen(char *nomef);
+
 
 /** \brief Função que imprime o menu de Top Scores.
 
@@ -353,17 +390,20 @@ void print_dead_screen(char *nomef);
 */
 void print_score_screen(char *nomef);
 
+
 /** \brief Função que imprime as Stats (vida, mana, nível, ataque, crítico e score) do jogador.
 
 	@param e  Estado atual do jogo.
 */
 void print_stats(ESTADO e);
 
+
 /** \brief Função que imprimi o ecrã inicial do jogo.
 
 	@param *nomef  Nome do ficheiro.
 */
 void print_start(char *nomef);
+
 
 /** \brief Função que imprime as casas livres para onde o jogador se pode mover.
 
@@ -373,6 +413,7 @@ void print_start(char *nomef);
 */
 void print_rangeMov(ESTADO e, int px, int py);
 
+
 /** \brief Função que imprime as casas com monstro que o jogador pode atacar.
 
 	@param e  Estado atual do jogo.
@@ -381,12 +422,14 @@ void print_rangeMov(ESTADO e, int px, int py);
 */ 
 void print_rangeAttack (ESTADO e, int px, int py);
 
+
 /** \brief Função que imprime o inventário do jogador.
 
 	@param e  Estado atual do jogo.
 	@param *nomef  Nome do ficheiro.
 */ 
 void print_inventory(ESTADO e, char *nomef);
+
 
 /** \brief Função que imprime as animações do movimento do jogador ou dos inimigos.
 
@@ -398,11 +441,13 @@ void print_inventory(ESTADO e, char *nomef);
 */ 
 void print_animation(int difx,int dify, int posx, int id);
 
+
 /** \brief Função que imprime o tabuleiro de jogo.
 
 	@param e  Estado atual do jogo.
 */ 
 void print_board(ESTADO e);
+
 
 /** \brief Função que imprime hexagonos transparentes como hiperligações.
 
@@ -411,12 +456,14 @@ void print_board(ESTADO e);
 */ 
 void print_hex(int x, int y);
 
+
 /** \brief Função que guarda o estado num ficheiro.
 
 	@param e  Estado atual do jogo.
 	@param *nomef  Nome do ficheiro.
 */ 
 void guardar_estado(ESTADO e, char *nomef);
+
 
 /** \brief Função que lê o estado a partir de um ficheiro.
 
@@ -428,6 +475,7 @@ ESTADO ler_estado(char *nomef);
 
 /** \brief Função que mostra ao jogador que não tem mana para realizar a ação.*/ 
 void print_noMana();
+
 
 /** \brief Função que desenha o menu após o jogador ter acabado o jogo.
 
@@ -457,16 +505,9 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI);
 */ 
 ESTADO processar_mov(ESTADO e, int posx, int posy);
 
+
+/** \brief Função principal do jogo */
 void parser();
-
-
-
-void print_animation(int x,int y, int px, int id);
-int isWall (ESTADO e, int x, int y);
-void print_bolaFogo_animation(int x, int y);
-void print_dormir_animation();
-void print_flash_animation(int acao);
-
 
 
 #endif

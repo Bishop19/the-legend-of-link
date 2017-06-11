@@ -18,14 +18,11 @@ Collaboration diagram for estado\+:
 \item 
 char \hyperlink{structestado_a620f2f81ebfe4cba1d6e44b09a1762f7}{nivel}
 \item 
-char {\bfseries screen}\hypertarget{structestado_a9e83d6dd64bf8e642bd6089ed0429c9c}{}\label{structestado_a9e83d6dd64bf8e642bd6089ed0429c9c}
-
+char \hyperlink{structestado_a9e83d6dd64bf8e642bd6089ed0429c9c}{screen}
 \item 
-char {\bfseries bola\+Fogo}\hypertarget{structestado_ab2fb851219c49552677f99c5759797ed}{}\label{structestado_ab2fb851219c49552677f99c5759797ed}
-
+char \hyperlink{structestado_ab2fb851219c49552677f99c5759797ed}{bola\+Fogo}
 \item 
-char {\bfseries flash}\hypertarget{structestado_aabc94c34319b0500ee6eb353f35c9caa}{}\label{structestado_aabc94c34319b0500ee6eb353f35c9caa}
-
+char \hyperlink{structestado_aabc94c34319b0500ee6eb353f35c9caa}{flash}
 \item 
 int \hyperlink{structestado_a47e99ef4241dfe72d9d68244a68adb46}{score}
 \item 
@@ -35,9 +32,7 @@ int \hyperlink{structestado_a47e99ef4241dfe72d9d68244a68adb46}{score}
 \item 
 \hyperlink{estado_8h_a915d62cffb534f2a6557ce29c9c50624}{T\+R\+E\+A\+S\+U\+RE} \hyperlink{structestado_ae4cc2103608d31c5a97732cc6411334a}{treasure}
 \item 
-\hyperlink{structitemState}{I\+T\+EM} \hyperlink{structestado_a2c147e6348aeaa62b05ff2109f0f2bf4}{item}
-\item 
-\hyperlink{estado_8h_a55b3f4b56938eeb8fa5e8f9c07baf1b0}{P\+O\+S\+I\+C\+AO} \hyperlink{structestado_a85a6f9c990b282dbc2f6c68d36a4462f}{lama}
+\hyperlink{estado_8h_abb89e4e096567d9205a898bda0a14bfe}{I\+T\+EM} \hyperlink{structestado_a2c147e6348aeaa62b05ff2109f0f2bf4}{item}
 \item 
 char \hyperlink{structestado_a6fbc4a80c4f371036f264ecfe27e5f9e}{num\+\_\+inimigos}
 \item 
@@ -50,6 +45,8 @@ char \hyperlink{structestado_ac1a8a541e2301189833c6f713c416063}{num\+\_\+obstacu
 char \hyperlink{structestado_a813cb0f2927179b6139566f846c77018}{range}
 \item 
 char \hyperlink{structestado_a1dcd7329b4a4cd561a7b72b2552f1d6c}{vidas}
+\item 
+char \hyperlink{structestado_a4b38ac23d32fda340afb2b57bfdcc2c4}{no\+Mana}
 \end{DoxyCompactItemize}
 
 
@@ -57,25 +54,31 @@ char \hyperlink{structestado_a1dcd7329b4a4cd561a7b72b2552f1d6c}{vidas}
 Estrutura que armazena o estado do jogo. 
 
 \subsection{Member Data Documentation}
-\index{estado@{estado}!door@{door}}
+\index{estado@{estado}!bola\+Fogo@{bola\+Fogo}}
+\index{bola\+Fogo@{bola\+Fogo}!estado@{estado}}
+\subsubsection[{\texorpdfstring{bola\+Fogo}{bolaFogo}}]{\setlength{\rightskip}{0pt plus 5cm}char estado\+::bola\+Fogo}\hypertarget{structestado_ab2fb851219c49552677f99c5759797ed}{}\label{structestado_ab2fb851219c49552677f99c5759797ed}
+Indicador da utilização do Power Up \char`\"{}\+Bola de Fogo\char`\"{} \index{estado@{estado}!door@{door}}
 \index{door@{door}!estado@{estado}}
 \subsubsection[{\texorpdfstring{door}{door}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf P\+O\+S\+I\+C\+AO} estado\+::door}\hypertarget{structestado_a7415ebf0dc1fbc535407bb2bd669dc81}{}\label{structestado_a7415ebf0dc1fbc535407bb2bd669dc81}
-A posição da porta \index{estado@{estado}!inimigo@{inimigo}}
+A posição da porta \index{estado@{estado}!flash@{flash}}
+\index{flash@{flash}!estado@{estado}}
+\subsubsection[{\texorpdfstring{flash}{flash}}]{\setlength{\rightskip}{0pt plus 5cm}char estado\+::flash}\hypertarget{structestado_aabc94c34319b0500ee6eb353f35c9caa}{}\label{structestado_aabc94c34319b0500ee6eb353f35c9caa}
+Indicador da ultilização do Power Up "Flash \index{estado@{estado}!inimigo@{inimigo}}
 \index{inimigo@{inimigo}!estado@{estado}}
 \subsubsection[{\texorpdfstring{inimigo}{inimigo}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf E\+N\+E\+MY} estado\+::inimigo\mbox{[}{\bf M\+A\+X\+\_\+\+I\+N\+I\+M\+I\+G\+OS}\mbox{]}}\hypertarget{structestado_a85c620d8bd760efde2d2681df831dcb2}{}\label{structestado_a85c620d8bd760efde2d2681df831dcb2}
 Array com a posição dos inimigos \index{estado@{estado}!item@{item}}
 \index{item@{item}!estado@{estado}}
 \subsubsection[{\texorpdfstring{item}{item}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\+T\+EM} estado\+::item}\hypertarget{structestado_a2c147e6348aeaa62b05ff2109f0f2bf4}{}\label{structestado_a2c147e6348aeaa62b05ff2109f0f2bf4}
-Item dropado \index{estado@{estado}!jog@{jog}}
+Item dropado pelo tesouro \index{estado@{estado}!jog@{jog}}
 \index{jog@{jog}!estado@{estado}}
 \subsubsection[{\texorpdfstring{jog}{jog}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf P\+L\+A\+Y\+ER} estado\+::jog}\hypertarget{structestado_aba384d85c8fd0406b06aa2f478874bc1}{}\label{structestado_aba384d85c8fd0406b06aa2f478874bc1}
-A posição do jogador \index{estado@{estado}!lama@{lama}}
-\index{lama@{lama}!estado@{estado}}
-\subsubsection[{\texorpdfstring{lama}{lama}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf P\+O\+S\+I\+C\+AO} estado\+::lama}\hypertarget{structestado_a85a6f9c990b282dbc2f6c68d36a4462f}{}\label{structestado_a85a6f9c990b282dbc2f6c68d36a4462f}
-Lama que faz com que o player não jogo um turno \index{estado@{estado}!nivel@{nivel}}
+A posição do jogador \index{estado@{estado}!nivel@{nivel}}
 \index{nivel@{nivel}!estado@{estado}}
 \subsubsection[{\texorpdfstring{nivel}{nivel}}]{\setlength{\rightskip}{0pt plus 5cm}char estado\+::nivel}\hypertarget{structestado_a620f2f81ebfe4cba1d6e44b09a1762f7}{}\label{structestado_a620f2f81ebfe4cba1d6e44b09a1762f7}
-Nivel de jogo \index{estado@{estado}!num\+\_\+inimigos@{num\+\_\+inimigos}}
+Nivel de jogo \index{estado@{estado}!no\+Mana@{no\+Mana}}
+\index{no\+Mana@{no\+Mana}!estado@{estado}}
+\subsubsection[{\texorpdfstring{no\+Mana}{noMana}}]{\setlength{\rightskip}{0pt plus 5cm}char estado\+::no\+Mana}\hypertarget{structestado_a4b38ac23d32fda340afb2b57bfdcc2c4}{}\label{structestado_a4b38ac23d32fda340afb2b57bfdcc2c4}
+Indicativo que o jogador se encontra sem mana \index{estado@{estado}!num\+\_\+inimigos@{num\+\_\+inimigos}}
 \index{num\+\_\+inimigos@{num\+\_\+inimigos}!estado@{estado}}
 \subsubsection[{\texorpdfstring{num\+\_\+inimigos}{num_inimigos}}]{\setlength{\rightskip}{0pt plus 5cm}char estado\+::num\+\_\+inimigos}\hypertarget{structestado_a6fbc4a80c4f371036f264ecfe27e5f9e}{}\label{structestado_a6fbc4a80c4f371036f264ecfe27e5f9e}
 O nº de inimigos \index{estado@{estado}!num\+\_\+obstaculos@{num\+\_\+obstaculos}}
@@ -90,10 +93,13 @@ Array com a posição dos obstáculos \index{estado@{estado}!range@{range}}
 Opção de mostrar casas que os inimigos podem atacar \index{estado@{estado}!score@{score}}
 \index{score@{score}!estado@{estado}}
 \subsubsection[{\texorpdfstring{score}{score}}]{\setlength{\rightskip}{0pt plus 5cm}int estado\+::score}\hypertarget{structestado_a47e99ef4241dfe72d9d68244a68adb46}{}\label{structestado_a47e99ef4241dfe72d9d68244a68adb46}
-Pontuação do jogador \index{estado@{estado}!treasure@{treasure}}
+Pontuação do jogador \index{estado@{estado}!screen@{screen}}
+\index{screen@{screen}!estado@{estado}}
+\subsubsection[{\texorpdfstring{screen}{screen}}]{\setlength{\rightskip}{0pt plus 5cm}char estado\+::screen}\hypertarget{structestado_a9e83d6dd64bf8e642bd6089ed0429c9c}{}\label{structestado_a9e83d6dd64bf8e642bd6089ed0429c9c}
+Momento em que o jogo se encontra \index{estado@{estado}!treasure@{treasure}}
 \index{treasure@{treasure}!estado@{estado}}
 \subsubsection[{\texorpdfstring{treasure}{treasure}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf T\+R\+E\+A\+S\+U\+RE} estado\+::treasure}\hypertarget{structestado_ae4cc2103608d31c5a97732cc6411334a}{}\label{structestado_ae4cc2103608d31c5a97732cc6411334a}
-Tesouro que aumenta o score aleatoriamente \index{estado@{estado}!vidas@{vidas}}
+Tesouro que contém um item \index{estado@{estado}!vidas@{vidas}}
 \index{vidas@{vidas}!estado@{estado}}
 \subsubsection[{\texorpdfstring{vidas}{vidas}}]{\setlength{\rightskip}{0pt plus 5cm}char estado\+::vidas}\hypertarget{structestado_a1dcd7329b4a4cd561a7b72b2552f1d6c}{}\label{structestado_a1dcd7329b4a4cd561a7b72b2552f1d6c}
 Opção de mostrar a vida dos inimigos 

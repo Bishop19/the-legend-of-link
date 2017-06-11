@@ -919,10 +919,10 @@ ESTADO ler_estado(char *nomef){
 	if (fp==NULL) printf ("Erro");
 	else{ 
 		x=fscanf(fp, "%s\n", st);
+		if (x==0) printf("Erro");
 		fclose(fp);
 	}
 	e=str2estado(st);
-	x++;
 
 	return e;
 }

@@ -4,13 +4,13 @@ digraph "estado"
   node [fontname="Helvetica",fontsize="10",shape=record];
   Node1 [label="estado",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
   Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" jog" ];
-  Node2 [label="playerState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structplayerState.html",tooltip="Estrutura que armazena uma posição. "];
-  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" lama\nobstaculo\ndoor" ];
+  Node2 [label="playerState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structplayerState.html",tooltip="Estrutura que armazena informação do jogador. "];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" obstaculo\ndoor" ];
   Node3 [label="posicao",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structposicao.html",tooltip="Estrutura que armazena uma posição. "];
   Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" item" ];
-  Node4 [label="itemState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structitemState.html"];
+  Node4 [label="itemState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structitemState.html",tooltip="Estrutura que armazena informação sobre o item dropado pelo tesouros. "];
   Node5 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" treasure" ];
-  Node5 [label="treasureState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structtreasureState.html",tooltip="Estrutura que armazena uma posição. "];
+  Node5 [label="treasureState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structtreasureState.html",tooltip="Estrutura que armazena informação sobre o tesouro. "];
   Node6 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" inimigo" ];
-  Node6 [label="enemyState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structenemyState.html",tooltip="Estrutura que armazena uma posição. "];
+  Node6 [label="enemyState",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structenemyState.html",tooltip="Estrutura que armazena informação de um inimigo. "];
 }

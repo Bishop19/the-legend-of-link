@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['guardar_5festado',['guardar_estado',['../parser_8c.html#acc107ef338d7a5ae93c6d47b13f8cd04',1,'parser.c']]]
+  ['flash',['flash',['../structestado.html#aabc94c34319b0500ee6eb353f35c9caa',1,'estado']]]
 ];

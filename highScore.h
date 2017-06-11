@@ -1,3 +1,8 @@
+/**
+@file highScore.h
+Funções responsaveis pelos melhores scores.
+*/
+
 /** \brief Estrutura que armazena o score que um jogador alcançou.*/
 typedef struct scores {
 	char nome[20];
