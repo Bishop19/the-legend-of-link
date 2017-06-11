@@ -175,8 +175,8 @@ ESTADO enemyMove(ESTADO e){
 				print_attack_animation(e, i);
 				i++;
 			}
-			if (abs(e.inimigo[i].x-e.door.x)+abs(e.inimigo[i].y-e.door.y)<=6) e=enemyMove_door(e, i);
-			else if (abs(e.inimigo[i].x-e.treasure.x)+abs(e.inimigo[i].y-e.treasure.y)<=5) e=enemyMove_treasure(e, i);
+			if (abs(e.inimigo[i].x-e.door.x)+abs(e.inimigo[i].y-e.door.y)<=4) e=enemyMove_door(e, i);
+			else if (abs(e.inimigo[i].x-e.treasure.x)+abs(e.inimigo[i].y-e.treasure.y)<=2) e=enemyMove_treasure(e, i);
 			else{
 				if (e.jog.x > e.inimigo[i].x){
 					x=e.inimigo[i].x + 1;
@@ -691,11 +691,17 @@ void print_enemy(ESTADO e){
 	for(i = 0; i < e.num_inimigos; i++){
 		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==1) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY, i);
 		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==2) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY2, i);
-		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==3) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY3, i);
+		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==3) {
+			print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY3, i);
+			print_imageID(e.inimigo[i].x, e.inimigo[i].y, ROCK, i+30);
+		}
 		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==4) print_imageID(e.inimigo[i].x, e.inimigo[i].y, BOSS1, i);
 		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==5) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY5, i);
 		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==6) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY6, i);
-		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==7) print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY7, i);
+		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==7) {
+			print_imageID(e.inimigo[i].x, e.inimigo[i].y, ENEMY7, i);
+			print_imageID(e.inimigo[i].x, e.inimigo[i].y, ROCK, i+30);
+		}
 		if(e.inimigo[i].vida !=0 && e.inimigo[i].tipo==8) print_imageID(e.inimigo[i].x, e.inimigo[i].y, BOSS2, i);
 	}
 }
@@ -943,15 +949,14 @@ void print_attack_animation(ESTADO e, int numI){
 		difx=e.jog.x-e.inimigo[numI].x;
 		dify=e.jog.y-e.inimigo[numI].y;
 
-		print_imageID(e.inimigo[numI].x, e.inimigo[numI].y, ROCK, id);
-		printf("<animateMotion xlink:href=#%d dur=0.75s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, -(60*difx), -(70*dify));
+		printf("<animateMotion xlink:href=#%d dur=0.75s begin=0.3s fill=freeze path='M%d,%d 0,0' /> \n", id, -60*difx, 70*dify);
 		printf("<animate xlink:href=#%d attributeName='opacity' to='0' dur='0.2s' begin='0.75s' fill='freeze' /> \n", id);
 	}
 		
 	else {
 		difx=e.jog.x-e.inimigo[numI].x;
 		dify=e.jog.y-e.inimigo[numI].y;
-		printf("<animateMotion xlink:href=#%d dur=0.75s begin=0.5s fill=freeze path='M0,0, %d,%d 0,0' /> \n", numI, 60*difx, 70*dify);
+		printf("<animateMotion xlink:href=#%d dur=0.5s begin=0.5s fill=freeze path='M0,0, %d,%d 0,0' /> \n", numI, 60*difx, 70*dify);
 	}
 
 }

@@ -64,7 +64,7 @@ Funções responsaveis pelo funcionamento do jogo.
 #define MENU_BUTTON2 "http://127.0.0.1/imagens/menu_button2.png"
 #define ESPADA_GIR "http://127.0.0.1/imagens/espada_giratoria.png"
 #define ESPADA_GIR2 "http://127.0.0.1/imagens/espada_giratoria2.png"
-#define ROCK "http://127.0.0.1/imagens/mana.png"
+#define ROCK "http://127.0.0.1/imagens/rock.png"
 
 
 
