@@ -422,7 +422,7 @@ ESTADO catchItem(int item, ESTADO e){
 	else if (item==3) e.jog.item_vida+=1;
 	else if (item==4) e.jog.item_mana+=1;
 	else if (item==5) e.jog.atk+=1;
-	else if (item==6) e.jog.crit+=1;
+	else if (item==6) e.jog.crit+=2;
 	else if (item==7) e.jog.item_sword+=1;
 	else if (item==8) e.jog.item_shield+=1;
 
