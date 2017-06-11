@@ -164,11 +164,7 @@ void print_move(ESTADO e, int difx, int dify, char *nomef, int acao){
 }
 
 
-/** \brief Função que move os inimigos.
 
-	O movimento dos inimigos é feito conforme a posição do jogador e o estado do tabuleiro (onde se situa a porta e o tesouro).
-	@param newE
-*/
 ESTADO enemyMove(ESTADO e){
 	int i, x, y, danoSofrido=0;
 
@@ -179,35 +175,39 @@ ESTADO enemyMove(ESTADO e){
 				// print_attack_animation(e, i);
 				i++;
 			}
-			if (e.jog.x > e.inimigo[i].x){
-				x=e.inimigo[i].x + 1;
-				if(casaLivre(e, x, e.inimigo[i].y)==1){ 
-						e.inimigo[i].x = x;
-						print_animation(1,0,x,i);
+			if (abs(e.inimigo[i].x-e.door.x)+abs(e.inimigo[i].y-e.door.y)<=6) e=enemyMove_door(e, i);
+			else if (abs(e.inimigo[i].x-e.treasure.x)+abs(e.inimigo[i].y-e.treasure.y)<=5) e=enemyMove_treasure(e, i);
+			else{
+				if (e.jog.x > e.inimigo[i].x){
+					x=e.inimigo[i].x + 1;
+					if(casaLivre(e, x, e.inimigo[i].y)==1){ 
+							e.inimigo[i].x = x;
+							print_animation(1,0,x,i);
+					}
 				}
-			}
-			else if (e.jog.y > e.inimigo[i].y){
-				y=e.inimigo[i].y + 1;
-				if(casaLivre(e, e.inimigo[i].x, y)==1){ 
-						e.inimigo[i].y = y;
-						print_animation(0,1,e.inimigo[i].x,i);
+				else if (e.jog.y > e.inimigo[i].y){
+					y=e.inimigo[i].y + 1;
+					if(casaLivre(e, e.inimigo[i].x, y)==1){ 
+							e.inimigo[i].y = y;
+							print_animation(0,1,e.inimigo[i].x,i);
 
+					}
 				}
-			}
-			else if (e.jog.x < e.inimigo[i].x){
-				x=e.inimigo[i].x - 1;
-				if(casaLivre(e, x, e.inimigo[i].y)==1){ 
-						e.inimigo[i].x = x;
-						print_animation(-1,0,x,i);
+				else if (e.jog.x < e.inimigo[i].x){
+					x=e.inimigo[i].x - 1;
+					if(casaLivre(e, x, e.inimigo[i].y)==1){ 
+							e.inimigo[i].x = x;
+							print_animation(-1,0,x,i);
 
+					}
 				}
-			}
-			else if (e.jog.y < e.inimigo[i].y){
-					y=e.inimigo[i].y - 1;
-				if(casaLivre(e, e.inimigo[i].x, y)==1){ 
-						e.inimigo[i].y = y;
-						print_animation(0,-1,e.inimigo[i].x,i);
+				else if (e.jog.y < e.inimigo[i].y){
+						y=e.inimigo[i].y - 1;
+					if(casaLivre(e, e.inimigo[i].x, y)==1){ 
+							e.inimigo[i].y = y;
+							print_animation(0,-1,e.inimigo[i].x,i);
 
+					}
 				}
 			}
 		}
@@ -218,6 +218,77 @@ ESTADO enemyMove(ESTADO e){
 	return e;
 }
 
+
+ESTADO enemyMove_door(ESTADO e, int i){
+	int x, y;
+
+	if (e.door.x > e.inimigo[i].x){
+		x=e.inimigo[i].x + 1;
+		if(casaLivre(e, x, e.inimigo[i].y)==1){ 
+			e.inimigo[i].x = x;
+			print_animation(1,0,x,i);
+		}
+	}
+	else if (e.door.y > e.inimigo[i].y){
+		y=e.inimigo[i].y + 1;
+		if(casaLivre(e, e.inimigo[i].x, y)==1){ 
+			e.inimigo[i].y = y;
+			print_animation(0,1,e.inimigo[i].x,i);
+		}
+	}
+	else if (e.door.x < e.inimigo[i].x){
+		x=e.inimigo[i].x - 1;
+		if(casaLivre(e, x, e.inimigo[i].y)==1){ 
+			e.inimigo[i].x = x;
+			print_animation(-1,0,x,i);
+		}
+	}
+	else if (e.door.y < e.inimigo[i].y){
+		y=e.inimigo[i].y - 1;
+		if(casaLivre(e, e.inimigo[i].x, y)==1){ 
+			e.inimigo[i].y = y;
+			print_animation(0,-1,e.inimigo[i].x,i);
+		}
+	}
+
+	return e;
+}
+
+
+ESTADO enemyMove_treasure(ESTADO e, int i){
+	int x, y;
+
+	if (e.treasure.x > e.inimigo[i].x){
+		x=e.inimigo[i].x + 1;
+		if(casaLivre(e, x, e.inimigo[i].y)==1){ 
+			e.inimigo[i].x = x;
+			print_animation(1,0,x,i);
+		}
+	}
+	else if (e.treasure.y > e.inimigo[i].y){
+		y=e.inimigo[i].y + 1;
+		if(casaLivre(e, e.inimigo[i].x, y)==1){ 
+			e.inimigo[i].y = y;
+			print_animation(0,1,e.inimigo[i].x,i);
+		}
+	}
+	else if (e.treasure.x < e.inimigo[i].x){
+		x=e.inimigo[i].x - 1;
+		if(casaLivre(e, x, e.inimigo[i].y)==1){ 
+			e.inimigo[i].x = x;
+			print_animation(-1,0,x,i);
+		}
+	}
+	else if (e.treasure.y < e.inimigo[i].y){
+		y=e.inimigo[i].y - 1;
+		if(casaLivre(e, e.inimigo[i].x, y)==1){ 
+			e.inimigo[i].y = y;
+			print_animation(0,-1,e.inimigo[i].x,i);
+		}
+	}
+
+	return e;
+}
 
 
 int inRange(ESTADO e, int i){
@@ -1214,9 +1285,10 @@ void parser(){
         acao=0;
         strcpy(nomef,"Default");
     }
-    else{
-        num=sscanf(args,"%[^,],%d,%d", nomef, &acao, &i);
-        if (num==1) acao = 10;
+    else{ 
+    	num=sscanf(args,"%[^,],%d,%d", nomef, &acao, &i);
+    	if (num==1) acao = 10;
+    }
 
 	if(acao==44) acao=10; // para voltar ao inicio e reiniciar o jogo
 

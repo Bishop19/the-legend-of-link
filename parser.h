@@ -102,9 +102,28 @@ void print_move(ESTADO e, int difx, int dify, char *nomef, int acao);
 
 	O movimento dos inimigos é feito conforme a posição do jogador e o estado do tabuleiro (onde se situa a porta e o tesouro).
 	@param e Estado atual de jogo
-	@returns 
+	@returns Estado resultante do movimento dos inimigos.
 */
 ESTADO enemyMove(ESTADO e);
+
+
+/** \brief Função auxiliar a enemyMove que move os inimigos que estão perto da porta.
+
+	@param e - Estado atual de jogo
+	@param i - Indice inimigo
+	@returns Estado resultante do movimento dos inimigos.
+*/
+ESTADO enemyMove_door(ESTADO e, int i);
+
+
+/** \brief Função auxiliar a enemyMove que move os inimigos que estão perto do tesouro.
+
+	@param e - Estado atual de jogo
+	@param i - Indice inimigo
+	@returns Estado resultante do movimento dos inimigos.
+*/
+ESTADO enemyMove_treasure(ESTADO e, int i);
+
 
 /** \brief Função que determina se o jogador está em range do ataque do inimigo.
 
