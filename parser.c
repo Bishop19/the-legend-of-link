@@ -498,7 +498,7 @@ void mov_Flash(ESTADO e, char *nomef){
 		if(casaLivre(e, e.jog.x-2, e.jog.y)==1) print_move(e, -2, +0, nomef, 24);
 		if(e.jog.x%2==0){
 			if(casaLivre(e, e.jog.x-1, e.jog.y-1)==1) print_move(e, -1, -1, nomef, 25);
-			if(casaLivre(e, e.jog.x+1, e.jog.y-1)==1) print_move(e, -1, +1, nomef, 26);
+			if(casaLivre(e, e.jog.x+1, e.jog.y-1)==1) print_move(e, +1, -1, nomef, 26);
 			if(casaLivre(e, e.jog.x-1, e.jog.y+2)==1) print_move(e, -1, +2, nomef, 27);
 			if(casaLivre(e, e.jog.x+1, e.jog.y+2)==1) print_move(e, +1, +2, nomef, 28);
 		}
@@ -515,6 +515,15 @@ void mov_Flash(ESTADO e, char *nomef){
 	printf("<text x=712 y=550 font-family=Verdana font-size=9 fill=white> %d </text> \n", 2);
 } 
 
+void print_flash_animation(int acao){
+	if (acao==23) printf("<animateMotion xlink:href=#jog dur=0.75s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", -120, 0);
+	else if (acao==24) printf("<animateMotion xlink:href=#jog dur=0.75s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", 120, 0);
+	else if (acao==25 || acao==29) printf("<animateMotion xlink:href=#jog dur=0.75s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", 60, 105);
+	else if (acao==26 || acao==30) printf("<animateMotion xlink:href=#jog dur=0.75s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", -60, 105);
+	else if (acao==27 || acao==31) printf("<animateMotion xlink:href=#jog dur=0.75s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", 60, -105);
+	else if (acao==28 || acao==32) printf("<animateMotion xlink:href=#jog dur=0.75s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", -60, -105);
+
+}
 
 void espada_giratoria(char *nomef){
 	int acao=18;
@@ -937,7 +946,7 @@ void print_end_game(int score, char *nomef){
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-	if (acao==0 || acao==10) e=inicializar(1,0,0,0,10,10,1,0,1,1,1,1,0);
+	if (acao==0 || acao==10) e=inicializar(5,0,0,0,10,10,1,0,1,1,1,1,0);
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
@@ -1056,62 +1065,62 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 		else if(acao==23){
 			e=processar_mov(e, x+2, y);
 			e.jog.mana-=2;
-			e.flash=0;
+			e.flash=2;
 			e=enemyMove(e);
 
 		}
 		else if(acao==24){
 			e=processar_mov(e, x-2, y);
 			e.jog.mana-=2;
-			e.flash=0;
+			e.flash=2;
 			e=enemyMove(e);
 		}
 		else if(acao==25){
 			e=processar_mov(e, x-1, y-1);
 			e.jog.mana-=2;
-			e.flash=0;
+			e.flash=2;
 			e=enemyMove(e);
 		}
 		else if(acao==26){
 			e=processar_mov(e, x+1, y-1);
 			e.jog.mana-=2;
-			e.flash=0;
+			e.flash=2;
 			e=enemyMove(e);
 		}
 		else if(acao==27){
 			e=processar_mov(e, x-1, y+2);
 			e.jog.mana-=2;
-			e.flash=0;
+			e.flash=2;
 			e=enemyMove(e);
 		}
 		else if(acao==28){
 			e=processar_mov(e, x+1, y+2);
 			e.jog.mana-=2;
-			e.flash=0;
+			e.flash=2;
 			e=enemyMove(e);
 		}
 		else if(acao==29){
 			e=processar_mov(e, x-1, y-2);
 			e.jog.mana-=2;
-			e.flash=0;
+			e.flash=2;
 			e=enemyMove(e);
 		}
 		else if(acao==30){
 			e=processar_mov(e, x+1, y-2);
 			e.jog.mana-=2;
-			e.flash=0;
+			e.flash=2;
 			e=enemyMove(e);
 		}
 		else if(acao==31){
 			e=processar_mov(e, x-1, y+1);
 			e.jog.mana-=2;
-			e.flash=0;
+			e.flash=2;
 			e=enemyMove(e);
 		}
 		else if(acao==32){
 			e=processar_mov(e, x+1, y+1);
 			e.jog.mana-=2;
-			e.flash=0;
+			e.flash=2;
 			e=enemyMove(e);
 		}
 		else if(acao==40){
@@ -1243,6 +1252,10 @@ void parser(){
 			e.noMana=0;
 		}
 		if(acao==45) print_dormir_animation();
+		if(e.flash==2){
+			print_flash_animation(acao);
+			e.flash=0;
+		}
 	}
 	else{
 		guardar_Score(nomef, e.score);

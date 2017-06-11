@@ -464,7 +464,8 @@ void parser();
 void print_animation(int x,int y, int px, int id);
 int isWall (ESTADO e, int x, int y);
 void print_bolaFogo_animation(int x, int y);
-void print_dormir_animation(){
+void print_dormir_animation();
+void print_flash_animation(int acao);
 
 
 
