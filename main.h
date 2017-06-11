@@ -4,12 +4,12 @@
 
 /** \brief Função que define o tamanho da janela de jogo e o seu nome.
 
-	Função que "abre" o jogo.
+	Função que inicia o svg.
 */
 void print_header(); 
 
 
-/** \brief Função que "fecha" o jogo. */
+/** \brief Função que termina o svg. */
 void print_footer();
 
 
