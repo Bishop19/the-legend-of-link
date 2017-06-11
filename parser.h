@@ -64,6 +64,7 @@ Funções responsaveis pelo funcionamento do jogo.
 #define MENU_BUTTON2 "http://127.0.0.1/imagens/menu_button2.png"
 #define ESPADA_GIR "http://127.0.0.1/imagens/espada_giratoria.png"
 #define ESPADA_GIR2 "http://127.0.0.1/imagens/espada_giratoria2.png"
+#define ROCK "http://127.0.0.1/imagens/mana.png"
 
 
 
@@ -441,6 +442,14 @@ void print_inventory(ESTADO e, char *nomef);
 	@param id  ID da imagem.
 */ 
 void print_animation(int difx,int dify, int posx, int id);
+
+
+/** \brief Função que imprime as animações do movimento do jogador ou dos inimigos.
+
+	@param e - Estado atual de jogo.
+	@param numI - Indice do inimigo.
+*/
+void print_attack_animation(ESTADO e, int numI);
 
 
 /** \brief Função que imprime o tabuleiro de jogo.

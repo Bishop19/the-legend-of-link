@@ -77,7 +77,7 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 	    		e.inimigo[0].item=itemInimigo(randNum);
 	    		e.inimigo[0].visivel=0;
 	    		e.num_inimigos++;
-	    		aux=5; 
+	    		aux=6; 
 	    		i++;	
 			}
 		}
@@ -124,13 +124,10 @@ void print_move(ESTADO e, int difx, int dify, char *nomef, int acao){
 
 	if (px==e.door.x && py==e.door.y){
 		acao=1;
-		if(e.nivel%5==0 && e.inimigo[0].vida>=0); // porque é que não funciona assim (ao ser nivel multiplo de 5 o inimigo[0] é sempre o boss ?!?!
-		else{
-			print_rangeMov(e, px, py);
-			printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
-				print_hex(e.door.x,e.door.y);
-			printf("</a>\n");
-		}
+		print_rangeMov(e, px, py);
+		printf("<a xlink:href=\"http://127.0.0.1/cgi-bin/Rogue?%s,%d\">\n", nomef, acao);
+			print_hex(e.door.x,e.door.y);
+		printf("</a>\n");
 	}
 	
 	else if (difx==0 && dify==(-1) && py>=0 && py<8){
@@ -179,6 +176,7 @@ ESTADO enemyMove(ESTADO e){
 		if(e.inimigo[i].vida>0){
 			if (inRange(e,i)==1){
 				danoSofrido+=e.inimigo[i].atk;
+				// print_attack_animation(e, i);
 				i++;
 			}
 			if (e.jog.x > e.inimigo[i].x){
@@ -866,6 +864,23 @@ void print_animation(int difx,int dify, int posx, int id){
 }
 
 
+void print_attack_animation(ESTADO e, int numI){
+	int difx, dify, id;
+
+	if(e.inimigo[numI].tipo==3 || e.inimigo[numI].tipo==7){
+		id=numI+30;
+		difx=e.jog.x-e.inimigo[numI].x;
+		dify=e.jog.y-e.inimigo[numI].y;
+
+		print_imageID(e.inimigo[numI].x, e.inimigo[numI].y, ROCK, id);
+		printf("<animateMotion xlink:href=#%d dur=0.75s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, -(60*difx), -(70*dify));
+		printf("<animate xlink:href=#%d attributeName='opacity' to='0' dur='0.2s' begin='0.75s' fill='freeze' /> \n", id);
+	}
+		
+	else printf("<animateMotion xlink:href=%d dur=0.75s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, -60, -105);
+
+}
+
 
 void print_board(ESTADO e){ 
 	int x, y;
@@ -950,7 +965,7 @@ void print_end_game(int score, char *nomef){
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-	if (acao==0 || acao==10) e=inicializar(1,0,0,0,20,10,1,0,1,1,1,1,1);
+	if (acao==0 || acao==10) e=inicializar(4,0,0,0,20,10,1,0,1,1,1,1,1);
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
@@ -1056,7 +1071,7 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 				e.inimigo[numI].vida=0;
 				e.score+=5;
 				if(e.inimigo[numI].tipo==(4*(e.nivel/5))) e.score+=45;
-				if(e.inimigo[i].item<=8) e.inimigo[numI].visivel=1;
+				if(e.inimigo[numI].item<=8) e.inimigo[numI].visivel=1;
 			}
 			e.jog.mana-=3;
 			e=enemyMove(e);
@@ -1195,20 +1210,17 @@ void parser(){
     char nomef[100];
     char *args = getenv("QUERY_STRING");
 
-    if(strlen(args) == 0){ //aqui detecta-se que não foi passado nenhum parametro, neste caso precisas de escolher um nome para o ficheiro e que acao queres fazer
+    if(strlen(args) == 0){
         acao=0;
         strcpy(nomef,"Default");
     }
-    else{ //aqui vou fazer um scan dos parametros ficando em num a quantidade de parametros lidos
+    else{
         num=sscanf(args,"%[^,],%d,%d", nomef, &acao, &i);
-        if (num==1) acao = 10;  //se só for 1 quer dizer que só coloquei o nome do jogador(ficheiro) pelo que escolho uma acao para mostrar esse estado
-    }                                     // se for maior que 1 então estou a receber nos parametros o nome do ficheiro e a acao pelo que devo
-
-                                                //avançar para o processamento da acao especificada no link
+        if (num==1) acao = 10;
 
 	if(acao==44) acao=10; // para voltar ao inicio e reiniciar o jogo
 
-	e=processar_acao(e, acao, nomef, i); //equivalente a print_move
+	e=processar_acao(e, acao, nomef, i); 
 
 	if(e.screen==0) print_start(nomef);
 	else if(e.nivel==11){
