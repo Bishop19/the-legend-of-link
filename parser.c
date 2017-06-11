@@ -753,10 +753,10 @@ void print_stats(ESTADO e){
 	int i;
 
 	for (i=0;i<e.jog.vida;i++) 
-		printf("<image x=%d y=36 width=20 height=20 xlink:href=\"%s\"/>\n", 600+81+80+20*i, VIDA); // Vida
+		printf("<image x=%d y=36 xlink:href=\"%s\"/>\n", 600+81+80+10*i, VIDA); // Vida
 
 	for (i=0;i<e.jog.mana;i++) 
-		printf("<image x=%d y=80 width=20 height=20 xlink:href=\"%s\"/>\n", 600+81+80+20*i, MANA); // Mana
+		printf("<image x=%d y=80 xlink:href=\"%s\"/>\n", 600+81+80+20*i, MANA); // Mana
 
 	printf("<text x=877 y=207 font-family=Verdana font-size=22 fill=white> %d </text> \n", e.nivel); // Nivel
 	if(e.jog.powerUp_sword==1) printf("<text x=753 y=207 font-family=Verdana font-size=22 fill=green> %d </text> \n", e.jog.atk*2); // Ataque
@@ -946,7 +946,7 @@ void print_end_game(int score, char *nomef){
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-	if (acao==0 || acao==10) e=inicializar(10,0,0,0,10,10,1,0,1,1,1,1,0);
+	if (acao==0 || acao==10) e=inicializar(10,0,0,0,20,10,1,0,1,1,1,1,0);
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
@@ -988,8 +988,8 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 		}
 		else if(acao==13){
 			e.jog.item_vida--;
-			if(e.jog.vida<8) e.jog.vida+=2;
-			else e.jog.vida=10;
+			if(e.jog.vida<18) e.jog.vida+=2;
+			else e.jog.vida=20;
 		}
 		else if(acao==14){
 			e.jog.item_mana--;
@@ -1136,8 +1136,8 @@ ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 			e.screen=3;
 		}
 		else if(acao==45){
-			if(e.jog.vida<=8) e.jog.vida+=2;
-			else e.jog.vida=10;
+			if(e.jog.vida<=18) e.jog.vida+=2;
+			else e.jog.vida=20;
 			if(e.jog.mana<=8) e.jog.mana+=2;
 			else e.jog.mana=10;
 			e=enemyMove(e);
