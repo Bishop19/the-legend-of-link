@@ -265,7 +265,7 @@ int casaLivre (ESTADO e, int x, int y){
 	if(e.jog.x==x && e.jog.y==y) r=0; 
 	if(e.door.x==x && e.door.y==y) r=0; 
 	if(isItem(e,x,y)!=(-1)) r=0; 
-	if(e.item.x==x && e.item.y==y && e.item.visivel ==1)r=0;
+	if(e.item.x==x && e.item.y==y && e.item.visivel==1) r=0;
 	if(e.treasure.x==x && e.treasure.y==y && e.treasure.visivel==1) r=0; 		 
 	for(i=0; i < e.num_inimigos && r!=0; i++){ 
 		if(e.inimigo[i].x==x && e.inimigo[i].y==y && e.inimigo[i].vida>0) r=0;
