@@ -172,7 +172,7 @@ ESTADO enemyMove(ESTADO e){
 		if(e.inimigo[i].vida>0){
 			if (inRange(e,i)==1){
 				danoSofrido+=e.inimigo[i].atk;
-				// print_attack_animation(e, i);
+				print_attack_animation(e, i);
 				i++;
 			}
 			if (abs(e.inimigo[i].x-e.door.x)+abs(e.inimigo[i].y-e.door.y)<=6) e=enemyMove_door(e, i);
@@ -948,7 +948,11 @@ void print_attack_animation(ESTADO e, int numI){
 		printf("<animate xlink:href=#%d attributeName='opacity' to='0' dur='0.2s' begin='0.75s' fill='freeze' /> \n", id);
 	}
 		
-	else printf("<animateMotion xlink:href=%d dur=0.75s begin=0s fill=freeze path='M%d,%d 0,0' /> \n", id, -60, -105);
+	else {
+		difx=e.jog.x-e.inimigo[numI].x;
+		dify=e.jog.y-e.inimigo[numI].y;
+		printf("<animateMotion xlink:href=#%d dur=0.75s begin=0.5s fill=freeze path='M0,0, %d,%d 0,0' /> \n", numI, 60*difx, 70*dify);
+	}
 
 }
 
