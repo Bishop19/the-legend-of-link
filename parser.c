@@ -9,7 +9,7 @@
 
 
 ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int atk, int crit, int vida_potion, int mana_potion, int sword, int shield, int screen){
-	int i, x, y, randNum; 
+	int i,aux, x, y, randNum; 
 	ESTADO e = {0};
 	srand(time(NULL));
 
@@ -62,8 +62,9 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 
 	e.num_inimigos = 0;
 	i=0;
+	aux=0;
 	if (e.nivel%5==0){ // cria boss
-		while(i==0){
+		while(aux==0){
 			x=rand()%11; 
 			y=rand()%8;
 			if((casaLivre(e,x,y)==1) && (abs(e.door.x-x)+abs(e.door.y-y)>5) && (abs(e.jog.x-x)+abs(e.jog.y-y)>5)){
@@ -75,11 +76,12 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
 	    		e.inimigo[0].item=itemInimigo(randNum);
 	    		e.inimigo[0].visivel=0;
 	    		e.num_inimigos++;
-	    		i=4; //   !!! ver erro  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 	
+	    		aux=5; 
+	    		i++;	
 			}
 		}
 	}
-	while(i<NUM_INIMIGOS){
+	while(aux<NUM_INIMIGOS){
 		x=rand()%11; 
 		y=rand()%8;
 		randNum=rand();
@@ -93,6 +95,7 @@ ESTADO inicializar(int nivel, int px, int py, int score, int vida, int mana, int
     			e.inimigo[i].visivel=0;
     			i++;
     			e.num_inimigos++;
+    			aux++;
     		}	
    	}
 
@@ -946,7 +949,7 @@ void print_end_game(int score, char *nomef){
 ESTADO processar_acao(ESTADO e, int acao, char *nomef, int numI){
 	int i;
 
-	if (acao==0 || acao==10) e=inicializar(10,0,0,0,20,10,1,0,1,1,1,1,0);
+	if (acao==0 || acao==10) e=inicializar(10,0,0,0,20,10,1,0,1,1,1,1,1);
 	else{
 		e=ler_estado(nomef);
 		int x=e.jog.x; int y=e.jog.y;
