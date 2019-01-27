@@ -4,7 +4,7 @@ Bugs:
 
 - dá para clicar em paredes (DONE);
 
-
+teste
 
 Por implementar:
 - separar em ficheiros os prints do resto;
